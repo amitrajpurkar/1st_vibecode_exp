@@ -92,6 +92,37 @@ the intent for this exercise is to engage into a journey of understanding how to
 - **Java Version:** 21 (for tests), 25 (for compilation)
 - **Gradle Version:** 9.1.0
 
+---
+
+## Developer Workflow just for this mkdocs site:
+
+1. plan what you want to document and how you want to organize into pages, sections, etc.
+2. update the appropriate markdown files
+3. if needed update the mkdocs.yml file
+4. build and run the site locally to see if it looks good
+5. if needed make changes to the markdown files and repeat steps 2-4
+6. when satisfied, commit the changes
+7. push the changes to the remote repository
+8. deploy to vercel
+
+```bash
+
+mkdocs build
+mkdocs serve
+
+git status
+git add .
+git commit -m "updated docs"
+git push
+
+# vercel login.. do per-session device login
+vercel login
+vercel deploy
+
+# vercel deploy with --prod flag to deploy to production
+vercel deploy --prod
+
+```
 
 ---
 
