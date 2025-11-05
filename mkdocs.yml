@@ -185,6 +185,8 @@ nav:
   
   - Additional Documentation:
     - Documentation Index: index.md
+    - Old Index: windsurfs_index.md
+    - Vercel: vercel_steps.md
     - Enhancements Oct 2025: ENHANCEMENTS_OCT_2025.md
     - Annotation Refactoring: ANNOTATION_REFACTORING.md
     - Resilience4j Implementation: RESILIENCE4J_IMPLEMENTATION_SUMMARY.md

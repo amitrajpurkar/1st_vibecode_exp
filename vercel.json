@@ -1,0 +1,5 @@
+{
+  "buildCommand": "uv sync && uv run mkdocs build",
+  "outputDirectory": "site",
+  "ignoreCommand": "false"
+}
