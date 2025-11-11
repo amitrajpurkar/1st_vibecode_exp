@@ -104,7 +104,8 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="Spring Boot API with Circuit Breaker" class="md-header__button md-logo" aria-label="Spring Boot API with Circuit Breaker" data-md-component="logo">
       
-  <img src="assets/logo.png" alt="logo">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7H5a2 2 0 0 0-2 2v8h2v-4h2v4h2V9a2 2 0 0 0-2-2m0 4H5V9h2m7-2h-4v10h2v-4h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2m0 4h-2V9h2m6 0v6h1v2h-4v-2h1V9h-1V7h4v2Z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -480,7 +481,8 @@
   <label class="md-nav__title" for="__drawer">
     <a href="." title="Spring Boot API with Circuit Breaker" class="md-nav__button md-logo" aria-label="Spring Boot API with Circuit Breaker" data-md-component="logo">
       
-  <img src="assets/logo.png" alt="logo">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7H5a2 2 0 0 0-2 2v8h2v-4h2v4h2V9a2 2 0 0 0-2-2m0 4H5V9h2m7-2h-4v10h2v-4h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2m0 4h-2V9h2m6 0v6h1v2h-4v-2h1V9h-1V7h4v2Z"/></svg>
 
     </a>
     Spring Boot API with Circuit Breaker
@@ -674,6 +676,39 @@
   <a href="#developer-workflow-just-for-this-mkdocs-site" class="md-nav__link">
     <span class="md-ellipsis">
       Developer Workflow just for this mkdocs site:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Developer Workflow just for this mkdocs site:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow-using-github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow using GitHub Pages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-using-vercel-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow using Vercel-CLI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      key takeaways
     </span>
   </a>
   
@@ -2387,12 +2422,15 @@ the intent for this exercise is to engage into a journey of understanding how to
 <h2 id="tools-used">tools used:<a class="headerlink" href="#tools-used" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Windsurf AI : .. purchased pro license one after trying <ul>
-<li>Cursor by Anthropic, </li>
 <li>Codex by OpenAI</li>
-<li>Claude by Anthropic, </li>
-<li>Amp by GitHub, </li>
-<li>Codeium, ... </li>
+<li>Copilot by GitHub</li>
+<li>Claude by Anthropic </li>
+<li>Cursor AI </li>
+<li>AMP CLI </li>
+<li>Codeium (which i was using for more than a year)</li>
 <li>research also on licensed JetBrains Idea.</li>
+<li>other coding agents: TabNine, CodeWhisperer (AWS), Kite, Ghostwriter (Replit), Augment Code...</li>
+<li>most of these tools cost around $20 per month for Pro-license</li>
 </ul>
 </li>
 <li>Git</li>
@@ -2476,6 +2514,39 @@ the intent for this exercise is to engage into a journey of understanding how to
 </ul>
 <hr />
 <h2 id="developer-workflow-just-for-this-mkdocs-site">Developer Workflow just for this mkdocs site:<a class="headerlink" href="#developer-workflow-just-for-this-mkdocs-site" title="Permanent link">&para;</a></h2>
+<h3 id="workflow-using-github-pages">Workflow using GitHub Pages<a class="headerlink" href="#workflow-using-github-pages" title="Permanent link">&para;</a></h3>
+<ol>
+<li>i am using an explicit repo that only has mkdocs files</li>
+<li>sync up and bring larger markdown files from the main repo; these are the ones worked with Windsurf AI</li>
+<li>update hand-crafted markdown files as needed</li>
+<li>build and run the site locally to see if it looks good</li>
+<li>if needed make changes to the markdown files and repeat steps 2-4</li>
+<li>when satisfied, commit the changes</li>
+<li>push the changes to the remote repository
+    a. i am next copying the compiled pages from "site" folder to another repo
+    b. using a specific repo for GitHub Pages: amitrajpurkar.github.io
+    c. once i copy over updated pages here, commit and push to that repo</li>
+<li>GitHub Pages is then updated automatically</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>mkdocs-repo<span class="w"> </span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># update hand-crafted markdown files as needed</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># sync up and bring larger markdown files from the main repo; these are the ones worked with Windsurf AI</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>mkdocs<span class="w"> </span>build
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>mkdocs<span class="w"> </span>serve
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>diff<span class="w"> </span>-r<span class="w"> </span>site<span class="w"> </span>amitrajpurkar.github.io
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>cp<span class="w"> </span>-r<span class="w"> </span>site/*<span class="w"> </span>amitrajpurkar.github.io/
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">cd</span><span class="w"> </span>amitrajpurkar.github.io
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>git<span class="w"> </span>status
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>git<span class="w"> </span>add<span class="w"> </span>.
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;updated docs&quot;</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>git<span class="w"> </span>push
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># github pages.. need to get this working</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="c1"># gh pages -b gh-pages</span>
+</span></code></pre></div>
+<h3 id="workflow-using-vercel-cli">Workflow using Vercel-CLI<a class="headerlink" href="#workflow-using-vercel-cli" title="Permanent link">&para;</a></h3>
 <ol>
 <li>plan what you want to document and how you want to organize into pages, sections, etc.</li>
 <li>update the appropriate markdown files</li>
@@ -2486,23 +2557,33 @@ the intent for this exercise is to engage into a journey of understanding how to
 <li>push the changes to the remote repository</li>
 <li>deploy to vercel</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdocs<span class="w"> </span>build
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mkdocs<span class="w"> </span>serve
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>git<span class="w"> </span>status
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>git<span class="w"> </span>add<span class="w"> </span>.
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;updated docs&quot;</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>git<span class="w"> </span>push
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># vercel login.. do per-session device login</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>vercel<span class="w"> </span>login
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>vercel<span class="w"> </span>deploy
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># vercel deploy with --prod flag to deploy to production</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>vercel<span class="w"> </span>deploy<span class="w"> </span>--prod
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdocs<span class="w"> </span>build
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>mkdocs<span class="w"> </span>serve
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>git<span class="w"> </span>status
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>git<span class="w"> </span>add<span class="w"> </span>.
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;updated docs&quot;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>git<span class="w"> </span>push
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># vercel login.. do per-session device login</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>vercel<span class="w"> </span>login
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>vercel<span class="w"> </span>deploy
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># vercel deploy with --prod flag to deploy to production</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>vercel<span class="w"> </span>deploy<span class="w"> </span>--prod
 </span></code></pre></div>
 <hr />
-<p><strong>Last Updated:</strong> November 5, 2025<br />
+<h2 id="key-takeaways">key takeaways<a class="headerlink" href="#key-takeaways" title="Permanent link">&para;</a></h2>
+<ol>
+<li>AI tools are here to stay and will continue to improve</li>
+<li>As a software programmer, there is a need to have our own AI Coding Assistant</li>
+<li>at first we need to baby-sit the AI Coding Assistant and develop/ evolve our own workflows</li>
+<li>Within &amp; across industries, programmers at large are producing code using AI tools</li>
+<li>We need to understand and decipher the code produced by AI tools</li>
+<li>Observability, Testing against specs, Code Reviews, Domain knowledge, are the key to success</li>
+</ol>
+<hr />
+<p><strong>Last Updated:</strong> November 10, 2025<br />
 <strong>Project:</strong> Spring Boot API with Circuit Breaker<br />
 <strong>Version:</strong> 3.2.10</p>
 
