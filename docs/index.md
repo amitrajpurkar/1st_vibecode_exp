@@ -6,10 +6,19 @@ the intent for this exercise is to engage into a journey of understanding how to
 ---
 
 ## tools used:
-1. Windsurf AI : .. purchased this one after trying Cursor, Claude, Amp, Codeium, ... research also on licensed JetBrains Idea.
+1. Windsurf AI : .. purchased pro license one after trying 
+    * Codex by OpenAI
+    * Copilot by GitHub
+    * Claude by Anthropic 
+    * Cursor AI 
+    * AMP CLI 
+    * Codeium (which i was using for more than a year)
+    * research also on licensed JetBrains Idea.
+    * other coding agents: TabNine, CodeWhisperer (AWS), Kite, Ghostwriter (Replit), Augment Code...
+    * most of these tools cost around $20 per month for Pro-license
 2. Git
 3. MkDocs
-4. Vercel
+4. Vercel and GitHub Pages
 
 ---
 
@@ -96,6 +105,42 @@ the intent for this exercise is to engage into a journey of understanding how to
 
 ## Developer Workflow just for this mkdocs site:
 
+### Workflow using GitHub Pages
+1. i am using an explicit repo that only has mkdocs files
+2. sync up and bring larger markdown files from the main repo; these are the ones worked with Windsurf AI
+3. update hand-crafted markdown files as needed
+4. build and run the site locally to see if it looks good
+5. if needed make changes to the markdown files and repeat steps 2-4
+6. when satisfied, commit the changes
+7. push the changes to the remote repository
+    a. i am next copying the compiled pages from "site" folder to another repo
+    b. using a specific repo for GitHub Pages: amitrajpurkar.github.io
+    c. once i copy over updated pages here, commit and push to that repo
+8. GitHub Pages is then updated automatically
+
+```bash
+cd mkdocs-repo 
+# update hand-crafted markdown files as needed
+# sync up and bring larger markdown files from the main repo; these are the ones worked with Windsurf AI
+mkdocs build
+mkdocs serve
+
+diff -r site amitrajpurkar.github.io
+cp -r site/* amitrajpurkar.github.io/
+
+cd amitrajpurkar.github.io
+git status
+git add .
+git commit -m "updated docs"
+git push
+
+# github pages.. need to get this working
+# gh pages -b gh-pages
+
+```
+
+
+### Workflow using Vercel-CLI
 1. plan what you want to document and how you want to organize into pages, sections, etc.
 2. update the appropriate markdown files
 3. if needed update the mkdocs.yml file
@@ -126,6 +171,18 @@ vercel deploy --prod
 
 ---
 
-**Last Updated:** November 5, 2025  
+## key takeaways
+
+1. AI tools are here to stay and will continue to improve
+2. As a software programmer, there is a need to have our own AI Coding Assistant
+3. at first we need to baby-sit the AI Coding Assistant and develop/ evolve our own workflows
+4. Within & across industries, programmers at large are producing code using AI tools
+5. We need to understand and decipher the code produced by AI tools
+6. Observability, Testing against specs, Code Reviews, Domain knowledge, are the key to success
+
+
+---
+
+**Last Updated:** November 10, 2025  
 **Project:** Spring Boot API with Circuit Breaker  
 **Version:** 3.2.10
