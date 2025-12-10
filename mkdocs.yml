@@ -143,11 +143,14 @@ extra:
 nav:
   - Home: index.md
   
-  
-  - 1st Experiment:
+
+  - Legacy App Migration: 
     - Breakdown: Experiment01.md
     - Full Stack Architecture: FULLSTACK_ARCHITECTURE.md
     - AI tools: AI_Coding_Tools.md
+
+
+  - Migration Work: 
     - Getting Started:
       - First Analysis before starting: First_Analysis.md
       - Draft a Plan to work with AI: prompt_pad.md
@@ -205,25 +208,25 @@ nav:
       - Pending Actions: experiment01/PENDING_ACTIONS.md
 
 
-  - 2nd Experiment:
+  - Weather App 1:
     - Plan: experiment02/README.md
     - Prompts: experiment02/prompt_interaction.md
     - Architecture: experiment02/FEATURES.md
 
   
-  - 3rd Experiment:
+  - Weather App 2:
     - Plan: experiment03/README.md
     - Prompts: experiment03/prompts.md
     - Specs: experiment03/spec.md
 
   
-  - 4th Experiment:
+  - Q&A App 1:
     - Plan: experiment04/README.md
     - Prompts: experiment04/prompts.md
     - Architecture: experiment04/architecture.md
 
   
-  - 5th Experiment:
+  - Q&A App 2:
     - Plan: experiment05/README.md
     - Prompts: experiment05/prompts.md
     - Architectures: experiment05/architecture.md
