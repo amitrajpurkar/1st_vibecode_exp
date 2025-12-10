@@ -184,10 +184,10 @@ services:
 
 ## 📚 More Information
 
-- Full documentation: [DOCKER.md](./../DOCKER.md)
-- Implementation details: [src/main/docs/DOCKER_IMPLEMENTATION.md](./../DOCKER_IMPLEMENTATION.md)
+- Full documentation: [DOCKER.md](./../experiment01/DOCKER.md)
+- Implementation details: [src/main/docs/DOCKER_IMPLEMENTATION.md](./../experiment01/DOCKER_IMPLEMENTATION.md)
 - Troubleshooting: See DOCKER.md
 
 ---
 
-**Need Help?** Check the full [DOCKER.md](./../DOCKER.md) guide for detailed instructions.
+**Need Help?** Check the full [DOCKER.md](./../experiment01/DOCKER.md) guide for detailed instructions.

@@ -1,7 +1,7 @@
-site_name: Spring Boot API with Circuit Breaker
-site_description: Full-stack production-ready application with Spring Boot backend and React frontend
-site_author: Development Team
-site_url: https://example.com
+site_name: Experiments with AI Code Assistant
+site_description: Prompting techniques, Spec-kit and more
+site_author: Curious Developer
+site_url: https://amitrajpurkar.github.io
 
 # Repository
 repo_name: sprboot_api_cktBrkr
@@ -9,7 +9,7 @@ repo_url: https://github.com/amitrajpurkar/sprboot_api_cktBrkr
 edit_uri: ""
 
 # Copyright
-copyright: Copyright &copy; 2025 Spring Boot API Project
+copyright: Copyright &copy; 2025 Experiments with AI Code Assistant
 
 # Theme Configuration
 theme:
@@ -142,72 +142,94 @@ extra:
 # Navigation
 nav:
   - Home: index.md
-
-  - Getting Started:
-    - Draft Plan: prompt_pad.md
-    - First Interaction: prompt_dialog.md
   
-  - Architecture:
-    - Project Summary: PROJECT_SUMMARY.md
+  
+  - 1st Experiment:
+    - Breakdown: Experiment01.md
     - Full Stack Architecture: FULLSTACK_ARCHITECTURE.md
-    - First Analysis: First_Analysis.md
+    - AI tools: AI_Coding_Tools.md
+    - Getting Started:
+      - First Analysis before starting: First_Analysis.md
+      - Draft a Plan to work with AI: prompt_pad.md
+      - Interaction Dialog with AI: prompt_dialog.md
+    - Architecture:
+      - Project Summary: experiment01/PROJECT_SUMMARY.md
+      - Full Stack Architecture: FULLSTACK_ARCHITECTURE.md
+    - Migration Guides:
+      - H2 Database Migration: experiment01/H2_MIGRATION.md
+      - Resilience4j Migration: experiment01/RESILIENCE4J_MIGRATION.md
+      - Gradle 9 Migration: experiment01/GRADLE_9_MIGRATION.md
+      - Upgrade Plan: experiment01/Upgrade_Plan.md
+      - Circuit Breaker Upgrade: experiment01/Upgrade_CircuitBreaker_Plan.md
+      - H2 Upgrade Plan: experiment01/Upgrade_H2_Plan.md
+    - Migration Status:
+      - Migration Summary: experiment01/MIGRATION_SUMMARY.md
+      - H2 Migration Complete: experiment01/H2_MIGRATION_COMPLETE.md
+      - Test Migration Complete: experiment01/TEST_MIGRATION_COMPLETE.md
+      - Phase 1 Complete: experiment01/PHASE1_COMPLETE.md
+      - Phase 3 Complete: experiment01/PHASE3_COMPLETE.md
+      - Upgrade Progress: experiment01/UPGRADE_PROGRESS.md
+      - Upgrade Status: experiment01/UPGRADE_STATUS.md
+    - Implementation Guides:
+      - Product API: experiment01/PRODUCT_API_IMPLEMENTATION.md
+      - Frontend Implementation: experiment01/FRONTEND_IMPLEMENTATION.md
+      - Docker Implementation: experiment01/DOCKER_IMPLEMENTATION.md
+      - Performance Testing: experiment01/PERFORMANCE_TESTING_IMPLEMENTATION.md
+      - ircuit Breaker Summary: experiment01/CIRCUIT_BREAKER_SUMMARY.md
+    - Test Results:
+      - Backend Tests: experiment01/FINAL_TEST_RESULTS.md
+      - Frontend Tests: experiment01/FRONTEND_TEST_SUMMARY.md
+      - Product Controller Tests: experiment01/PRODUCT_CONTROLLER_TESTS.md
+      - Test Results Summary: experiment01/TEST_RESULTS_SUMMARY.md
+      - Validation Tests: experiment01/VALIDATION_TESTS_SUMMARY.md
+    - Code Reviews & Fixes:
+      - First response: experiment01/code_review_01.md
+      - Code Review Summary: experiment01/CODE_REVIEW_SUMMARY.md
+      - Senior Architect Review: experiment01/SENIOR_ARCHITECT_CODE_REVIEW.txt
+      - Critical Fix 002: experiment01/CRITICAL-002-FIX-SUMMARY.md
+      - Critical Fix 003: experiment01/CRITICAL-003-FIX-SUMMARY.md
+    - Quick Start Guides:
+      - H2 Database: quick-start/h2-quick-start.md
+      - Frontend Setup: quick-start/frontend-quickstart.md
+      - Docker Setup: quick-start/docker-quick-start.md
+      - Gatling Testing: quick-start/gatling-quick-reference.md
+      - Resilience4j: quick-start/RESILIENCE4J_QUICK_START.md
+    - Additional Documentation:
+      - Old Index: experiment01/windsurfs_index.md
+      - Vercel: experiment01/vercel_steps.md
+      - Enhancements Oct 2025: experiment01/ENHANCEMENTS_OCT_2025.md
+      - Annotation Refactoring: experiment01/ANNOTATION_REFACTORING.md
+      - Resilience4j Implementation: experiment01/RESILIENCE4J_IMPLEMENTATION_SUMMARY.md
+      - Docker Guide: experiment01/DOCKER.md
+      - Performance Testing: experiment01/PERFORMANCE_TESTING.md
+      - Pending Actions: experiment01/PENDING_ACTIONS.md
+
+
+  - 2nd Experiment:
+    - Plan: experiment02/README.md
+    - Prompts: experiment02/prompt_interaction.md
+    - Architecture: experiment02/FEATURES.md
+
   
-  - Migration Guides:
-    - H2 Database Migration: H2_MIGRATION.md
-    - Resilience4j Migration: RESILIENCE4J_MIGRATION.md
-    - Gradle 9 Migration: GRADLE_9_MIGRATION.md
-    - Upgrade Plan: Upgrade_Plan.md
-    - Circuit Breaker Upgrade: Upgrade_CircuitBreaker_Plan.md
-    - H2 Upgrade Plan: Upgrade_H2_Plan.md
+  - 3rd Experiment:
+    - Plan: experiment03/README.md
+    - Prompts: experiment03/prompts.md
+    - Specs: experiment03/spec.md
+
   
-  - Migration Status:
-    - Migration Summary: MIGRATION_SUMMARY.md
-    - H2 Migration Complete: H2_MIGRATION_COMPLETE.md
-    - Test Migration Complete: TEST_MIGRATION_COMPLETE.md
-    - Phase 1 Complete: PHASE1_COMPLETE.md
-    - Phase 3 Complete: PHASE3_COMPLETE.md
-    - Upgrade Progress: UPGRADE_PROGRESS.md
-    - Upgrade Status: UPGRADE_STATUS.md
+  - 4th Experiment:
+    - Plan: experiment04/README.md
+    - Prompts: experiment04/prompts.md
+    - Architecture: experiment04/architecture.md
+
   
-  - Implementation Guides:
-    - Product API: PRODUCT_API_IMPLEMENTATION.md
-    - Frontend Implementation: FRONTEND_IMPLEMENTATION.md
-    - Docker Implementation: DOCKER_IMPLEMENTATION.md
-    - Performance Testing: PERFORMANCE_TESTING_IMPLEMENTATION.md
-    - Circuit Breaker Summary: CIRCUIT_BREAKER_SUMMARY.md
+  - 5th Experiment:
+    - Plan: experiment05/README.md
+    - Prompts: experiment05/prompts.md
+    - Architectures: experiment05/architecture.md
+
   
-  - Test Results:
-    - Backend Tests: FINAL_TEST_RESULTS.md
-    - Frontend Tests: FRONTEND_TEST_SUMMARY.md
-    - Product Controller Tests: PRODUCT_CONTROLLER_TESTS.md
-    - Test Results Summary: TEST_RESULTS_SUMMARY.md
-    - Validation Tests: VALIDATION_TESTS_SUMMARY.md
-  
-  - Code Reviews & Fixes:
-    - First response: code_review_01.md
-    - Code Review Summary: CODE_REVIEW_SUMMARY.md
-    - Senior Architect Review: SENIOR_ARCHITECT_CODE_REVIEW.txt
-    - Critical Fix 002: CRITICAL-002-FIX-SUMMARY.md
-    - Critical Fix 003: CRITICAL-003-FIX-SUMMARY.md
-  
-  - Quick Start Guides:
-    - H2 Database: quick-start/h2-quick-start.md
-    - Frontend Setup: quick-start/frontend-quickstart.md
-    - Docker Setup: quick-start/docker-quick-start.md
-    - Gatling Testing: quick-start/gatling-quick-reference.md
-    - Resilience4j: quick-start/RESILIENCE4J_QUICK_START.md
-    - Push to Vercel: vercel_steps.md
-  
-  - Additional Documentation:
-    - Documentation Index: index.md
-    - Old Index: windsurfs_index.md
-    - Vercel: vercel_steps.md
-    - Enhancements Oct 2025: ENHANCEMENTS_OCT_2025.md
-    - Annotation Refactoring: ANNOTATION_REFACTORING.md
-    - Resilience4j Implementation: RESILIENCE4J_IMPLEMENTATION_SUMMARY.md
-    - Docker Guide: DOCKER.md
-    - Performance Testing: PERFORMANCE_TESTING.md
-    - Pending Actions: PENDING_ACTIONS.md
+
 
 # Custom CSS
 extra_css:

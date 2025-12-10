@@ -1,187 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://example.com/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/ANNOTATION_REFACTORING/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/AI_Coding_Tools/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/CIRCUIT_BREAKER_SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/Experiment01/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/CODE_REVIEW_SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/FULLSTACK_ARCHITECTURE/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/CRITICAL-002-FIX-SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/First_Analysis/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/CRITICAL-003-FIX-SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/prompt_dialog/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/DOCKER/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/prompt_pad/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/DOCKER_IMPLEMENTATION/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/ANNOTATION_REFACTORING/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/ENHANCEMENTS_OCT_2025/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/CIRCUIT_BREAKER_SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/FINAL_TEST_RESULTS/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/CODE_REVIEW_SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/FRONTEND_IMPLEMENTATION/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/CRITICAL-002-FIX-SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/FRONTEND_TEST_SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/CRITICAL-003-FIX-SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/FULLSTACK_ARCHITECTURE/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/DOCKER/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/First_Analysis/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/DOCKER_IMPLEMENTATION/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/GRADLE_9_MIGRATION/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/ENHANCEMENTS_OCT_2025/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/H2_MIGRATION/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/FINAL_TEST_RESULTS/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/H2_MIGRATION_COMPLETE/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/FRONTEND_IMPLEMENTATION/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/MIGRATION_SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/FRONTEND_TEST_SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/PENDING_ACTIONS/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/GRADLE_9_MIGRATION/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/PERFORMANCE_TESTING/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/H2_MIGRATION/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/PERFORMANCE_TESTING_IMPLEMENTATION/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/H2_MIGRATION_COMPLETE/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/PHASE1_COMPLETE/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/MIGRATION_SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/PHASE3_COMPLETE/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/PENDING_ACTIONS/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/PRODUCT_API_IMPLEMENTATION/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/PERFORMANCE_TESTING/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/PRODUCT_CONTROLLER_TESTS/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/PERFORMANCE_TESTING_IMPLEMENTATION/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/PROJECT_SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/PHASE1_COMPLETE/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/RESILIENCE4J_IMPLEMENTATION_SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/PHASE3_COMPLETE/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/RESILIENCE4J_MIGRATION/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/PRODUCT_API_IMPLEMENTATION/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/TEST_MIGRATION_COMPLETE/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/PRODUCT_CONTROLLER_TESTS/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/TEST_RESULTS_SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/PROJECT_SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/UPGRADE_PROGRESS/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/RESILIENCE4J_IMPLEMENTATION_SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/UPGRADE_STATUS/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/RESILIENCE4J_MIGRATION/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/Upgrade_CircuitBreaker_Plan/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/TEST_MIGRATION_COMPLETE/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/Upgrade_H2_Plan/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/TEST_RESULTS_SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/Upgrade_Plan/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/UPGRADE_PROGRESS/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/VALIDATION_TESTS_SUMMARY/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/UPGRADE_STATUS/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/code_review_01/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/Upgrade_CircuitBreaker_Plan/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/prompt_dialog/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/Upgrade_H2_Plan/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/prompt_pad/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/Upgrade_Plan/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/vercel_steps/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/VALIDATION_TESTS_SUMMARY/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/windsurfs_index/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/code_review_01/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/quick-start/RESILIENCE4J_QUICK_START/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/vercel_steps/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/quick-start/docker-quick-start/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment01/windsurfs_index/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/quick-start/frontend-quickstart/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment02/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/quick-start/gatling-quick-reference/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment02/FEATURES/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
     <url>
-         <loc>https://example.com/quick-start/h2-quick-start/</loc>
-         <lastmod>2025-11-11</lastmod>
+         <loc>https://amitrajpurkar.github.io/experiment02/prompt_interaction/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/experiment03/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/experiment03/prompts/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/experiment03/spec/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/experiment04/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/experiment04/architecture/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/experiment04/prompts/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/experiment05/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/experiment05/architecture/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/experiment05/prompts/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/quick-start/RESILIENCE4J_QUICK_START/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/quick-start/docker-quick-start/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/quick-start/frontend-quickstart/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/quick-start/gatling-quick-reference/</loc>
+         <lastmod>2025-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://amitrajpurkar.github.io/quick-start/h2-quick-start/</loc>
+         <lastmod>2025-12-10</lastmod>
     </url>
 </urlset>

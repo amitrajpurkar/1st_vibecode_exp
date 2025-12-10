@@ -340,7 +340,7 @@ return future.get(200, TimeUnit.MILLISECONDS);
 
 ## 📚 More Information
 
-- **Full Documentation:** [RESILIENCE4J_MIGRATION.md](./../RESILIENCE4J_MIGRATION.md)
+- **Full Documentation:** [RESILIENCE4J_MIGRATION.md](./../experiment01/RESILIENCE4J_MIGRATION.md)
 - **Official Docs:** https://resilience4j.readme.io/
 - **Examples:** https://github.com/resilience4j/resilience4j-spring-boot3-demo
 

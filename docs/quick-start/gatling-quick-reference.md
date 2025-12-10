@@ -183,10 +183,10 @@ setUp(
 
 ## 📚 Resources
 
-- Full Guide: [PERFORMANCE_TESTING.md](./../PERFORMANCE_TESTING.md)
+- Full Guide: [PERFORMANCE_TESTING.md](./../experiment01/PERFORMANCE_TESTING.md)
 - Gatling Docs: https://gatling.io/docs/
 - Resilience4j: https://resilience4j.readme.io/
 
 ---
 
-**Need Help?** See [PERFORMANCE_TESTING.md](./../PERFORMANCE_TESTING.md) for detailed documentation.
+**Need Help?** See [PERFORMANCE_TESTING.md](./../experiment01/PERFORMANCE_TESTING.md) for detailed documentation.
