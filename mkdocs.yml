@@ -142,7 +142,7 @@ extra:
 # Navigation
 nav:
   - Home: index.md
-  - Legacy App Migration: Experiment01.md
+  - Legacy App Migration: FirstPlan.md
   - Migration Work: 
     - Getting Started:
       - First Analysis before starting: First_Analysis.md

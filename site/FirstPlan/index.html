@@ -12,7 +12,7 @@
         <meta name="author" content="Curious Developer">
       
       
-        <link rel="canonical" href="https://amitrajpurkar.github.io/Experiment01/">
+        <link rel="canonical" href="https://amitrajpurkar.github.io/FirstPlan/">
       
       
         <link rel="prev" href="..">
@@ -2763,13 +2763,15 @@
 
 
 <h1 id="first-experiment-springboot-restapi-with-circuit-breaker">First Experiment -- Springboot RestAPI with Circuit Breaker<a class="headerlink" href="#first-experiment-springboot-restapi-with-circuit-breaker" title="Permanent link">&para;</a></h1>
-<p><strong>Problem statement</strong> : 
-- take a working application from several years back. 
-- upgrade it to latest version of same tech stack. 
-- replace retired libraries with newer ones. 
-- make use of AI Code Assistant. 
-- test the application personally (human in the loop)
-- document carefully the findings</p>
+<p><strong>Problem statement</strong> : </p>
+<ul>
+<li>take a working application from several years back. </li>
+<li>upgrade it to latest version of same tech stack. </li>
+<li>replace retired libraries with newer ones. </li>
+<li>make use of AI Code Assistant. </li>
+<li>test the application personally (human in the loop)</li>
+<li>document carefully the findings</li>
+</ul>
 <h2 id="breaking-down-sequence-of-events">📚 Breaking down Sequence of Events<a class="headerlink" href="#breaking-down-sequence-of-events" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
@@ -2864,67 +2866,6 @@
 </ul>
 </li>
 </ul>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>First analysis and planning
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>- **[First_Analysis.md](First_Analysis.md)** - Initial codebase analysis
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>- **[prompt_dialog.md](prompt_dialog.md)** - Development conversation log
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>- **[prompt_pad.md](prompt_pad.md)** - Development notes
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a> 📦 Gradle &amp; Build
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>- **[GRADLE_9_MIGRATION.md](GRADLE_9_MIGRATION.md)** - Gradle 9.1.0 migration guide
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a> 📋 Upgrade Plans &amp; Progress
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>- **[Upgrade_Plan.md](Upgrade_Plan.md)** - Master upgrade plan
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>- **[Upgrade_H2_Plan.md](Upgrade_H2_Plan.md)** - H2 database upgrade plan
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>- **[UPGRADE_STATUS.md](UPGRADE_STATUS.md)** - Upgrade status tracking
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>- **[UPGRADE_PROGRESS.md](UPGRADE_PROGRESS.md)** - Progress tracking
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a> 🏁 Phase Completions
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>- **[PHASE1_COMPLETE.md](PHASE1_COMPLETE.md)** - Phase 1 completion summary
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>- **[PHASE3_COMPLETE.md](PHASE3_COMPLETE.md)** - Phase 3 completion summary
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a> 🔄 Resilience4j Migration (Circuit Breaker)
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>- **[RESILIENCE4J_MIGRATION.md](RESILIENCE4J_MIGRATION.md)** - Comprehensive migration guide (400+ lines)
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>- **[RESILIENCE4J_QUICK_START.md](./quick-start/RESILIENCE4J_QUICK_START.md)** - Developer quick reference
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>- **[RESILIENCE4J_IMPLEMENTATION_SUMMARY.md](RESILIENCE4J_IMPLEMENTATION_SUMMARY.md)** - Implementation details
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>- **[Upgrade_CircuitBreaker_Plan.md](Upgrade_CircuitBreaker_Plan.md)** - Original upgrade plan
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a> 🧪 Testing Documentation
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>- **[TEST_RESULTS_SUMMARY.md](TEST_RESULTS_SUMMARY.md)** - Initial test analysis
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>- **[TEST_MIGRATION_COMPLETE.md](TEST_MIGRATION_COMPLETE.md)** - Test migration completion
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a> 🎯 Final Results &amp; Summaries
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>- **[FINAL_TEST_RESULTS.md](FINAL_TEST_RESULTS.md)** - ✅ Complete test results (100% pass rate)
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>- **[CIRCUIT_BREAKER_SUMMARY.md](CIRCUIT_BREAKER_SUMMARY.md)** - Circuit breaker implementation summary
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>- **[MIGRATION_SUMMARY.md](MIGRATION_SUMMARY.md)** - Overall migration summary
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a> ✅ Project Status
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>**Current Status:** ✅ **COMPLETE**
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>- ✅ Spring Boot 3.2.10 upgrade complete
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>- ✅ Gradle 9.1.0 migration complete
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>- ✅ Resilience4j circuit breaker integrated
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>- ✅ All tests passing (100% pass rate)
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>- ✅ Documentation complete
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a> 📊 Key Metrics
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>- **Tests:** 12 total, 9 passed, 3 skipped (MongoDB)
-</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>- **Success Rate:** 100% (9/9 executable tests)
-</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>- **Build Time:** 7 seconds
-</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>- **Java Version:** 21 (for tests), 25 (for compilation)
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>- **Gradle Version:** 9.1.0
-</span></code></pre></div>
 <hr />
 
 
