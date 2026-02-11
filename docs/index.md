@@ -31,12 +31,18 @@ the intent for this exercise is to engage into a journey of understanding how to
 
 ---
 
-* [First Experiment](FirstPlan.md): migrate legacy app to new tech stack using **prompts**
-* [Experiment 2](experiment02/README.md): create new Weather App using **prompts**
-* [Experiment 3](experiment03/README.md): create new Weather App using **Speckit**
-* [Experiment 4](experiment04/README.md): create new Question Answer App using **speckit** using Claude Opus 4
-* [Experiment 5](experiment05/README.md): create another QA App using **speckit** using GPT 5.1 Reasoning
-* ... keep practising more
+## Experiments: (these are growing)
+
+| Name | Description | Status |
+|---|---|---|
+| [First Experiment](FirstPlan.md) | migrate legacy app to new tech stack using **prompts** | ✅ |
+| [Weather app](experiment02/README.md) | create a Weather App using **prompts** | ✅ |
+| [Weather app 2](experiment03/README.md) | create similar Weather App using **Speckit** | ✅ |
+| [Q&A app](experiment04/README.md) | create a Question Answer App using **speckit** using Claude Opus 4 | ✅ |
+| [Q&A app 2](experiment05/README.md) | create another QA App using **speckit** using GPT 5.1 Reasoning | ✅ |
+| [Restaurant EDA](https://github.com/amitrajpurkar/restaurant-eda/tree/001-restaurant-analytics) | explore restaurant data using **speckit** | in-progress |
+| [Mosquito Risk EDA](https://github.com/amitrajpurkar/geoemergeamit) | explore mosquito risk data using **AGENTS.md; speckit; skills** | in-progress |
+| ... | keep practising more... | xx |
 
 ---
 
