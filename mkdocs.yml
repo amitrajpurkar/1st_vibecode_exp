@@ -216,6 +216,9 @@ nav:
     - Plan: experiment05/README.md
     - Prompts: experiment05/prompts.md
     - Architectures: experiment05/architecture.md
+  - Journals:
+    - asof 2026-02-11: shelve_20260211.md
+    - AI Asst Research: AI_Code_Asst.md
 
   
 
