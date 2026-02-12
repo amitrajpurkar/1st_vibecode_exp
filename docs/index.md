@@ -29,9 +29,10 @@ the intent for this exercise is to engage into a journey of understanding how to
 * IMPORTANT: 
     * understanding how AGENT.md, SpecKit, Skills work is important
     * use readily-available developer-workflow:: Speckit, RIPER-5, Claude has one as well
-        * Speckit: Constitution, Specify, Clarify, Plan, Task, Analyze, Implement, Review
-        * RIPER-5: Research, Innovate, Plan, Execute, Review
+        * Speckit: Constitution → Specify → Clarify → Plan → Task → Analyze → Implement → Review
+        * RIPER-5: Research → Innovate → Plan → Execute → Review
         * Claude: xxx...
+        * HumanLayer: Research → Plan → Implement → Validate
     * add to your toolbox a library of AGENTS.md, Skills
 * DEVELOPER WATCHOUTS:
     * Non-negotiable: AI amplifies skills; it does not replace Developer’s skills
@@ -46,8 +47,7 @@ the intent for this exercise is to engage into a journey of understanding how to
     * If we don’t use concepts like Agent.md, Specs, Skills, we will babysit with AI for a long time and no consistency can be reached; we need to bring repeatability, predictability into software engineering to make production code reliable; Feeding the AI Agents with these three will help get us there
     * Within & across industries, programmers at large are producing code using AI tools -- We need to understand and decipher the code produced by AI
     * Observability, Testing against specs, Code Reviews, Domain knowledge, are the key to success
-    * watch this... {{< youtube "https://youtu.be/wVyQn6QRcT4?feature=shared" >}}
-    * or watch this... {{video "https://youtu.be/wVyQn6QRcT4?feature=shared" }}
+    * watch this... {{video "https://youtu.be/wVyQn6QRcT4?feature=shared" }}
     * instead of BA writing user stories, Dev interprets, QA guesses, PM chases; we can use AI-style "one-shared-specs" which reduces rework, interpretation drift, role friction; 
     * we all need to learn "Structured Intent Writing" .. executable intent.
     * as Architects :: `we need to champion shared specs, define role specific AGENT files, curate skills by role, treat AI as cross-functional team member`
@@ -73,7 +73,9 @@ the intent for this exercise is to engage into a journey of understanding how to
 
 
 ## for further research
-8. TBD... more to be researched, experimented
+* TBD... more to be researched, experimented
+* [HumanLayer](https://github.com/humanlayer/humanlayer.git)
+* [Claude plugins](https://github.com/anthropics/claude-code.git)
 
 
 ---
