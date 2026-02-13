@@ -11,6 +11,15 @@ Key characteristics:
 - The student selects a topic and difficulty, answers 10 multiple-choice questions, and receives feedback and a summary.
 - The implementation is intentionally small but layered for clarity (models, services, API, templates, utils).
 
+
+quick start
+```
+cd ~/workspace/pyprojects/q_and_a_practise2
+uv run uvicorn src.main:app --reload --port 8000 --host 127.0.0.1
+# above command starts both backend and frontend
+
+```
+
 ## High-Level Architecture
 
 The application uses a classic layered structure:

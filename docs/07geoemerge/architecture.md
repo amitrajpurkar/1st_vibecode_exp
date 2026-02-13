@@ -4,6 +4,17 @@
 **Last Updated:** February 8, 2026  
 **Status:** Production-Ready
 
+
+quick start
+```
+cd ~/workspace/pyprojects/geoemerge/geoemergeamit/
+.venv/bin/python -m uvicorn backend.src.api.main:app --reload --host 127.0.0.1 --port 8000
+cd frontend
+npm run dev -- --host 127.0.0.1 --port 5173
+# you need two terminals to run both backend and frontend
+
+```
+
 ---
 
 ## Table of Contents

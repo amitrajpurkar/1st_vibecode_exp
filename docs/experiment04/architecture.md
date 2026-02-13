@@ -2,6 +2,15 @@
 
 This document provides a comprehensive overview of the application architecture, project structure, and static code analysis results.
 
+
+quick start
+```
+cd ~/workspace/pyprojects/q_and_a_practise1
+uv run uvicorn src.web.main:app --reload --port 8000 --host 127.0.0.1
+# above command starts both backend and frontend
+
+```
+
 ---
 
 ## Table of Contents
