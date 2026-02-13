@@ -60,11 +60,11 @@ the intent for this exercise is to engage into a journey of understanding how to
 |---|---|---|
 | [First Experiment](FirstPlan.md) | migrate legacy app to new tech stack using **prompts** | ✅ |
 | [Weather app](experiment02/README.md) | create a Weather App using **prompts** | ✅ |
-| [Weather app 2](experiment03/README.md) | create similar Weather App using **Speckit** | ✅ |
-| [Q&A app](experiment04/README.md) | create a Question Answer App using **speckit** using Claude Opus 4 | ✅ |
-| [Q&A app 2](experiment05/README.md) | create another QA App using **speckit** using GPT 5.1 Reasoning | ✅ |
-| [Restaurant EDA](https://github.com/amitrajpurkar/restaurant-eda/tree/001-restaurant-analytics) | explore restaurant data using **speckit** | ⚠️ |
-| [Mosquito Risk EDA](https://github.com/amitrajpurkar/geoemergeamit) | explore mosquito risk data using **AGENTS.md; speckit; skills** | ✅ |
+| [Weather app 2](experiment03/README.md) | create similar Weather App using **SpecKit** | ✅ |
+| [Q&A app](experiment04/architecture.md) | create a Question Answer App using **SpecKit** using Claude Opus 4 | ✅ |
+| [Q&A app 2](experiment05/architecture.md) | create another QA App using **SpecKit** using GPT 5.1 Reasoning | ✅ |
+| [Restaurant EDA](06restaurants/architecture.md) | explore restaurant data using **SpecKit** | ⚠️ |
+| [Mosquito Risk EDA](07geoemerge/architecture.md) | explore mosquito risk data using **AGENTS.md; SpecKit; skills** | ✅ |
 | ... | keep practising more... | xx |
 
 
