@@ -3,7 +3,9 @@
 Here is the documentation (written by myself the human; not by AI). <br/><br/>
 the Quest:  **to engage into a journey of understanding how to work with AI Coding Agents and how to use it effectively as a coding assistant to boost productivity.**
 
+<br/><br/><br/>
 noting down the intent of this documentation:
+
 * highlight the importance of agents, specs, skills.. "the why"
 * show using my experiments the way these helped.. "the how"
 * (maybe in future).. show how new-SDLC looks like, as we use Agentic AI as a coding assistant
