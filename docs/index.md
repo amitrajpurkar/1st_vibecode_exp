@@ -21,7 +21,7 @@ noting down the intent of this documentation:
 | SpecKit| Intent & correctness| Features / systems| Per change|
 | Skills| Capability & execution| Tasks| Reusable|
 
-
+<br/><br/><br/>
 (the what...) 
 
 | **Dimension**| **AGENT.md**| **SpecKit**| **Skills**|
@@ -36,7 +36,7 @@ noting down the intent of this documentation:
 
 
 ---
-
+<br/><br/><br/>
 (the how...)
 ## Experiments: (these are growing)
 
