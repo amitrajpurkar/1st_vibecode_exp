@@ -13,7 +13,8 @@ noting down the intent of this documentation:
 ## key takeaways
 
 
-(the why...)
+(the why...) 
+
 | **Artifact**| **Controls**| **Applies to**| **Lifespan**|
 | ---- | ---- | ---- | ---- |
 | AGENT.md| Behavior & discipline| AI agent| Long-lived|
@@ -21,7 +22,8 @@ noting down the intent of this documentation:
 | Skills| Capability & execution| Tasks| Reusable|
 
 
-(the what...)
+(the what...) 
+
 | **Dimension**| **AGENT.md**| **SpecKit**| **Skills**|
 | ---- | ---- | ---- | ---- |
 | insight | defines how the AI behaves| defines what is being built | defines what the AI can do |
