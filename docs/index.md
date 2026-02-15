@@ -1,12 +1,19 @@
 # Experiments with AI Coding Assistant
 
 Here is the documentation (written by myself the human; not by AI). <br/><br/>
-the intent for this exercise is to engage into a journey of understanding how to work with AI Coding Agents and how to use it effectively as a coding assistant to boost productivity.
+the Quest:  **to engage into a journey of understanding how to work with AI Coding Agents and how to use it effectively as a coding assistant to boost productivity.**
+
+noting down the intent of this documentation:
+* highlight the importance of agents, specs, skills.. "the why"
+* show using my experiments the way these helped.. "the how"
+* (maybe in future).. show how new-SDLC looks like, as we use Agentic AI as a coding assistant
 
 ---
 
 ## key takeaways
 
+
+(the why...)
 | **Artifact**| **Controls**| **Applies to**| **Lifespan**|
 | ---- | ---- | ---- | ---- |
 | AGENT.md| Behavior & discipline| AI agent| Long-lived|
@@ -14,6 +21,7 @@ the intent for this exercise is to engage into a journey of understanding how to
 | Skills| Capability & execution| Tasks| Reusable|
 
 
+(the what...)
 | **Dimension**| **AGENT.md**| **SpecKit**| **Skills**|
 | ---- | ---- | ---- | ---- |
 | insight | defines how the AI behaves| defines what is being built | defines what the AI can do |
@@ -23,6 +31,26 @@ the intent for this exercise is to engage into a journey of understanding how to
 | Changes often?| Rarely| Frequently| less often|
 | Audience| AI agent| Humans + AI| Humans + AI|
 | Enforces| Style, rules, discipline| Scope, intent, acceptance| Capability, execution|
+
+
+---
+
+(the how...)
+## Experiments: (these are growing)
+
+| Name | Description | Status | Takeaways |
+|---|---|---|---|
+| [First Experiment](FirstPlan.md) | migrate legacy app to new tech stack using **prompts** | ✅ | how planning helps; no use of specs |
+| [Weather app](experiment02/README.md) | create a Weather App using **prompts** | ✅ | more thoughtful planning |
+| [Weather app 2](experiment03/README.md) | create similar Weather App using **SpecKit** | ✅ | SpecKit helps in better scoping and execution |
+| [Q&A app](experiment04/architecture.md) | create a Question Answer App using **SpecKit** using Claude Opus 4 | ✅ | another thoughtful planning |
+| [Q&A app 2](experiment05/architecture.md) | create another QA App using **SpecKit** using GPT 5.1 Reasoning | ✅ | better execution with SpecKit |
+| [Restaurant EDA](06restaurants/architecture.md) | explore restaurant data using **SpecKit** | ⚠️ | better scoping and execution with SpecKit |
+| [Mosquito Risk EDA](07geoemerge/architecture.md) | explore mosquito risk data using **AGENTS.md; SpecKit; skills** | ✅ | better scoping and execution with SpecKit, multiple revisions |
+| ... | keep practising more... | xx | xx |
+
+
+---
 
 
 ## Journal date: 2026-02-11
@@ -54,20 +82,6 @@ the intent for this exercise is to engage into a journey of understanding how to
 
 ---
 
-## Experiments: (these are growing)
-
-| Name | Description | Status |
-|---|---|---|
-| [First Experiment](FirstPlan.md) | migrate legacy app to new tech stack using **prompts** | ✅ |
-| [Weather app](experiment02/README.md) | create a Weather App using **prompts** | ✅ |
-| [Weather app 2](experiment03/README.md) | create similar Weather App using **SpecKit** | ✅ |
-| [Q&A app](experiment04/architecture.md) | create a Question Answer App using **SpecKit** using Claude Opus 4 | ✅ |
-| [Q&A app 2](experiment05/architecture.md) | create another QA App using **SpecKit** using GPT 5.1 Reasoning | ✅ |
-| [Restaurant EDA](06restaurants/architecture.md) | explore restaurant data using **SpecKit** | ⚠️ |
-| [Mosquito Risk EDA](07geoemerge/architecture.md) | explore mosquito risk data using **AGENTS.md; SpecKit; skills** | ✅ |
-| ... | keep practising more... | xx |
-
-
 
 ---
 
@@ -80,6 +94,6 @@ the intent for this exercise is to engage into a journey of understanding how to
 
 ---
 
-**Last Updated:** February 11, 2026  
+**Last Updated:** February 15, 2026  
 **Project:** Journey with AI Code Assistant  
-**Version:** 1.0.1
+**Version:** 1.0.2
