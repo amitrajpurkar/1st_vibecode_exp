@@ -8,7 +8,9 @@ noting down the intent of this documentation:
 
 * highlight the importance of agents, specs, skills.. "the why"
 * show using my experiments the way these helped.. "the how"
-* (maybe in future).. show how new-SDLC looks like, as we use Agentic AI as a coding assistant
+* separate the two: 
+    * "project-needs" (functional requirements) vs 
+    * "understand-new-tools-and-usage" (understand best practices for new AI tools)
 
 ---
 
@@ -19,14 +21,14 @@ noting down the intent of this documentation:
 
 | **Artifact**| **Controls**| **Applies to**| **Lifespan**|
 | ---- | ---- | ---- | ---- |
-| AGENT.md| Behavior & discipline| AI agent| Long-lived|
-| SpecKit| Intent & correctness| Features / systems| Per change|
-| Skills| Capability & execution| Tasks| Reusable|
+| AGENT profile| Behavior & discipline| AI agent| Reusable, long-lived|
+| Skills| Capability & execution| Tasks| Reusable, long-lived|
+| Specifications ( ~~SpecKit~~ )| Intent & correctness| Features / systems| Per change/ project|
 
 <br/><br/><br/>
 (the what...) 
 
-| **Dimension**| **AGENT.md**| **SpecKit**| **Skills**|
+| **Dimension**| **AGENT.md (profile)**| **Specs**| **Skills**|
 | ---- | ---- | ---- | ---- |
 | insight | defines how the AI behaves| defines what is being built | defines what the AI can do |
 | Primary purpose| Control agent behavior| Control development process| Control task execution|
@@ -38,8 +40,43 @@ noting down the intent of this documentation:
 
 
 ---
+
+<br/><br/><br/>
+
+## Next level down... "using AI Tools"
+
+1. collection of pointers/ references for agents.md; skills; workflows
+2. definition / description of what is what when using AI Code Assistants.
+3. understanding the new SLDC when doing AI-assisted development
+3. idea is as/when you start a new project, working with AI tools, 
+    - how should you setup your machine/ environment
+    - how should you structure your project
+    - how should you plan your project
+    - how should you design your project
+    - which skill-set you must always have for your typical profile.
+    - what are the commands, their sequence, and when to use them.
+    - how to make yourself fast as well as productive and efficient.
+
+
+## some definitions to help clarify
+
+| Word | Definition |
+|---|---|
+| Project | a temporary, structured endeavor to create, maintain, or enhance a software product or system |
+| SDLC | Software Development Lifecycle |
+| Activity | a specific, actionable task within the SDLC that contributes to the creation, modification, or maintenance of a software product |
+| Task | a sufficiently defined, complete unit of work that delivers a specific, tangible change, typically designed to be accomplished by one person within one day |
+| Workflow | a structured, step-by-step methodology, or plan, used by teams to build, test, and deploy applications, often referred to as SDLC |
+| Skill | a technical or professional capability—ranging from programming languages to problem-solving—used to design, build, test, and maintain computer applications and systems |
+| Rules | set of explicit or understood regulations or principles governing conduct within a particular activity or group of activities |
+| Memory | the part of a computer in which data or program instructions can be stored for retrieval |
+| Constitution | a body of fundamental principles or established precedents according to which a software program/code is acknowledged to be governed |
+
+---
+
 <br/><br/><br/>
 (the how...)
+
 ## Experiments: (these are growing)
 
 | Name | Description | Status | Takeaways |
@@ -51,21 +88,80 @@ noting down the intent of this documentation:
 | [Q&A app 2](experiment05/architecture.md) | create another QA App using **SpecKit** using GPT 5.1 Reasoning | ✅ | better execution with SpecKit |
 | [Restaurant EDA](06restaurants/architecture.md) | explore restaurant data using **SpecKit** | ⚠️ | better scoping and execution with SpecKit |
 | [Mosquito Risk EDA](07geoemerge/architecture.md) | explore mosquito risk data using **AGENTS.md; SpecKit; skills** | ✅ | better scoping and execution with SpecKit, multiple revisions |
+| [Resource Dessert](08rdessert/architecture.md) | experiment from a data hackathon **AGENTS.md; SpecKit; skills** | ✅ | better scoping and execution with SpecKit, multiple revisions |
+| [dashboard](static/car-dashboard.html) | have Claude Cowork read, analyze data-logs-in-excel saved in google-drive to create a dashboard | ✅ | prompt based approach; still learning Cowork |
 | ... | keep practising more... | xx | xx |
 
 
 ---
 
 
-## Journal date: 2026-02-11
-* IMPORTANT: 
-    * understanding how AGENT.md, SpecKit, Skills work is important
-    * use readily-available developer-workflow:: Speckit, RIPER-5, Claude has one as well
-        * Speckit: Constitution → Specify → Clarify → Plan → Task → Analyze → Implement → Review
-        * RIPER-5: Research → Innovate → Plan → Execute → Review
-        * Claude: xxx...
-        * HumanLayer: Research → Plan → Implement → Validate
-    * add to your toolbox a library of AGENTS.md, Skills
+## SPECS, SDD, Specifications Driven Development
+* there is no hard/ fast directions/ guidelines on which workflows are best -- you can develop your own
+* industry standard is missing; different companies have different techniques to address SDD
+* [SpecKit](https://github.com/github/spec-kit): a good starting point for using readily available workflows; 
+    * workflow: **Constitution → Specify → Clarify → Plan → Task → Analyze → Implement → Review**
+    * SpecKit runs as standalone tool; runs from CLI; 
+    * SpecKit provides its templates to different AI Agents.
+* from Cursor [RIPER-5](https://github.com/johnpeterman72/CursorRIPER); 
+    * workflow: **Research → Innovate → Plan → Execute → Review**
+* [Agent-Skills](https://github.com/addyosmani/agent-skills)
+    * workflow: **Spec → Plan → Build → Test → Review → Ship**
+* so what is a typical developer workflow ?
+    * you start with specifications, 
+    * clarify the specs and ideate on these specs, refine specs if possible, 
+    * then create a plan for your project, 
+    * then break down the plan into tasks, 
+    * then have AI Agent implement the tasks; 
+    * and finally verify/ validate the output of AI Agent;
+
+
+## AGENTS, CONSTITUTION, RULES
+* the overarching rules that AI Agent must follow -- this defines the behavior of the AI Agent, its profile, what role is it playing.
+* these can be re-used across multiple projects
+* We can have one AGENTS.md file for each type of Software Developer: Java, Python, Java-Springboot, React, etc.
+* You can hand craft an AGENTS.md or even have AI-Agent generate it for you.
+* AI Coding Agents like Windsurf/ Cascade refer to AGENTS.md as Constitution
+* AI Coding Agents like Claude Code refer to AGENTS.md as CLAUDE.md
+* scopes: Global (<user-home>/.claude/...), Project, Task
+
+
+## SKILLS, WORKFLOWS
+* Reference points to begin with
+    * [https://agentskills.io/home](https://agentskills.io/home)
+    * [https://skills.sh](https://skills.sh)
+    * [https://skillzwave.ai/browse/development/](https://skillzwave.ai/browse/development/)
+* A Skill relates to a specific task that the AI Agent must perform as a software developer.
+* like any other tool -- **RTFM: please read the docs to understand how to use each skill.**
+* Claude specific
+    * [https://claude.com/plugins](https://claude.com/plugins)
+    * [https://claudemarketplaces.com/skills](https://claudemarketplaces.com/skills)
+    * [https://github.com/addyosmani/agent-skills](https://github.com/addyosmani/agent-skills)
+    * [https://github.com/JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman)
+* AI Coding Agents like Windsurf/ Cascade refer to Skills as Workflows.
+* install Skills under different scopes: Global (<user-home>/.claude/skills/...), Project
+
+---
+
+## SpecKit vs Spec2Cloud — Quick Summary
+
+| Dimension | SpecKit | Spec2Cloud |
+|---|---|---|
+| **Maintainer** | GitHub (Microsoft) | Microsoft EMEA App GBB |
+| **Open Source** | ✅ MIT | ✅ MIT |
+| **Stars** | 95k+ (mature) | ~94 (early-stage) |
+| **AI Agents** | 30+ supported | Primarily GitHub Copilot |
+| **Cloud Dependency** | None — cloud-agnostic | Azure-required for deploy |
+| **On-Prem Support** | ✅ Yes | ❌ Not a primary use case |
+| **Offline / Air-gapped** | ✅ Explicitly supported | ⚠️ Partial (spec phases only) |
+| **Deployment Target** | Any / developer's choice | Azure |
+| **Extensibility** | 80+ community extensions | 46 built-in skills |
+| **Best For** | Any stack, any cloud, any AI | Azure + Copilot teams |
+
+---
+
+## Journal Notes
+
 * DEVELOPER WATCHOUTS:
     * Non-negotiable: AI amplifies skills; it does not replace Developer’s skills
     * Architectural thinking: decompose the system, decide which component, library or design pattern suites best for the problem at hand; think about transaction boundaries; interface contracts
@@ -86,6 +182,19 @@ noting down the intent of this documentation:
 
 ---
 
+## so that i dont forget
+
+```bash
+navigate to <working-dir> 
+# once i update documentation, i have a few helpers
+./doc.sh --help
+
+./doc.sh serve      # recompile mkdocs, verify locally
+./doc.sh publish    # publish to main.
+./doc.sh commit     # push to remote.
+
+```
+
 
 ---
 
@@ -98,6 +207,6 @@ noting down the intent of this documentation:
 
 ---
 
-**Last Updated:** February 15, 2026  
+**Last Updated:** April 15, 2026  
 **Project:** Journey with AI Code Assistant  
-**Version:** 1.0.2
+**Version:** 1.0.3
