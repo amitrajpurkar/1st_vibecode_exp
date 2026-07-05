@@ -90,6 +90,9 @@ noting down the intent of this documentation:
 | [Mosquito Risk EDA](07geoemerge/architecture.md) | explore mosquito risk data using **AGENTS.md; SpecKit; skills** | ✅ | better scoping and execution with SpecKit, multiple revisions |
 | [Resource Dessert](08rdessert/architecture.md) | experiment from a data hackathon **AGENTS.md; SpecKit; skills** | ✅ | better scoping and execution with SpecKit, multiple revisions |
 | [dashboard](static/car-dashboard.html) | have Claude Cowork read, analyze data-logs-in-excel saved in google-drive to create a dashboard | ✅ | prompt based approach; still learning Cowork |
+| [google drive explorer](static/drive-explorer.html) | Claude Cowork reads all files/ folders in google drive and creates a intuitive page | ✅ | prompt based approach |
+| [running dashboard](static/nike-dashboard.html)  | Claude Cowork read Nike data and created a dashboard | ✅ | prompt based approach |
+| [Roadtrip logs](static/2026-ny-roadtrip.html)  | Claude Cowork read roadtrip logs for 2026 NY trip and created a travel-log | ✅ | prompt based approach |
 | ... | keep practising more... | xx | xx |
 
 

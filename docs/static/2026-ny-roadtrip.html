@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Road Trip 2026 · New York &amp; Beyond</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --cream:#faf8f5; --warm:#fffdf9; --tan:#f0ece4; --sage:#e9f0ec;
+      --lav:#ede9f5; --peach:#f5ede8; --sky:#e8eef5;
+      --gold:#c9a86c; --slate:#5a6a7a; --text:#2c3540;
+      --muted:#8a9aa8; --acc:#6d8fa8; --border:#e0dbd0;
+      --font-serif:'Playfair Display',Georgia,serif;
+      --font-sans:'Inter',system-ui,sans-serif;
+    }
+    body{font-family:var(--font-sans);background:var(--cream);color:var(--text);line-height:1.7;font-size:14px}
+
+    /* ── HERO ── */
+    .hero{background:linear-gradient(140deg,#e8eef5 0%,#ede9f5 45%,#f5ede8 100%);padding:64px 40px 56px;text-align:center;border-bottom:1px solid var(--border)}
+    .hero h1{font-family:var(--font-serif);font-size:3rem;letter-spacing:-.02em;line-height:1.15;color:var(--text)}
+    .hero-sub{font-size:.95rem;color:var(--slate);margin-top:8px;font-weight:300;letter-spacing:.06em}
+    .hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+    .hp{background:rgba(255,255,255,.65);border:1px solid var(--border);border-radius:20px;padding:5px 15px;font-size:.75rem;color:var(--slate);font-weight:500}
+
+    /* ── SECTION WRAPPERS ── */
+    .sb{padding:52px 0}
+    .sb-tan{background:var(--tan)} .sb-sage{background:var(--sage)}
+    .sb-lav{background:var(--lav)} .sb-peach{background:var(--peach)}
+    .si{max-width:1180px;margin:0 auto;padding:0 40px}
+    .sec-h{font-family:var(--font-serif);font-size:1.75rem;color:var(--text);margin-bottom:6px}
+    .sec-sub{font-size:.8rem;color:var(--muted);margin-bottom:32px}
+    hr.div{border:none;border-top:1px solid var(--border);margin:0}
+
+    /* ── TIMELINE + CHARTS GRID ── */
+    .tl-chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+    @media(max-width:780px){.tl-chart-grid{grid-template-columns:1fr}}
+
+    /* timeline */
+    .timeline{position:relative;padding-left:26px}
+    .timeline::before{content:'';position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:linear-gradient(to bottom,var(--gold),#e0c898)}
+    .tl-item{position:relative;margin-bottom:22px}
+    .tl-dot{position:absolute;left:-21px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--tan)}
+    .tl-meta{font-size:.67rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+    .tl-day{font-weight:600;font-size:.88rem;color:var(--text)}
+    .tl-loc{font-weight:400;color:var(--slate)}
+    .tl-attrs{font-size:.74rem;color:var(--muted);margin-top:1px}
+
+    /* charts */
+    .charts-col{display:flex;flex-direction:column;gap:24px}
+    .chart-card{background:var(--warm);border:1px solid var(--border);border-radius:12px;padding:20px}
+    .chart-lbl{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--slate);margin-bottom:12px}
+    .chart-wrap{position:relative;height:190px}
+
+    /* ── FOOD TABLE ── */
+    table.dt{width:100%;border-collapse:collapse;font-size:.8rem}
+    table.dt th{text-align:left;padding:8px 10px;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);border-bottom:2px solid var(--border)}
+    table.dt td{padding:8px 10px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:top}
+    table.dt tr:hover td{background:rgba(255,255,255,.55)}
+    .td-date{white-space:nowrap;color:var(--muted);font-size:.74rem}
+    .td-notes{color:var(--slate);font-size:.76rem}
+    .td-count{text-align:right;font-weight:600;color:var(--gold)}
+
+    /* badges */
+    .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:500}
+    .bg-green{background:#d4edda;color:#2d7a44} .bg-yellow{background:#fff3cd;color:#856404}
+    .bg-indigo{background:#e0e0ff;color:#3c3c99} .bg-pink{background:#fce4ec;color:#880e4f}
+    .bg-gray{background:#e9ecef;color:#495057}
+
+    /* ── STAY GRID ── */
+    .stay-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-top:8px}
+    .stay-card{background:var(--warm);border:1px solid var(--border);border-radius:12px;padding:18px}
+    .stay-date{font-size:.67rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+    .stay-name{font-weight:600;font-size:.9rem;margin:5px 0 3px;color:var(--text)}
+    .stay-loc{font-size:.76rem;color:var(--acc);margin-bottom:5px}
+    .stay-addr{font-size:.7rem;color:var(--muted);margin-bottom:4px}
+    .conf{font-size:.68rem;color:var(--muted);display:block;margin-bottom:6px}
+    .stay-hi{font-size:.78rem;font-style:italic;color:var(--slate);margin-bottom:3px}
+    .stay-note{font-size:.72rem;color:var(--muted)}
+
+    /* ── JOURNAL ── */
+    .jd{margin-bottom:52px}
+    .jd-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--border);flex-wrap:wrap}
+    .jd-num{background:var(--gold);color:#fff;font-weight:700;font-size:.72rem;padding:4px 11px;border-radius:12px}
+    .jd-date{font-family:var(--font-serif);font-size:1.05rem;color:var(--text)}
+    .jd-loc{font-size:.78rem;color:var(--muted);font-style:italic}
+
+    .je{display:grid;gap:8px;margin-bottom:16px;padding:16px;background:var(--warm);border:1px solid var(--border);border-radius:10px;transition:box-shadow .2s}
+    .je:hover{box-shadow:0 2px 14px rgba(0,0,0,.07)}
+    .je-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .je-attr{font-weight:600;font-size:.92rem;color:var(--text)}
+    .pill-loc{background:var(--sky);border:1px solid #c5d8eb;color:var(--acc);font-size:.65rem;padding:2px 8px;border-radius:10px;font-weight:500}
+    .pill-wx{font-size:.68rem;color:var(--muted)}
+    .je-hi{font-size:.8rem;font-style:italic;color:var(--slate)}
+    .je-notes{font-size:.77rem;color:var(--muted);line-height:1.65}
+
+    /* thumbs */
+    .thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:flex-start}
+    .thumb{height:200px;border-radius:8px;overflow:hidden;flex-shrink:0;display:inline-block;background:var(--tan)}
+    .thumb img{height:200px;width:auto;display:block;border-radius:8px}
+    .thumb-empty{height:200px;width:130px;border-radius:8px;border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--border);flex-shrink:0}
+
+    /* ── PHOTO LOG ── */
+    .album-link{color:var(--acc);text-decoration:none;font-weight:500}
+    .album-link:hover{text-decoration:underline}
+    .muted-it{color:var(--muted);font-style:italic;font-size:.74rem}
+
+    /* ── SUMMARY ── */
+    .stat-row{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:36px}
+    .stat-box{background:var(--warm);border:1px solid var(--border);border-radius:12px;padding:18px 24px;text-align:center}
+    .stat-num{font-family:var(--font-serif);font-size:1.9rem;color:var(--gold);display:block;font-weight:600}
+    .stat-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+    .summary-prose{max-width:760px}
+    .summary-prose p{font-family:var(--font-serif);font-size:.98rem;line-height:1.95;color:var(--text);margin-bottom:18px}
+    .summary-prose strong{font-weight:600;color:var(--text)}
+
+    footer{text-align:center;padding:28px 20px;font-size:.7rem;color:var(--muted);border-top:1px solid var(--border)}
+    @media(max-width:600px){.si{padding:0 18px}.hero{padding:44px 20px 40px}.hero h1{font-size:2rem}}
+
+    /* ── INDEX NAV ── */
+    .idx-wrap{max-width:1180px;margin:0 auto;padding:36px 40px}
+    .idx-head{font-family:var(--font-serif);font-size:1.1rem;color:var(--slate);margin-bottom:16px;font-weight:400}
+    .idx-sections{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+    .idx-sec-card{display:flex;flex-direction:column;align-items:center;text-decoration:none;background:var(--warm);border:1px solid var(--border);border-radius:12px;padding:14px 18px;min-width:130px;transition:box-shadow .15s,border-color .15s;text-align:center}
+    .idx-sec-card:hover{box-shadow:0 3px 14px rgba(0,0,0,.1);border-color:var(--acc)}
+    .idx-icon{font-size:1.4rem;margin-bottom:4px}
+    .idx-title{font-weight:600;font-size:.82rem;color:var(--text)}
+    .idx-desc{font-size:.68rem;color:var(--muted);margin-top:2px}
+    .idx-label{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}
+    .idx-days{display:flex;flex-wrap:wrap;gap:8px}
+    .idx-day-card{display:flex;flex-direction:column;text-decoration:none;background:var(--warm);border:1px solid var(--border);border-radius:10px;padding:8px 12px;min-width:80px;transition:box-shadow .15s,border-color .15s}
+    .idx-day-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.09);border-color:var(--gold)}
+    .idx-day-num{font-weight:700;font-size:.72rem;color:var(--gold)}
+    .idx-day-date{font-size:.75rem;font-weight:500;color:var(--text)}
+    .idx-day-loc{font-size:.67rem;color:var(--muted);margin-top:1px}
+
+    /* ── HOVER IMAGE PREVIEW ── */
+    #img-preview{position:fixed;z-index:9999;pointer-events:none;display:none;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.35);background:#000;overflow:hidden}
+    #img-preview img{display:block;max-height:420px;max-width:620px;object-fit:contain}
+
+    /* ── NATURE SIDEBARS ── */
+    .sb-panel{position:fixed;top:0;width:96px;height:100vh;pointer-events:none;z-index:1;transition:opacity 1.4s ease}
+    .sb-panel svg{width:100%;height:100%;display:block}
+    .sb-l{left:0}.sb-r{right:0;transform:scaleX(-1)}
+    @media(max-width:1420px){.sb-panel{width:64px}}
+    @media(max-width:1240px){.sb-panel{display:none}}
+  </style>
+</head>
+<body>
+
+<!-- ════ NATURE SIDEBARS ════ -->
+<!-- Forest (theme A — primary) -->
+<div id="sb-forest-l" class="sb-panel sb-l">
+<svg viewBox="0 0 96 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+  <rect width="96" height="700" fill="#eaf2e6"/>
+  <rect width="96" height="160" fill="#f2f7f0" opacity=".85"/>
+  <ellipse cx="24" cy="390" rx="24" ry="42" fill="#c4dab4" opacity=".55"/>
+  <ellipse cx="76" cy="410" rx="20" ry="36" fill="#c4dab4" opacity=".5"/>
+  <ellipse cx="50" cy="370" rx="26" ry="46" fill="#aed09e" opacity=".55"/>
+  <ellipse cx="18" cy="430" rx="19" ry="32" fill="#8ec07e" opacity=".7"/>
+  <ellipse cx="82" cy="450" rx="17" ry="28" fill="#8ec07e" opacity=".65"/>
+  <ellipse cx="50" cy="415" rx="23" ry="38" fill="#74b062" opacity=".75"/>
+  <ellipse cx="12" cy="470" rx="16" ry="26" fill="#5c9c48" opacity=".82"/>
+  <ellipse cx="84" cy="490" rx="15" ry="24" fill="#5c9c48" opacity=".78"/>
+  <ellipse cx="46" cy="458" rx="21" ry="34" fill="#4a8a38" opacity=".88"/>
+  <rect x="10" y="475" width="5" height="36" fill="#705038" rx="2"/>
+  <rect x="44" y="480" width="5" height="30" fill="#705038" rx="2"/>
+  <rect x="81" y="495" width="4" height="24" fill="#705038" rx="2"/>
+  <rect x="0" y="508" width="96" height="192" fill="#4a7e40"/>
+  <ellipse cx="28" cy="516" rx="24" ry="9" fill="#3d6c35" opacity=".6"/>
+  <ellipse cx="75" cy="522" rx="20" ry="8" fill="#3d6c35" opacity=".5"/>
+  <ellipse cx="50" cy="510" rx="16" ry="6" fill="#3d6c35" opacity=".4"/>
+</svg>
+</div>
+<div id="sb-forest-r" class="sb-panel sb-r">
+<svg viewBox="0 0 96 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+  <rect width="96" height="700" fill="#eaf2e6"/>
+  <rect width="96" height="160" fill="#f2f7f0" opacity=".85"/>
+  <ellipse cx="24" cy="390" rx="24" ry="42" fill="#c4dab4" opacity=".55"/>
+  <ellipse cx="76" cy="410" rx="20" ry="36" fill="#c4dab4" opacity=".5"/>
+  <ellipse cx="50" cy="370" rx="26" ry="46" fill="#aed09e" opacity=".55"/>
+  <ellipse cx="18" cy="430" rx="19" ry="32" fill="#8ec07e" opacity=".7"/>
+  <ellipse cx="82" cy="450" rx="17" ry="28" fill="#8ec07e" opacity=".65"/>
+  <ellipse cx="50" cy="415" rx="23" ry="38" fill="#74b062" opacity=".75"/>
+  <ellipse cx="12" cy="470" rx="16" ry="26" fill="#5c9c48" opacity=".82"/>
+  <ellipse cx="84" cy="490" rx="15" ry="24" fill="#5c9c48" opacity=".78"/>
+  <ellipse cx="46" cy="458" rx="21" ry="34" fill="#4a8a38" opacity=".88"/>
+  <rect x="10" y="475" width="5" height="36" fill="#705038" rx="2"/>
+  <rect x="44" y="480" width="5" height="30" fill="#705038" rx="2"/>
+  <rect x="81" y="495" width="4" height="24" fill="#705038" rx="2"/>
+  <rect x="0" y="508" width="96" height="192" fill="#4a7e40"/>
+  <ellipse cx="28" cy="516" rx="24" ry="9" fill="#3d6c35" opacity=".6"/>
+  <ellipse cx="75" cy="522" rx="20" ry="8" fill="#3d6c35" opacity=".5"/>
+</svg>
+</div>
+
+<!-- Mountain ridge (theme B — mid-page) -->
+<div id="sb-mtn-l" class="sb-panel sb-l" style="opacity:0">
+<svg viewBox="0 0 96 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+  <rect width="96" height="700" fill="#eaeef8"/>
+  <rect width="96" height="220" fill="#ede8f8" opacity=".7"/>
+  <polygon points="0,420 28,295 55,335 96,308 96,700 0,700" fill="#c8bcea" opacity=".52"/>
+  <polygon points="0,455 22,345 48,372 96,348 96,700 0,700" fill="#a090cc" opacity=".62"/>
+  <polygon points="0,495 16,400 42,424 68,408 96,418 96,700 0,700" fill="#7460a8" opacity=".76"/>
+  <rect x="0" y="502" width="96" height="198" fill="#4c3c84"/>
+  <polygon points="28,415 32,388 36,415" fill="#3c2e68" opacity=".88"/>
+  <polygon points="52,406 56,378 60,406" fill="#3c2e68" opacity=".88"/>
+  <polygon points="14,428 17,402 20,428" fill="#3c2e68" opacity=".8"/>
+  <polygon points="72,412 75,386 78,412" fill="#3c2e68" opacity=".8"/>
+  <ellipse cx="48" cy="200" rx="6" ry="6" fill="#f5e8c0" opacity=".5"/>
+  <ellipse cx="22" cy="140" rx="3" ry="3" fill="#f5e8c0" opacity=".35"/>
+  <ellipse cx="76" cy="170" rx="4" ry="4" fill="#f5e8c0" opacity=".4"/>
+  <ellipse cx="60" cy="100" rx="2" ry="2" fill="#f5e8c0" opacity=".3"/>
+</svg>
+</div>
+<div id="sb-mtn-r" class="sb-panel sb-r" style="opacity:0">
+<svg viewBox="0 0 96 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+  <rect width="96" height="700" fill="#eaeef8"/>
+  <rect width="96" height="220" fill="#ede8f8" opacity=".7"/>
+  <polygon points="0,420 28,295 55,335 96,308 96,700 0,700" fill="#c8bcea" opacity=".52"/>
+  <polygon points="0,455 22,345 48,372 96,348 96,700 0,700" fill="#a090cc" opacity=".62"/>
+  <polygon points="0,495 16,400 42,424 68,408 96,418 96,700 0,700" fill="#7460a8" opacity=".76"/>
+  <rect x="0" y="502" width="96" height="198" fill="#4c3c84"/>
+  <polygon points="28,415 32,388 36,415" fill="#3c2e68" opacity=".88"/>
+  <polygon points="52,406 56,378 60,406" fill="#3c2e68" opacity=".88"/>
+  <polygon points="14,428 17,402 20,428" fill="#3c2e68" opacity=".8"/>
+  <polygon points="72,412 75,386 78,412" fill="#3c2e68" opacity=".8"/>
+  <ellipse cx="48" cy="200" rx="6" ry="6" fill="#f5e8c0" opacity=".5"/>
+  <ellipse cx="22" cy="140" rx="3" ry="3" fill="#f5e8c0" opacity=".35"/>
+  <ellipse cx="76" cy="170" rx="4" ry="4" fill="#f5e8c0" opacity=".4"/>
+</svg>
+</div>
+
+<!-- Coastal dunes (theme C — bottom / Savannah) -->
+<div id="sb-coast-l" class="sb-panel sb-l" style="opacity:0">
+<svg viewBox="0 0 96 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+  <rect width="96" height="700" fill="#f5f0e8"/>
+  <rect width="96" height="200" fill="#e8eff8" opacity=".75"/>
+  <rect x="0" y="180" width="96" height="58" fill="#9ac8dc" opacity=".52"/>
+  <rect x="0" y="228" width="96" height="14" fill="#7ab2c8" opacity=".42"/>
+  <ellipse cx="48" cy="370" rx="90" ry="62" fill="#e2cc8e" opacity=".62"/>
+  <ellipse cx="18" cy="460" rx="68" ry="64" fill="#d6b470" opacity=".72"/>
+  <ellipse cx="85" cy="475" rx="56" ry="52" fill="#cab258" opacity=".66"/>
+  <ellipse cx="48" cy="560" rx="80" ry="50" fill="#c0a04a" opacity=".7"/>
+  <line x1="38" y1="345" x2="30" y2="295" stroke="#7a9850" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="44" y1="340" x2="48" y2="288" stroke="#8aac58" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="32" y1="350" x2="22" y2="300" stroke="#7a9850" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="62" y1="342" x2="57" y2="290" stroke="#7a9850" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="68" y1="338" x2="74" y2="286" stroke="#8aac58" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="56" y1="347" x2="48" y2="295" stroke="#7a9850" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="20" y1="430" x2="14" y2="395" stroke="#8aac58" stroke-width="1.4" stroke-linecap="round"/>
+  <line x1="78" y1="438" x2="84" y2="400" stroke="#8aac58" stroke-width="1.4" stroke-linecap="round"/>
+  <rect x="0" y="590" width="96" height="110" fill="#b89040"/>
+</svg>
+</div>
+<div id="sb-coast-r" class="sb-panel sb-r" style="opacity:0">
+<svg viewBox="0 0 96 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+  <rect width="96" height="700" fill="#f5f0e8"/>
+  <rect width="96" height="200" fill="#e8eff8" opacity=".75"/>
+  <rect x="0" y="180" width="96" height="58" fill="#9ac8dc" opacity=".52"/>
+  <rect x="0" y="228" width="96" height="14" fill="#7ab2c8" opacity=".42"/>
+  <ellipse cx="48" cy="370" rx="90" ry="62" fill="#e2cc8e" opacity=".62"/>
+  <ellipse cx="18" cy="460" rx="68" ry="64" fill="#d6b470" opacity=".72"/>
+  <ellipse cx="85" cy="475" rx="56" ry="52" fill="#cab258" opacity=".66"/>
+  <ellipse cx="48" cy="560" rx="80" ry="50" fill="#c0a04a" opacity=".7"/>
+  <line x1="38" y1="345" x2="30" y2="295" stroke="#7a9850" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="44" y1="340" x2="48" y2="288" stroke="#8aac58" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="32" y1="350" x2="22" y2="300" stroke="#7a9850" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="62" y1="342" x2="57" y2="290" stroke="#7a9850" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="68" y1="338" x2="74" y2="286" stroke="#8aac58" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="56" y1="347" x2="48" y2="295" stroke="#7a9850" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="20" y1="430" x2="14" y2="395" stroke="#8aac58" stroke-width="1.4" stroke-linecap="round"/>
+  <line x1="78" y1="438" x2="84" y2="400" stroke="#8aac58" stroke-width="1.4" stroke-linecap="round"/>
+  <rect x="0" y="590" width="96" height="110" fill="#b89040"/>
+</svg>
+</div>
+
+<!-- ════ HERO ════ -->
+<div class="hero">
+  <h1>🚗 Road Trip 2026</h1>
+  <div class="hero-sub">New York &amp; Beyond · A Family Travel Log</div>
+  <div class="hero-pills">
+    <span class="hp">📅 May 30 – June 17, 2026</span>
+    <span class="hp">📍 17 Travel Days · 10+ Cities</span>
+    <span class="hp">🛣️ Orlando → Newark → NYC → Saratoga → Niagara → Hershey → Raleigh → Savannah</span>
+    <span class="hp">👨‍👩‍👦‍👦 Rajpurkar Family</span>
+    <span class="hp">📷 15,436 Photos</span>
+  </div>
+</div>
+
+<!-- ════ INDEX NAV ════ -->
+<div style="background:var(--warm);border-bottom:1px solid var(--border);">
+  <div class="idx-wrap">
+    <div class="idx-head">Quick Navigation</div>
+    
+    <div class="idx-sections">
+      <a href="#sec-summary" class="idx-sec-card">
+        <span class="idx-icon">📋</span>
+        <span class="idx-title">Trip Summary</span>
+        <span class="idx-desc">Stats & narrative</span>
+      </a>
+      <a href="#sec-photos" class="idx-sec-card">
+        <span class="idx-icon">📷</span>
+        <span class="idx-title">Photo Albums</span>
+        <span class="idx-desc">Google Photos links</span>
+      </a>
+      <a href="#sec-glance" class="idx-sec-card">
+        <span class="idx-icon">📅</span>
+        <span class="idx-title">Trip at a Glance</span>
+        <span class="idx-desc">Timeline & expenses</span>
+      </a>
+      <a href="#sec-food" class="idx-sec-card">
+        <span class="idx-icon">🍽️</span>
+        <span class="idx-title">Food & Stay</span>
+        <span class="idx-desc">Meals & hotels</span>
+      </a>
+      <a href="#sec-journey" class="idx-sec-card">
+        <span class="idx-icon">📖</span>
+        <span class="idx-title">The Journey</span>
+        <span class="idx-desc">Day-by-day stories</span>
+      </a></div>
+    <div class="idx-label">Jump to a day</div>
+    <div class="idx-days">
+      <a href="#day-2026-05-30" class="idx-day-card">
+        <span class="idx-day-num">Day 1</span>
+        <span class="idx-day-date">May 30</span>
+        <span class="idx-day-loc">Orlando</span>
+      </a>
+      <a href="#day-2026-05-31" class="idx-day-card">
+        <span class="idx-day-num">Day 2</span>
+        <span class="idx-day-date">May 31</span>
+        <span class="idx-day-loc">Orlando</span>
+      </a>
+      <a href="#day-2026-06-01" class="idx-day-card">
+        <span class="idx-day-num">Day 3</span>
+        <span class="idx-day-date">Jun 1</span>
+        <span class="idx-day-loc">Orlando</span>
+      </a>
+      <a href="#day-2026-06-02" class="idx-day-card">
+        <span class="idx-day-num">Day 4</span>
+        <span class="idx-day-date">Jun 2</span>
+        <span class="idx-day-loc">Orlando</span>
+      </a>
+      <a href="#day-2026-06-05" class="idx-day-card">
+        <span class="idx-day-num">Day 5</span>
+        <span class="idx-day-date">Jun 5</span>
+        <span class="idx-day-loc">Newark</span>
+      </a>
+      <a href="#day-2026-06-06" class="idx-day-card">
+        <span class="idx-day-num">Day 6</span>
+        <span class="idx-day-date">Jun 6</span>
+        <span class="idx-day-loc">New Jersey</span>
+      </a>
+      <a href="#day-2026-06-07" class="idx-day-card">
+        <span class="idx-day-num">Day 7</span>
+        <span class="idx-day-date">Jun 7</span>
+        <span class="idx-day-loc">New York</span>
+      </a>
+      <a href="#day-2026-06-08" class="idx-day-card">
+        <span class="idx-day-num">Day 8</span>
+        <span class="idx-day-date">Jun 8</span>
+        <span class="idx-day-loc">New York</span>
+      </a>
+      <a href="#day-2026-06-09" class="idx-day-card">
+        <span class="idx-day-num">Day 9</span>
+        <span class="idx-day-date">Jun 9</span>
+        <span class="idx-day-loc">New York</span>
+      </a>
+      <a href="#day-2026-06-10" class="idx-day-card">
+        <span class="idx-day-num">Day 10</span>
+        <span class="idx-day-date">Jun 10</span>
+        <span class="idx-day-loc">New York</span>
+      </a>
+      <a href="#day-2026-06-11" class="idx-day-card">
+        <span class="idx-day-num">Day 11</span>
+        <span class="idx-day-date">Jun 11</span>
+        <span class="idx-day-loc">New York</span>
+      </a>
+      <a href="#day-2026-06-12" class="idx-day-card">
+        <span class="idx-day-num">Day 12</span>
+        <span class="idx-day-date">Jun 12</span>
+        <span class="idx-day-loc">Saratoga</span>
+      </a>
+      <a href="#day-2026-06-13" class="idx-day-card">
+        <span class="idx-day-num">Day 13</span>
+        <span class="idx-day-date">Jun 13</span>
+        <span class="idx-day-loc">Niagara Falls</span>
+      </a>
+      <a href="#day-2026-06-14" class="idx-day-card">
+        <span class="idx-day-num">Day 14</span>
+        <span class="idx-day-date">Jun 14</span>
+        <span class="idx-day-loc">Niagara Falls</span>
+      </a>
+      <a href="#day-2026-06-15" class="idx-day-card">
+        <span class="idx-day-num">Day 15</span>
+        <span class="idx-day-date">Jun 15</span>
+        <span class="idx-day-loc">Hershey</span>
+      </a>
+      <a href="#day-2026-06-16" class="idx-day-card">
+        <span class="idx-day-num">Day 16</span>
+        <span class="idx-day-date">Jun 16</span>
+        <span class="idx-day-loc">Raleigh</span>
+      </a>
+      <a href="#day-2026-06-17" class="idx-day-card">
+        <span class="idx-day-num">Day 17</span>
+        <span class="idx-day-date">Jun 17</span>
+        <span class="idx-day-loc">Savannah</span>
+      </a></div>
+  </div>
+</div>
+
+<hr class="div"/>
+
+<!-- ════ SECTION 1 · Summary ════ -->
+<div id="sec-summary" class="sb sb-peach">
+  <div class="si">
+    <h2 class="sec-h">Trip Summary</h2>
+    <p class="sec-sub">Looking back at 19 days, 10 cities, and a family adventure across the East Coast</p>
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-num">17</span><span class="stat-lbl">Travel Days</span></div>
+      <div class="stat-box"><span class="stat-num">10+</span><span class="stat-lbl">Cities Visited</span></div>
+      <div class="stat-box"><span class="stat-num">15,436</span><span class="stat-lbl">Photos Captured</span></div>
+      <div class="stat-box"><span class="stat-num">$9,350</span><span class="stat-lbl">Total Spend</span></div>
+      <div class="stat-box"><span class="stat-num">55</span><span class="stat-lbl">Journal Entries</span></div>
+      <div class="stat-box"><span class="stat-num">55</span><span class="stat-lbl">Meals Logged</span></div>
+    </div>
+    <div class="summary-prose">
+      <p>The summer of 2026 gave the Rajpurkar family a road trip to remember — 17 days that arced from a milestone family moment in Orlando, soared over the coastline to Newark, and then swept through some of America's most iconic landscapes before looping home to Jacksonville.</p>
+      <p>The journey opened on a personal note: <strong>Dhanesh's university orientation at UCF</strong>, where the family spent four days in Orlando anchored at the sprawling HGV Tuscany Village resort. Blue Springs State Park, Disney Springs, and a proud send-off to campus set the tone — equal parts family milestone and holiday.</p>
+      <p><strong>New York City</strong> was the centrepiece. Four days of relentless exploration — the vertiginous Summit One Vanderbilt observation deck, a night at Broadway watching <em>Harry Potter and the Cursed Child</em>, morning jogs around the full Central Park loop, the solemn World Trade Center Memorial, the Intrepid Museum, the United Nations, Brooklyn Bridge on foot, and the non-stop sensory spectacle of Times Square. The family navigated entirely on foot, Uber, and subway — a genuine urban adventure.</p>
+      <p>The Hudson Valley leg brought a nostalgic detour through <strong>Saratoga Springs</strong> — revisiting a place from 26 years past. The Saratoga Spa State Park mineral springs, a charming volunteer-run Automobile Museum, and the stillness of Saratoga Lake made this an unexpected highlight.</p>
+      <p><strong>Niagara Falls</strong> delivered one of the trip's most emotional moments: a family reunion with Sudesh Mama and family for a day of mist-drenched walks on Goat Island, the Maid of the Mist boat ride, waffle ice creams at the rainbow bridge, and fireworks lighting up the falls at night. Watching the mist rise above the American Falls at dusk, sitting on a bench with nowhere to be — that's the kind of moment road trips are made for.</p>
+      <p><strong>Hershey</strong> was pure indulgence — a well-earned sweet stop with an immersive Chocolate World factory tour, an unexpected Civic History Museum visit perched on the highest point in the city, and a seriously over-budgeted chocolate haul. The drive south through <strong>Raleigh</strong> added a full day at the Natural Science Museum, and the final chapter in <strong>Savannah</strong> closed the loop with riverfront pralines, a free ferry loop, and the quiet satisfaction of one last city explored before the drive home.</p>
+      <p>Total photo count exceeded <strong>15,436</strong> across 14 logged days — testament to how richly every stretch of tarmac was lived. A trip of firsts, reunions, chocolate, and the kind of long road miles that quietly bind families together.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="div"/>
+
+<!-- ════ SECTION 2 · Photo Albums ════ -->
+<div id="sec-photos" class="sb sb-lav">
+  <div class="si">
+    <h2 class="sec-h">Photo Albums</h2>
+    <p class="sec-sub">Daily Google Photos albums with shot counts</p>
+    <div style="overflow-x:auto;">
+      <table class="dt">
+        <thead>
+          <tr>
+            <th>Date</th><th>Location</th><th>Day Highlights</th>
+            <th>Album</th><th style="text-align:right;">Photos</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr>
+        <td class="td-date">May 30, 2026</td>
+        <td>Orlando</td>
+        <td class="td-notes">Blue Springs Sate Park</td>
+        <td><a href="https://photos.app.goo.gl/4d6xgMkMyM3nznY87" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">1,466</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">May 31, 2026</td>
+        <td>Orlando</td>
+        <td class="td-notes">Disney Springs</td>
+        <td><span class="muted-it">photos for all four days in one album</span></td>
+        <td class="td-count">—</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 01, 2026</td>
+        <td>Orlando</td>
+        <td class="td-notes">HGV, UCF campus</td>
+        <td><span class="muted-it">photos for all four days in one album</span></td>
+        <td class="td-count">—</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 02, 2026</td>
+        <td>Orlando</td>
+        <td class="td-notes">HGV, UCF campus</td>
+        <td><span class="muted-it">photos for all four days in one album</span></td>
+        <td class="td-count">—</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 05, 2026</td>
+        <td>Newark</td>
+        <td class="td-notes">runways, planes, view from plane</td>
+        <td><a href="https://photos.app.goo.gl/qDFsWXUWnsrGaEWSA" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">872</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 06, 2026</td>
+        <td>New Jersey</td>
+        <td class="td-notes">Statue of Liberty</td>
+        <td><a href="https://photos.app.goo.gl/bhZacGnmqtTsEc9Y7" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">1,571</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 07, 2026</td>
+        <td>New York</td>
+        <td class="td-notes">Summit Tower, Broadway show, times square</td>
+        <td><a href="https://photos.app.goo.gl/guL1kHTDavW4kmSw9" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">752</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 08, 2026</td>
+        <td>New York</td>
+        <td class="td-notes">Central Park, Intrepid Museum, United Nations</td>
+        <td><a href="https://photos.app.goo.gl/3AYTmfcTWbszj4VN7" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">1,194</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 09, 2026</td>
+        <td>New York</td>
+        <td class="td-notes">Central Park, Rockefeller Center</td>
+        <td><a href="https://photos.app.goo.gl/oVazHyQJvrM1vE166" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">578</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 10, 2026</td>
+        <td>New York</td>
+        <td class="td-notes">downtown, Brooklyn Bridge, Washington Square, WTC Memorial, One World mall</td>
+        <td><a href="https://photos.app.goo.gl/pHK5VQcMQsdM35fw6" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">710</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 11, 2026</td>
+        <td>Saratoga</td>
+        <td class="td-notes">drive to Albany, Clifton Park, Saratoga</td>
+        <td><a href="https://photos.app.goo.gl/7AYwF6pXEDtbGvbh6" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">841</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 12, 2026</td>
+        <td>Saratoga</td>
+        <td class="td-notes">Saratoga State Park, Automobile Museum, Saratoga Lake, drive to Batavia</td>
+        <td><a href="https://photos.app.goo.gl/bNG1q6VypdSrNXQ29" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">900</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 13, 2026</td>
+        <td>Niagara Falls</td>
+        <td class="td-notes">Drive to Niagara, enjoy the Niagara State Park with mama, mami</td>
+        <td><a href="https://photos.app.goo.gl/dNLyuKJgMzDpEWtC9" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">1,860</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 14, 2026</td>
+        <td>Niagara Falls</td>
+        <td class="td-notes">Family lunch at Niagara, drive to hershey</td>
+        <td><a href="https://photos.app.goo.gl/3Ar1whzJLnK7P9gu6" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">1,091</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 15, 2026</td>
+        <td>Hershey</td>
+        <td class="td-notes">Drive to Hershey, Chocolate factory tour, Civic History Museum and drive to Rocky Mt, NC</td>
+        <td><a href="https://photos.app.goo.gl/qpHnzUPRoDSWNiko9" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">1,795</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 16, 2026</td>
+        <td>Raleigh</td>
+        <td class="td-notes">drive to Raleigh downtown, Natural History Museum, drive to Savannah</td>
+        <td><a href="https://photos.app.goo.gl/7TJfWAQPQdN1Mo4p7" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">1,217</td>
+      </tr>
+
+      <tr>
+        <td class="td-date">Jun 17, 2026</td>
+        <td>Savannah</td>
+        <td class="td-notes">explore Savannah, drive back home</td>
+        <td><a href="https://photos.app.goo.gl/4yeYkyj8wWnr5zKY9" target="_blank" class="album-link">🔗 Open Album</a></td>
+        <td class="td-count">589</td>
+      </tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<hr class="div"/>
+
+<!-- ════ SECTION 3 · Timeline + Charts ════ -->
+<div id="sec-glance" class="sb sb-tan">
+  <div class="si">
+    <h2 class="sec-h">Trip at a Glance</h2>
+    <p class="sec-sub">Day-by-day timeline alongside spend breakdown by category and location</p>
+    <div class="tl-chart-grid">
+      <div>
+        <div class="timeline">
+          
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">May 30, 2026</div>
+            <div class="tl-day">Day 1 <span class="tl-loc">· Orlando</span></div>
+            <div class="tl-attrs">Blue Springs State Park</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">May 31, 2026</div>
+            <div class="tl-day">Day 2 <span class="tl-loc">· Orlando</span></div>
+            <div class="tl-attrs">Disney Springs, Prime outlets</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 01, 2026</div>
+            <div class="tl-day">Day 3 <span class="tl-loc">· Orlando</span></div>
+            <div class="tl-attrs">HGV Resort</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 02, 2026</div>
+            <div class="tl-day">Day 4 <span class="tl-loc">· Orlando</span></div>
+            <div class="tl-attrs">UCF Campus</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 05, 2026</div>
+            <div class="tl-day">Day 5 <span class="tl-loc">· Newark</span></div>
+            <div class="tl-attrs">United Airlines flight</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 06, 2026</div>
+            <div class="tl-day">Day 6 <span class="tl-loc">· New Jersey</span></div>
+            <div class="tl-attrs">Statue of Liberty, Lite rail to Hoboken</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 07, 2026</div>
+            <div class="tl-day">Day 7 <span class="tl-loc">· New York</span></div>
+            <div class="tl-attrs">Summit Towers, Broadway show, Times Square</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 08, 2026</div>
+            <div class="tl-day">Day 8 <span class="tl-loc">· New York</span></div>
+            <div class="tl-attrs">Intrepid Museum, Central Park, United Nations</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 09, 2026</div>
+            <div class="tl-day">Day 9 <span class="tl-loc">· New York</span></div>
+            <div class="tl-attrs">Central Park, Rockefeller Center, Empire State quest</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 10, 2026</div>
+            <div class="tl-day">Day 10 <span class="tl-loc">· New York</span></div>
+            <div class="tl-attrs">Brooklyn Bridge, Washington Square, One World Mall, World Trade Center Memorial</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 11, 2026</div>
+            <div class="tl-day">Day 11 <span class="tl-loc">· New York</span></div>
+            <div class="tl-attrs">late checkout, Car rental at Newark Airport, drive across Albany, searching Clifton Park, Malta lake</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 12, 2026</div>
+            <div class="tl-day">Day 12 <span class="tl-loc">· Saratoga</span></div>
+            <div class="tl-attrs">Saratoga Spa State Park, Mercedes Automobile Museum, Saratoga Park Spa, Saratoga Lake, Mohawk River Welcome Center</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 13, 2026</div>
+            <div class="tl-day">Day 13 <span class="tl-loc">· Niagara Falls</span></div>
+            <div class="tl-attrs">Niagara Falls, Maid of the Mist, Goat Island, ice cream and rainbow beach, leisure around american falls</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 14, 2026</div>
+            <div class="tl-day">Day 14 <span class="tl-loc">· Niagara Falls</span></div>
+            <div class="tl-attrs">family lunch at Olive Garden, Mall time, Walmart, Marshalls,, stop at Canadian burger place, road to Hershey</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 15, 2026</div>
+            <div class="tl-day">Day 15 <span class="tl-loc">· Hershey</span></div>
+            <div class="tl-attrs">Hershey Chocolate Factory, Civic History Museum, Harrisburg downtown, road to Rocky Mount</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 16, 2026</div>
+            <div class="tl-day">Day 16 <span class="tl-loc">· Raleigh</span></div>
+            <div class="tl-attrs">Raleigh downtown, Natural Science Museum, road to Savannah</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-meta">Jun 17, 2026</div>
+            <div class="tl-day">Day 17 <span class="tl-loc">· Savannah</span></div>
+            <div class="tl-attrs">NOAA center, River walk, sweet shop, River ferry, car-park, gas-station, Back to Jax</div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="charts-col">
+        <div class="chart-card">
+          <div class="chart-lbl">Expenses by Category (USD)</div>
+          <div class="chart-wrap"><canvas id="catChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-lbl">Expenses by Location (USD)</div>
+          <div class="chart-wrap"><canvas id="locChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div"/>
+
+<!-- ════ SECTION 4 · Food & Stay ════ -->
+<div id="sec-food" class="sb sb-sage">
+  <div class="si">
+    <h2 class="sec-h">Food &amp; Stay</h2>
+    <p class="sec-sub">What we ate and where we slept across 17 days</p>
+
+    <h3 style="font-size:.9rem;font-weight:600;color:var(--slate);margin-bottom:14px;letter-spacing:.03em;">🍽️ Meals</h3>
+    <div style="overflow-x:auto;margin-bottom:48px;">
+      <table class="dt">
+        <thead><tr><th>Date</th><th>Location</th><th>Slot</th><th>Place</th><th>Highlights</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="td-date">May 30, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>McDonalds</strong></td>
+          <td class="td-notes">Halifax location</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">May 30, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>at resort</strong></td>
+          <td class="td-notes">Costco, Walmart groceries</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">May 31, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at resort</strong></td>
+          <td class="td-notes">healthy omlets</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">May 31, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>Geradelli</strong></td>
+          <td class="td-notes">chocolate sundaes</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">May 31, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>Kizuna Asian Buffet</strong></td>
+          <td class="td-notes">asian buffet</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 01, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at resort</strong></td>
+          <td class="td-notes">a fast breakfast for Dhanesh, Aai, and later easy one for Yuvi and baba</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 01, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>at resort</strong></td>
+          <td class="td-notes">dhanesh, aai have quick meal at UCF, yuvi and baba have packs at resort</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 01, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>at resort</strong></td>
+          <td class="td-notes">fruit time at resort, later Yuvi has starbucks; Dhanesh and Prajakta do their part in UCF</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 01, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>at resort</strong></td>
+          <td class="td-notes">package meal heating in resort; Prajakta comes in late</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 02, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at resort</strong></td>
+          <td class="td-notes">no time for breakfast; doing packing/ loading into odyssey; checkout before 7am and rush to UCF</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 02, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>at UCF</strong></td>
+          <td class="td-notes">quick meals at UCF canteen; use their meal cards, canteen in Student Union building; large setup</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 02, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>McDonalds</strong></td>
+          <td class="td-notes">quick snacks on the way back fromn UCF to Jacksonville</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 02, 2026</td>
+          <td>Orlando</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>at home</strong></td>
+          <td class="td-notes">dinner at home</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 05, 2026</td>
+          <td>Jacksonville</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>lite dinner at airport</strong></td>
+          <td class="td-notes">burger fi sandwiches for boys</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 05, 2026</td>
+          <td>Newark</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>Newark airport</strong></td>
+          <td class="td-notes">pick cold sandwiches at Newark airport; most of the eateries were closed</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 06, 2026</td>
+          <td>New Jersey</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at Sheraton</strong></td>
+          <td class="td-notes">standard hotel breakfast; egg, sausage, potatoes, fruits</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 06, 2026</td>
+          <td>New Jersey</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>at Liberty island</strong></td>
+          <td class="td-notes">multiple snacks instead of lunch; smoothies, drinks, its hot so less eating more drinks</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 06, 2026</td>
+          <td>New Jersey</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>dominos</strong></td>
+          <td class="td-notes">pizza delivery at hotel room</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 07, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at room</strong></td>
+          <td class="td-notes">Marriott breakfast before checkout</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 07, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>roadside stall</strong></td>
+          <td class="td-notes">only pick hotdog, pretzel for boys from roadside stall, prajakta and amit skip; we are rushing to broadway show for which we are getting late</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 07, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>Val Pizza</strong></td>
+          <td class="td-notes">pizza dinner one slice each; small shack mexican</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 08, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at room</strong></td>
+          <td class="td-notes">muffins picked from CVS last night</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 08, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>fruits at Central Park</strong></td>
+          <td class="td-notes">boys, prajakta have meal near museum, i have fruit cup in Central Park</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 08, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>Aviator Grill, Krispy Kreme</strong></td>
+          <td class="td-notes">some grill place at times square ; plus krispy kreme</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 08, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>HCW</strong></td>
+          <td class="td-notes">chocolate sundaes at Hershey shop, times square</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 09, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>Angelina Bakery</strong></td>
+          <td class="td-notes">lavish breakfast for boys</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 09, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>at room</strong></td>
+          <td class="td-notes">use food from Angelina</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 09, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>Shake Shack</strong></td>
+          <td class="td-notes">burgers at this place at times square</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 10, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>SpitFire Cafe</strong></td>
+          <td class="td-notes">coffee during 8am standup</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 10, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>Greenwich Thai</strong></td>
+          <td class="td-notes">after brooklyn bridge walk</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 10, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>Naya at Wall Street , Venchi at times square</strong></td>
+          <td class="td-notes">this was like chipotle</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 11, 2026</td>
+          <td>New York</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at room</strong></td>
+          <td class="td-notes">use snacks from corner stores picked last night</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 11, 2026</td>
+          <td>Albany</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>check-fil-a</strong></td>
+          <td class="td-notes">late lunch fast food</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 11, 2026</td>
+          <td>Saratoga</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>at room</strong></td>
+          <td class="td-notes">heat up food collected from Latham&#x27;s Sams club</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 12, 2026</td>
+          <td>Saratoga</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at hotel</strong></td>
+          <td class="td-notes">standard hotel breakfast; egg, sausage, potatoes, fruits</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 12, 2026</td>
+          <td>Saratoga</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>in car</strong></td>
+          <td class="td-notes">much chips and sundry we were carrying</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 12, 2026</td>
+          <td>Batavia</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>at room</strong></td>
+          <td class="td-notes">heat up soups; have subway, salad</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 13, 2026</td>
+          <td>Batavia</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at hotel</strong></td>
+          <td class="td-notes">standard hotel breakfast; egg, sausage, potatoes, fruits</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 13, 2026</td>
+          <td>Niagara Falls</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>at Goat Island</strong></td>
+          <td class="td-notes">chips, biscuits, fruits from bag</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 13, 2026</td>
+          <td>Niagara Falls</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>near rainbow bridge</strong></td>
+          <td class="td-notes">hot waffle ice creams for all</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 13, 2026</td>
+          <td>Niagara Falls</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>Murugan Cafe</strong></td>
+          <td class="td-notes">dosa house dinner for all</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 14, 2026</td>
+          <td>Niagara Falls</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at hotel</strong></td>
+          <td class="td-notes">cold breakfast at Spark</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 14, 2026</td>
+          <td>Niagara Falls</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>Olive Garden</strong></td>
+          <td class="td-notes">elaborate family lunch at Olive Garden Niagara</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 14, 2026</td>
+          <td>Piffard</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>Tim Horton</strong></td>
+          <td class="td-notes">coffee and donuts</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 14, 2026</td>
+          <td>Williamsport</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>McDonalds</strong></td>
+          <td class="td-notes">value meals for all</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 15, 2026</td>
+          <td>Hershey</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at hotel</strong></td>
+          <td class="td-notes">standard hotel breakfast; egg, sausage, potatoes, fruits</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 15, 2026</td>
+          <td>Hershey</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>Chocolate world</strong></td>
+          <td class="td-notes">sundaes, chocolates</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 15, 2026</td>
+          <td>Raleigh</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>at room</strong></td>
+          <td class="td-notes">salad, warps</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 16, 2026</td>
+          <td>Raleigh</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at hotel</strong></td>
+          <td class="td-notes">standard hotel breakfast; egg, sausage, potatoes, fruits</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 16, 2026</td>
+          <td>Raleigh</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>museum cafeteria</strong></td>
+          <td class="td-notes">left over salad, nuggets and drinks</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 16, 2026</td>
+          <td>Savannah</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>Crocker Barrel</strong></td>
+          <td class="td-notes">elaborate dinner, meals</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 17, 2026</td>
+          <td>Savannah</td>
+          <td><span class="badge bg-green">breakie</span></td>
+          <td><strong>at hotel</strong></td>
+          <td class="td-notes">standard hotel breakfast; egg, sausage, potatoes, fruits</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 17, 2026</td>
+          <td>Savannah</td>
+          <td><span class="badge bg-yellow">lunch</span></td>
+          <td><strong>sweets by the river</strong></td>
+          <td class="td-notes">ice creams and pralines</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 17, 2026</td>
+          <td>Savannah</td>
+          <td><span class="badge bg-pink">snax</span></td>
+          <td><strong>gas station</strong></td>
+          <td class="td-notes">cold sandwiches, drinks</td>
+        </tr>
+
+        <tr>
+          <td class="td-date">Jun 17, 2026</td>
+          <td>Jacksonville</td>
+          <td><span class="badge bg-indigo">dinner</span></td>
+          <td><strong>new thai restaurant</strong></td>
+          <td class="td-notes">early and timely dinner</td>
+        </tr></tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:.9rem;font-weight:600;color:var(--slate);margin-bottom:14px;letter-spacing:.03em;">🏨 Accommodation</h3>
+    <div class="stay-grid">
+      
+      <div class="stay-card">
+        <div class="stay-date">May 30, 2026</div>
+        <div class="stay-name">HGV Tuscany Village</div>
+        <div class="stay-loc">📍 Orlando</div>
+        <div class="stay-addr">8122 Arrezzo way, Orlando, FL, 32821</div>
+        <span class="conf">Conf #743067705.0</span>
+        <div class="stay-hi">✨ remarkable arrangement</div>
+        <div class="stay-note">first day we were surprised by how large this resort facility was</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">May 31, 2026</div>
+        <div class="stay-name">HGV Tuscany Village</div>
+        <div class="stay-loc">📍 Orlando</div>
+        <div class="stay-addr">8122 Arrezzo way, Orlando, FL, 32821</div>
+        
+        <div class="stay-hi">✨ gym, the walkway within the apartment, the side gate right into prime outlets</div>
+        <div class="stay-note">several 8-9 storey buildings, like houses in Mumbai from early 2000</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 01, 2026</div>
+        <div class="stay-name">HGV Tuscany Village</div>
+        <div class="stay-loc">📍 Orlando</div>
+        <div class="stay-addr">8122 Arrezzo way, Orlando, FL, 32821</div>
+        
+        <div class="stay-hi">✨ enjoyed the gym and walkways</div>
+        <div class="stay-note">this day it was mostly me and Yuvan; Yuvi later enjoyed the swimming pool, then he enjoyed the jaccuzi as well</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 05, 2026</div>
+        <div class="stay-name">Marriott Springfield Suites, Carlstad, NJ</div>
+        <div class="stay-loc">📍 New Jersey</div>
+        <div class="stay-addr">192 Paterson Plank Rd, Carlstadt, NJ 07072</div>
+        <span class="conf">Conf #72710062.0</span>
+        <div class="stay-hi">✨ hotel was smaller than usual but clean, it was on ground floor</div>
+        <div class="stay-note">reached late in night; aimed for sleeping.. this was a compact room, but descent; hotel was in industrial area, besides &quot;Dream America&quot; stadium, there were also several stadiums setup for FIFA world cup</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 06, 2026</div>
+        <div class="stay-name">Marriott Springfield Suites, Carlstad, NJ</div>
+        <div class="stay-loc">📍 New Jersey</div>
+        <div class="stay-addr">192 Paterson Plank Rd, Carlstadt, NJ 07072</div>
+        <span class="conf">Conf #72710062.0</span>
+        <div class="stay-hi">✨ spend more time in hotel, watched movies</div>
+        <div class="stay-note">spend a bit more time 2nd night/ evening; came to room early from Hoboken; ordered pizza delivery from dominoes right into the room</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 07, 2026</div>
+        <div class="stay-name">Hilton Garden Inn, near Broadway, Times Square</div>
+        <div class="stay-loc">📍 NY City</div>
+        <div class="stay-addr">237 West 54th Street, New York, NY, 10019</div>
+        <span class="conf">Conf #3464831789.0</span>
+        <div class="stay-hi">✨ compact, cramped room</div>
+        <div class="stay-note">possibly typical of crowded city; this room was on 29th floor, we got the room late in evening</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 08, 2026</div>
+        <div class="stay-name">Hilton Garden Inn, near Broadway, Times Square</div>
+        <div class="stay-loc">📍 NY City</div>
+        <div class="stay-addr">237 West 54th Street, New York, NY, 10019</div>
+        <span class="conf">Conf #9124218151.0</span>
+        <div class="stay-hi">✨ changed to 9th floor</div>
+        <div class="stay-note">new room; lifts were busted in this hotel, it was a compulsary exercise up and down the stairs; day 1 we got this room late in evening; hence had to spend my day working from Central Park</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 09, 2026</div>
+        <div class="stay-name">Hilton Garden Inn, near Broadway, Times Square</div>
+        <div class="stay-loc">📍 NY City</div>
+        <div class="stay-addr">237 West 54th Street, New York, NY, 10019</div>
+        <span class="conf">Conf #9124218151.0</span>
+        <div class="stay-hi">✨ stairway climbs</div>
+        <div class="stay-note">myself spend most office time from room; did my meetings well; we had to attend marketing session on 9th</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 10, 2026</div>
+        <div class="stay-name">Hilton Garden Inn, near Broadway, Times Square</div>
+        <div class="stay-loc">📍 NY City</div>
+        <div class="stay-addr">237 West 54th Street, New York, NY, 10019</div>
+        <span class="conf">Conf #9124218151.0</span>
+        <div class="stay-hi">✨ stairway climbs</div>
+        <div class="stay-note">myself spend most office time from room; did my meetings well</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 11, 2026</div>
+        <div class="stay-name">Home2 Suites, besides i-89 Saratoga Springs</div>
+        <div class="stay-loc">📍 Saratoga Springs</div>
+        <div class="stay-addr">103 Saratoga Village Boulevard, Malta, NY, 12020</div>
+        <span class="conf">Conf #97362515.0</span>
+        <div class="stay-hi">✨ noon checkout</div>
+        <div class="stay-note">was able to take 3 calls in the morning before we checked out</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 12, 2026</div>
+        <div class="stay-name">Hampton Inn, Batavia</div>
+        <div class="stay-loc">📍 Batavia</div>
+        <div class="stay-addr">4360 Commerce Drive, Batavia, NY, 14020</div>
+        <span class="conf">Conf #94284595.0</span>
+        
+        <div class="stay-note">this was a descent room</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 13, 2026</div>
+        <div class="stay-name">Spark by Hilton, Lockport</div>
+        <div class="stay-loc">📍 Niagara Falls</div>
+        <div class="stay-addr">515 South Transit Street, Lockport, NY, 14094</div>
+        <span class="conf">Conf #3469368018.0</span>
+        <div class="stay-hi">✨ looked small at midnight</div>
+        <div class="stay-note">this was amazingly large setup</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 15, 2026</div>
+        <div class="stay-name">Hapton Inn</div>
+        <div class="stay-loc">📍 Rocky Mount</div>
+        <div class="stay-addr">530 N Winstead Ave, Rocky Mount, NC 27804</div>
+        
+        <div class="stay-hi">✨ before Raleigh, was this alongside US 64? there was NASH General hospital around</div>
+        <div class="stay-note">this room was descent again</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-date">Jun 16, 2026</div>
+        <div class="stay-name">Hapton Inn</div>
+        <div class="stay-loc">📍 Port Wentworth, Savannah</div>
+        <div class="stay-addr">7050 GA-21, Port Wentworth, GA, 31407</div>
+        
+        <div class="stay-hi">✨ had issues with AC and lodged complain</div>
+        <div class="stay-note">Hilton gave 20,000 points after talking around the complains</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div"/>
+
+<!-- ════ SECTION 5 · Journal Storyline ════ -->
+<div id="sec-journey" class="sb">
+  <div class="si">
+    <h2 class="sec-h">The Journey</h2>
+    <p class="sec-sub">Day-by-day stories from the road · Thumbnail slots ready for Google Photos links</p>
+    
+      <div class="jd" id="day-2026-05-30">
+        <div class="jd-header">
+          <span class="jd-num">Day 1</span>
+          <span class="jd-date">May 30, 2026</span>
+          <span class="jd-loc">Orlando</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Blue Springs State Park</span>
+            <span class="pill-loc">Orlando</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ memorable ferry</div>
+          <div class="je-notes">this was a long drive for dhanesh; at state park, it was the last day fo the pass; the park visit was excellent</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMNzyL6fI1EnRtA9jBO0mpYQ70-D9oxy19vZogldV5Kgkxh3cQs8fIU6gde_ab9rqp26lcFCX6Wm9yzjmZqpeg7WRHfghkg8rZ3XpMX_PoXvFbt3hmi_WTIhI0rA7IgUOg9O-m0L-y82xuIOVtueGIMbw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="kayak in the Blue Springs Lake"><img src="https://lh3.googleusercontent.com/pw/AP1GczMNzyL6fI1EnRtA9jBO0mpYQ70-D9oxy19vZogldV5Kgkxh3cQs8fIU6gde_ab9rqp26lcFCX6Wm9yzjmZqpeg7WRHfghkg8rZ3XpMX_PoXvFbt3hmi_WTIhI0rA7IgUOg9O-m0L-y82xuIOVtueGIMbw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMc_G4TV-_XkGPuaJVCuaU3Rb3laAQUoSxKJyc-4t_Y1Iipnj_1ljUgVvbZgpU-gK8HRPLF9pQCMyzX-ic1KF4d9Gs0tbqUw_ASrgRy3-QKOL9cYMj9KDdIkF5O_4dSuukYVOJ69pt2x4WOMvMdpSyVjg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="heron along the shore"><img src="https://lh3.googleusercontent.com/pw/AP1GczMc_G4TV-_XkGPuaJVCuaU3Rb3laAQUoSxKJyc-4t_Y1Iipnj_1ljUgVvbZgpU-gK8HRPLF9pQCMyzX-ic1KF4d9Gs0tbqUw_ASrgRy3-QKOL9cYMj9KDdIkF5O_4dSuukYVOJ69pt2x4WOMvMdpSyVjg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPxj9Y5qOLtanlu06jrWWhCAYQ64F21V04L2DoloXQqd84XVglNoj0l1DOF34qcJh07IUEl41mGGrGE3xg8-KIuTQ4nvfC4O0mV-zUt-spoQiECzmVGLcu0pKy0gwhfcOB_vF9IwmGA8gXZLFrpwReRzA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="Plaque besides the lake"><img src="https://lh3.googleusercontent.com/pw/AP1GczPxj9Y5qOLtanlu06jrWWhCAYQ64F21V04L2DoloXQqd84XVglNoj0l1DOF34qcJh07IUEl41mGGrGE3xg8-KIuTQ4nvfC4O0mV-zUt-spoQiECzmVGLcu0pKy0gwhfcOB_vF9IwmGA8gXZLFrpwReRzA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-05-31">
+        <div class="jd-header">
+          <span class="jd-num">Day 2</span>
+          <span class="jd-date">May 31, 2026</span>
+          <span class="jd-loc">Orlando</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Disney Springs</span>
+            <span class="pill-loc">Orlando</span>
+            <span class="pill-wx">☀ drizzling</span>
+          </div>
+          <div class="je-hi">✨ soveniers, ferry, giradelli</div>
+          <div class="je-notes">happy time, collecting soveniers, doing ferry, we tried multi-cycle which dropped because of rain; then had so much chocolate; later in.evening the asian buffet was hearty as well</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczPt6Cxv8u4A6MlGABLB3YWae68Cqd0ip8pBVoCf2wz0w9jquSqu7hreNrQuwf1_tpvUGPNn10W67kk90gpvoQgR_kmaricWFR9iQ6mAdFUCCkjnC1itrWTjHTh8U9KnYoozOVhX7II9lzn6f9Og5Ex_9A=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="road sign"><img src="https://lh3.googleusercontent.com/pw/AP1GczPt6Cxv8u4A6MlGABLB3YWae68Cqd0ip8pBVoCf2wz0w9jquSqu7hreNrQuwf1_tpvUGPNn10W67kk90gpvoQgR_kmaricWFR9iQ6mAdFUCCkjnC1itrWTjHTh8U9KnYoozOVhX7II9lzn6f9Og5Ex_9A=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczM1MO4sxJ21hW1UjM5x-bETHEsCaRcoaY0uq1VatWds4q_Qt_aLEqgu3Y7nSH1kEjYN-JAeSTpOo4fER6GImGEv75_SIXPqBRRMpo98wDMaGex4xm20UMbSID4XaqIgEYY2PJqGFow8zniCVAD2Y4G0Aw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="multi-cycle which we could not do due to rain"><img src="https://lh3.googleusercontent.com/pw/AP1GczM1MO4sxJ21hW1UjM5x-bETHEsCaRcoaY0uq1VatWds4q_Qt_aLEqgu3Y7nSH1kEjYN-JAeSTpOo4fER6GImGEv75_SIXPqBRRMpo98wDMaGex4xm20UMbSID4XaqIgEYY2PJqGFow8zniCVAD2Y4G0Aw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOE3ydH2hReneeUIE8DXw9ChWNPQmcboN1wxrIbwqaafgUOwcFWkCvlqQpq1MiyiYShY3y2W8l2ghZlBXlDSwSxA8-KECYAvA4Q3UNFEyHht6fWc4vpn71He1qof9iRSss_rxH1blYCuAHLDZpLkF4Lyw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="water mill which you see when you do the ferry in Disney Springs"><img src="https://lh3.googleusercontent.com/pw/AP1GczOE3ydH2hReneeUIE8DXw9ChWNPQmcboN1wxrIbwqaafgUOwcFWkCvlqQpq1MiyiYShY3y2W8l2ghZlBXlDSwSxA8-KECYAvA4Q3UNFEyHht6fWc4vpn71He1qof9iRSss_rxH1blYCuAHLDZpLkF4Lyw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Prime outlets</span>
+            <span class="pill-loc">Orlando</span>
+            <span class="pill-wx">☀ drizzling</span>
+          </div>
+          <div class="je-hi">✨ extended shopping</div>
+          <div class="je-notes">before the asian buffet we had this shopping stop; we bought brand new branded clothes for boys</div>
+          <div class="thumbs"></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-01">
+        <div class="jd-header">
+          <span class="jd-num">Day 3</span>
+          <span class="jd-date">Jun 01, 2026</span>
+          <span class="jd-loc">Orlando</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">HGV Resort</span>
+            <span class="pill-loc">Orlando</span>
+            <span class="pill-wx">☀ drizzling</span>
+          </div>
+          <div class="je-hi">✨ grandeur of resort</div>
+          <div class="je-notes">Dhanesh&#x27;s orientation; so Yuvi and me in resort; mum and Dhanesh in UCF; Dhanesh stays overnight</div>
+          <div class="thumbs"></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-02">
+        <div class="jd-header">
+          <span class="jd-num">Day 4</span>
+          <span class="jd-date">Jun 02, 2026</span>
+          <span class="jd-loc">Orlando</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">UCF Campus</span>
+            <span class="pill-loc">Orlando</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ big campus</div>
+          <div class="je-notes">after doing early checkout from HGV, we all got into UCF Campus; in between i did fill tank full at Costco and came back to campus; for most of office time i was in Student Union building</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMKuh-RmMbnfiAO6AIMMadoB3V4VS_wgE95OxZDh-Wlosp10Nkss_2OQLIe95I-UVlThr941FiCOggcLh1H-amNpijxNmVic7_9UKQxLzO_6hDsqfQ93nHn5ZsYe4P4BkeOAUCpergG1tbV3YJcMpNrQw=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="food app for cafeteria"><img src="https://lh3.googleusercontent.com/pw/AP1GczMKuh-RmMbnfiAO6AIMMadoB3V4VS_wgE95OxZDh-Wlosp10Nkss_2OQLIe95I-UVlThr941FiCOggcLh1H-amNpijxNmVic7_9UKQxLzO_6hDsqfQ93nHn5ZsYe4P4BkeOAUCpergG1tbV3YJcMpNrQw=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMPcoHZ17Nl7hoCQEmLb26NLJUmWMKWKyD8TVmVf5lZqIH5ueXTne9hN6U6cfQ4rzAknPyrwr6tHMN9Nom-6_KQLdCZ6FJvt2D-WvR2RxCojH5NM4s9LBJM9CdhZPVg3xDTFEDHcbDh-CDPjyomIIA4Ew=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="board for incoming students"><img src="https://lh3.googleusercontent.com/pw/AP1GczMPcoHZ17Nl7hoCQEmLb26NLJUmWMKWKyD8TVmVf5lZqIH5ueXTne9hN6U6cfQ4rzAknPyrwr6tHMN9Nom-6_KQLdCZ6FJvt2D-WvR2RxCojH5NM4s9LBJM9CdhZPVg3xDTFEDHcbDh-CDPjyomIIA4Ew=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczONIznE4Eny6mD0LQuYAL3ZP2tKF4Kft3QRz155sWfumagQ7ItFeLoYUNb6bUvEv0-L3KcE-HuNUfo8fOFYjDhD1Ge1GXfnmnmIYEl3ceAlR71lx8hEWNvCzPwYKdIqvc6OF8uPDr1RJNMR54oiBaiy5Q=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="sample of a club poster"><img src="https://lh3.googleusercontent.com/pw/AP1GczONIznE4Eny6mD0LQuYAL3ZP2tKF4Kft3QRz155sWfumagQ7ItFeLoYUNb6bUvEv0-L3KcE-HuNUfo8fOFYjDhD1Ge1GXfnmnmIYEl3ceAlR71lx8hEWNvCzPwYKdIqvc6OF8uPDr1RJNMR54oiBaiy5Q=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-05">
+        <div class="jd-header">
+          <span class="jd-num">Day 5</span>
+          <span class="jd-date">Jun 05, 2026</span>
+          <span class="jd-loc">Newark</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">United Airlines flight</span>
+            <span class="pill-loc">Newark</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ amazing aerial views</div>
+          <div class="je-notes">The flight experience was interesting as we got to see the several water bodies that we may not have ever known about nor seen, places we have been to but seen in a different prespective, and it brought back several joyful memories of planes taking off and landing. We felt our hearing capabailities struggle as the landing descent to arrive Newark-Liberty In&#x27;t Airport. We were introduced to Newark and the surrounding area by a North Indian Uber driver named Tenzin.</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczOy0I3bzCRg4xFH8UusFZ9SwnccpZQL32s_TYzkbiTsbF6ZhGrHAceeYv-cIQDnl-6fm-MLw0p0kbUlMxQ62g0GFJn6HvMsJqJVtwckIqQGS2VYBpGVOB8zVsaaAmEmpADAe0aC4C1vJEY_C4efqJ-ayg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="we took many pictures of planes at the airport ;  this one has a United Airlines plane which we later boarded"><img src="https://lh3.googleusercontent.com/pw/AP1GczOy0I3bzCRg4xFH8UusFZ9SwnccpZQL32s_TYzkbiTsbF6ZhGrHAceeYv-cIQDnl-6fm-MLw0p0kbUlMxQ62g0GFJn6HvMsJqJVtwckIqQGS2VYBpGVOB8zVsaaAmEmpADAe0aC4C1vJEY_C4efqJ-ayg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOkoCnhSBZcWF-dM4OJrn58jIIcle14oo4WYyUP3EyPLAmOlxTTxXzYm6CncVB6xba2d-D0nGdfEyLw6hjl2ht5hr-QCHZ4LRopsMJFITDVpAtgLLAoFqFoHZQuiGvbLGv3UjkjBKHYdJ7ZzVToUA7gIw=w1706-h960-s-no?authuser=0" target="_blank" class="thumb" title="somewhere in Jax; this was right as the plane took off from the runway"><img src="https://lh3.googleusercontent.com/pw/AP1GczOkoCnhSBZcWF-dM4OJrn58jIIcle14oo4WYyUP3EyPLAmOlxTTxXzYm6CncVB6xba2d-D0nGdfEyLw6hjl2ht5hr-QCHZ4LRopsMJFITDVpAtgLLAoFqFoHZQuiGvbLGv3UjkjBKHYdJ7ZzVToUA7gIw=w1706-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMd842lpiXqXE6w6rgf3BKJvYD2CcBfeLe1vj-Rz5mleOEi3s1u1rxDz3vrTjzoZoUz14oA_2WQvCLuLWdvkPsYfAn26G3CXUrvZvjLUDITK-uwz62adoXtKkGI4yBEDet6hCPScBGqcFmd1w0jD-wDvw=w1708-h960-s-no?authuser=0" target="_blank" class="thumb" title="sunset colors; somewhere alone the way.. we had been watching the digital console to get the location; we can spot this from the full album"><img src="https://lh3.googleusercontent.com/pw/AP1GczMd842lpiXqXE6w6rgf3BKJvYD2CcBfeLe1vj-Rz5mleOEi3s1u1rxDz3vrTjzoZoUz14oA_2WQvCLuLWdvkPsYfAn26G3CXUrvZvjLUDITK-uwz62adoXtKkGI4yBEDet6hCPScBGqcFmd1w0jD-wDvw=w1708-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNyIkn0tt0kOxqUxBcNyuDLTeEr080lLg5ZGQ91DkKOaaTgP0b6U-2SvWd2hOnoHR3uM4a35z7RpHZZGTv8xgYUn9d0nyHH5pDuAzJgb2ggLsxg3jXv91Ycuf8fyJfPJstja4CmoTaCN_A_8KuBeE9Ifw=w1708-h960-s-no?authuser=0" target="_blank" class="thumb" title="NY/ NJ from above, while landing; this was close to 9:15pm at the night"><img src="https://lh3.googleusercontent.com/pw/AP1GczNyIkn0tt0kOxqUxBcNyuDLTeEr080lLg5ZGQ91DkKOaaTgP0b6U-2SvWd2hOnoHR3uM4a35z7RpHZZGTv8xgYUn9d0nyHH5pDuAzJgb2ggLsxg3jXv91Ycuf8fyJfPJstja4CmoTaCN_A_8KuBeE9Ifw=w1708-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-06">
+        <div class="jd-header">
+          <span class="jd-num">Day 6</span>
+          <span class="jd-date">Jun 06, 2026</span>
+          <span class="jd-loc">New Jersey</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Statue of Liberty</span>
+            <span class="pill-loc">New Jersey</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ Statue from all angles</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMSOzQh2DVScg-9jtPMRTD0wfjIoAXxtE0lpfJ5MXw8OMg3wEWTiXTnANb5K16ZzeXTndfedNvz8h-O_k40EgqaDUI6HSYspP87wbLYTIqtw0edAi_NUSH4nU8Kc-v95CjpZU5YNsh2jOUgiYG5rEzCmw=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="911 memorial at Liberty State Park"><img src="https://lh3.googleusercontent.com/pw/AP1GczMSOzQh2DVScg-9jtPMRTD0wfjIoAXxtE0lpfJ5MXw8OMg3wEWTiXTnANb5K16ZzeXTndfedNvz8h-O_k40EgqaDUI6HSYspP87wbLYTIqtw0edAi_NUSH4nU8Kc-v95CjpZU5YNsh2jOUgiYG5rEzCmw=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPBxVfkmvot8Hn2WiLv2fR-cyFy0sEP2SxZnortoiQizxfJaWCC8eFv06e6EfKHdFw33PSI93Ul9-0_hZMY-8wzVsvn9YOhvBr3eB9BIdK6X39Fu2UsRp6VLInwuR7ud2XYVBIQeuoXWTYJeRV-K-fODA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="NY skyline"><img src="https://lh3.googleusercontent.com/pw/AP1GczPBxVfkmvot8Hn2WiLv2fR-cyFy0sEP2SxZnortoiQizxfJaWCC8eFv06e6EfKHdFw33PSI93Ul9-0_hZMY-8wzVsvn9YOhvBr3eB9BIdK6X39Fu2UsRp6VLInwuR7ud2XYVBIQeuoXWTYJeRV-K-fODA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczM2YpOd-ZNEkdOz9S18_NwoIA_phvv0eFk4iDUSC5YBqnPoL0LPtD4I0zdprw2wD-gKEkHemE-85YJzr7yCJ4qdJrAJkN1DjXCbqod3QC1skLJK7fpXQC2YFHMJ4pKoUlQwBSrboaCFWzUA_CP35sLf_Q=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="the statue"><img src="https://lh3.googleusercontent.com/pw/AP1GczM2YpOd-ZNEkdOz9S18_NwoIA_phvv0eFk4iDUSC5YBqnPoL0LPtD4I0zdprw2wD-gKEkHemE-85YJzr7yCJ4qdJrAJkN1DjXCbqod3QC1skLJK7fpXQC2YFHMJ4pKoUlQwBSrboaCFWzUA_CP35sLf_Q=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Lite rail to Hoboken</span>
+            <span class="pill-loc">New Jersey</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ monorail experience</div>
+          
+          <div class="thumbs"></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-07">
+        <div class="jd-header">
+          <span class="jd-num">Day 7</span>
+          <span class="jd-date">Jun 07, 2026</span>
+          <span class="jd-loc">New York</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Summit Towers</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ amazing 360 degree view of New York Manhattan</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczPhA5c_jQeyooOP4-L8abHFVTvCn_fQjrJ3A2l7II_W4VByH6ALCoccEfiB7V19shzOeKZnjuHjxWfecbzXred4QhyryR7_AE0p1IFfvFDOZZbuJSNSUpte5TWSE-1-i7DrKoEeBF7uBl0TYLFbbIJ4LA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="view one; floors 91, 92, 93 were the observatory giving 360 degree view of the city"><img src="https://lh3.googleusercontent.com/pw/AP1GczPhA5c_jQeyooOP4-L8abHFVTvCn_fQjrJ3A2l7II_W4VByH6ALCoccEfiB7V19shzOeKZnjuHjxWfecbzXred4QhyryR7_AE0p1IFfvFDOZZbuJSNSUpte5TWSE-1-i7DrKoEeBF7uBl0TYLFbbIJ4LA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOxyECoHnr6wbqGzycdA860USLn72sAiRTqgm_Tf5pAksMYIVq3dNEUdHnr_ITCJkTEbZd-ypwDPCM9iZO4qaNk13loRLsvJBZmGF0xFwBh5SBPSXqU4f3fy_ZbvfmlQkQP028-LAZwdADh1jRM-MMJKQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="view two"><img src="https://lh3.googleusercontent.com/pw/AP1GczOxyECoHnr6wbqGzycdA860USLn72sAiRTqgm_Tf5pAksMYIVq3dNEUdHnr_ITCJkTEbZd-ypwDPCM9iZO4qaNk13loRLsvJBZmGF0xFwBh5SBPSXqU4f3fy_ZbvfmlQkQP028-LAZwdADh1jRM-MMJKQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczN5lKkpKJ8-ary5-9wRAf7CSJQe8a2tPINGyc7D5YCdoTzvEYWPvtfRwmFC-y9RqZwApkZj0eANhdMyTcTDT0qsm4HsOJiOv2DtSaQolczNFR_yaZg9JSjZaz-fESxQnRacY4oeH7CHUGxt5Uh3af_mnA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="view three"><img src="https://lh3.googleusercontent.com/pw/AP1GczN5lKkpKJ8-ary5-9wRAf7CSJQe8a2tPINGyc7D5YCdoTzvEYWPvtfRwmFC-y9RqZwApkZj0eANhdMyTcTDT0qsm4HsOJiOv2DtSaQolczNFR_yaZg9JSjZaz-fESxQnRacY4oeH7CHUGxt5Uh3af_mnA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Broadway show</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ memorable drama stage play</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczOaWL3S30VtNN3IxVFXSxE-wpDdUea7m0-LfcC-czAbIITXWm5rnKO7PTkUIwDLe5qreoJq_o5qC19VQBFpQ9LEk3uebR4jMzLwyITurZe_LCJ45LTSgS6T4nFTxougW805QS_im33oKpL616sfoB4Ffg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the stage"><img src="https://lh3.googleusercontent.com/pw/AP1GczOaWL3S30VtNN3IxVFXSxE-wpDdUea7m0-LfcC-czAbIITXWm5rnKO7PTkUIwDLe5qreoJq_o5qC19VQBFpQ9LEk3uebR4jMzLwyITurZe_LCJ45LTSgS6T4nFTxougW805QS_im33oKpL616sfoB4Ffg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPU64-o6ZHPLnJjNOYxpJDOJLoOKSYOgwSzWO4Zx4m1B_aKEFodwP9kFTnKJlWTFTOlll_ic-s17inS8JSfPPzwwa1cnx37R7n7JodANFetBWognWLpz93BxdP81Lqb63oQ9f50rXVXQLqNY8dC1l6EWA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="close up"><img src="https://lh3.googleusercontent.com/pw/AP1GczPU64-o6ZHPLnJjNOYxpJDOJLoOKSYOgwSzWO4Zx4m1B_aKEFodwP9kFTnKJlWTFTOlll_ic-s17inS8JSfPPzwwa1cnx37R7n7JodANFetBWognWLpz93BxdP81Lqb63oQ9f50rXVXQLqNY8dC1l6EWA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPvETRdlRJFeTgWWMbgRiNgpbHQ-2JPHZxSQ_L9WGRUSremfn2FWRDf3oWH8Drncl0-Dw1SVjOTwRqyUSOXGB_ZZgA9HUFvFtlX3VSpAkekMuYfoztHCT62cvOAHy6Stx-Af6iiY0MZ_vCfd75RWlywoA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="lining up for autograph"><img src="https://lh3.googleusercontent.com/pw/AP1GczPvETRdlRJFeTgWWMbgRiNgpbHQ-2JPHZxSQ_L9WGRUSremfn2FWRDf3oWH8Drncl0-Dw1SVjOTwRqyUSOXGB_ZZgA9HUFvFtlX3VSpAkekMuYfoztHCT62cvOAHy6Stx-Af6iiY0MZ_vCfd75RWlywoA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Times Square</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ just like they show on TV</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczP2ytjr3FwxgoJFzgR8YbgrwTvXJHKzDiuO-wBXJ2rWdR2W2eUBP9JQuqyUjZ80jyWrUuSlpe5j3S5PGUwLq7YETh-GLyPAfhbmZLvfREv_fjQoHX5MExseAcLfjRw8tnyYNiKtCvoHmq3VID6SCed6Pw=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="tall buildings"><img src="https://lh3.googleusercontent.com/pw/AP1GczP2ytjr3FwxgoJFzgR8YbgrwTvXJHKzDiuO-wBXJ2rWdR2W2eUBP9JQuqyUjZ80jyWrUuSlpe5j3S5PGUwLq7YETh-GLyPAfhbmZLvfREv_fjQoHX5MExseAcLfjRw8tnyYNiKtCvoHmq3VID6SCed6Pw=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPqLS0pBZXaSBHcbxeCwXsK0DHLMYU5NgtiKq9-Uf4udQa0nla-oVZm2IV_JihiVAxdDtzMn4Yr3ElM_K_wBfO-M9WBO1nGeNYsyZT27Bd6ygomFfTB2HVjQB5Aaq3MXyIsLHpEMXPx_BtYkoQIJDiFlQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="typical times square"><img src="https://lh3.googleusercontent.com/pw/AP1GczPqLS0pBZXaSBHcbxeCwXsK0DHLMYU5NgtiKq9-Uf4udQa0nla-oVZm2IV_JihiVAxdDtzMn4Yr3ElM_K_wBfO-M9WBO1nGeNYsyZT27Bd6ygomFfTB2HVjQB5Aaq3MXyIsLHpEMXPx_BtYkoQIJDiFlQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNKChe55Xy1NdSArceq17qrHZoid6WqOut-wbOiCpLKRLbznQ82sxojVlPpTPiPL7_Z2WMIu5Ug6PtQ0-eZbLdfgPsl0FjnU6jJ47uGpRxW3TBcwFnRR-HW7P4MqFJIrp-zDcElo9Uyiy8GsJ0f__UpqQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="another typical scene"><img src="https://lh3.googleusercontent.com/pw/AP1GczNKChe55Xy1NdSArceq17qrHZoid6WqOut-wbOiCpLKRLbznQ82sxojVlPpTPiPL7_Z2WMIu5Ug6PtQ0-eZbLdfgPsl0FjnU6jJ47uGpRxW3TBcwFnRR-HW7P4MqFJIrp-zDcElo9Uyiy8GsJ0f__UpqQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-08">
+        <div class="jd-header">
+          <span class="jd-num">Day 8</span>
+          <span class="jd-date">Jun 08, 2026</span>
+          <span class="jd-loc">New York</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Intrepid Museum</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ submarine, planes</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczOQOi_9GMMyqrRyzp5XNSRYeGdDbQflwVPcBMgcUBKqTTvT9fQqMrJ6u1ZRuvJ1nMhczECf2kmNzcoyIXCGr94k6JTeWarr-AkFSkE5CqezR6PiVThLdol-UfCWTKBVVYQygQHgf2ev57wht_qwQqQE8w=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="one helicopter"><img src="https://lh3.googleusercontent.com/pw/AP1GczOQOi_9GMMyqrRyzp5XNSRYeGdDbQflwVPcBMgcUBKqTTvT9fQqMrJ6u1ZRuvJ1nMhczECf2kmNzcoyIXCGr94k6JTeWarr-AkFSkE5CqezR6PiVThLdol-UfCWTKBVVYQygQHgf2ev57wht_qwQqQE8w=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczP0ZYMZNG94IiMiPyrkxVRtHTOpjtjbAtd3CvaitXPAUhDFx1y7sNr1C-PI3oRDk_OLm74uB-3Mszm2iQKonWOdohYlqmcl8LdAb0s2IxZUSweSUvQCvDOSYU-JHKzgCsl9SZo3HPKmHf2uvxij8iYtmQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="F16 on Interprid"><img src="https://lh3.googleusercontent.com/pw/AP1GczP0ZYMZNG94IiMiPyrkxVRtHTOpjtjbAtd3CvaitXPAUhDFx1y7sNr1C-PI3oRDk_OLm74uB-3Mszm2iQKonWOdohYlqmcl8LdAb0s2IxZUSweSUvQCvDOSYU-JHKzgCsl9SZo3HPKmHf2uvxij8iYtmQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOG7y5czfMuNvHu6iSuD4CxZGG2ejwC7sCT2uNx6t3JZ7T69qZQkK9eV8ZaDigRglfd315VaSif5wHyVl9gt9mTqtXIhiCgHJ0tym-6t5q0VCIRMj9_iE2hpxePSB89zkpmGMMN0BVp8mcoOy8-V3SfwQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="more planes"><img src="https://lh3.googleusercontent.com/pw/AP1GczOG7y5czfMuNvHu6iSuD4CxZGG2ejwC7sCT2uNx6t3JZ7T69qZQkK9eV8ZaDigRglfd315VaSif5wHyVl9gt9mTqtXIhiCgHJ0tym-6t5q0VCIRMj9_iE2hpxePSB89zkpmGMMN0BVp8mcoOy8-V3SfwQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Central Park</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ full day walks</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczOTevmMTPDlV2GAcwWULFPMEKCrtvOQypNfUz_KSenm_Jz2AjbFCRlJXCwA33WNvR8FCyR0Lkmv_24SHvdidgLZ4dcwINs0oBgic5ybL_EhalgMLFTBLn9Kvl8pwB9AlCADpq0iVSjvPbCIKInTqpjNvg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="information booth in Central Park"><img src="https://lh3.googleusercontent.com/pw/AP1GczOTevmMTPDlV2GAcwWULFPMEKCrtvOQypNfUz_KSenm_Jz2AjbFCRlJXCwA33WNvR8FCyR0Lkmv_24SHvdidgLZ4dcwINs0oBgic5ybL_EhalgMLFTBLn9Kvl8pwB9AlCADpq0iVSjvPbCIKInTqpjNvg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOPc2JkKO5qY4gcfzUNIeGVK-ip8mdjC-9E1fdLr4nhbr4ivq2cJY0hqfuh3w47T0l9db9YAraIxzknmkAHIzbsFq7XHbM6s8CLhinUbwWiUgHBrmhiHqLy73Ogy0Bpk1Z1GV1_zQTIdRvmsQfu4t8j7A=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="tall buildings around the park"><img src="https://lh3.googleusercontent.com/pw/AP1GczOPc2JkKO5qY4gcfzUNIeGVK-ip8mdjC-9E1fdLr4nhbr4ivq2cJY0hqfuh3w47T0l9db9YAraIxzknmkAHIzbsFq7XHbM6s8CLhinUbwWiUgHBrmhiHqLy73Ogy0Bpk1Z1GV1_zQTIdRvmsQfu4t8j7A=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOBaS6bdr5gHX7gBAnQqai7gCpXjCgU9NZyDtrbnbixZL31jP06xJcdwP6lxvJKOHFe5YFiZ2OG2pHLRcLC-6GtvwxdTU6wTUA3uF8V4WrV2Ubuw23R4EEA7lxse6Ril6f5radqAybFPy-dWVcHfZkN_Q=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="walkways inside the part"><img src="https://lh3.googleusercontent.com/pw/AP1GczOBaS6bdr5gHX7gBAnQqai7gCpXjCgU9NZyDtrbnbixZL31jP06xJcdwP6lxvJKOHFe5YFiZ2OG2pHLRcLC-6GtvwxdTU6wTUA3uF8V4WrV2Ubuw23R4EEA7lxse6Ril6f5radqAybFPy-dWVcHfZkN_Q=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOU_M6XzXXGoK7M_ufzMjKYxoeJ4OA2_myfxKaS1NXpKiEuMRvX89PxL8N7xTnQBvORX99GLGYJvb0GplY23eREiO0YjE7tSgt9UCKlebQNiXAUHbmasBGsEthJ1AG6-FTGAnuxv2GakAzwH73588OtDQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="lake inside Central Park"><img src="https://lh3.googleusercontent.com/pw/AP1GczOU_M6XzXXGoK7M_ufzMjKYxoeJ4OA2_myfxKaS1NXpKiEuMRvX89PxL8N7xTnQBvORX99GLGYJvb0GplY23eREiO0YjE7tSgt9UCKlebQNiXAUHbmasBGsEthJ1AG6-FTGAnuxv2GakAzwH73588OtDQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPBs8-x7Eido5Ai0tGizWMwuQgA7V3XezfJeEPlR98zNKK5sYGJIrVzA_sH322UO_c3yeYIKGxPIale5K2SVncmWKhzFBJzMSbJh6F6hLzWFx01xq7qN5tudCKt6C3gt6fLYL0WVfTSACtBFM12dxjOSA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="Castle inside the park"><img src="https://lh3.googleusercontent.com/pw/AP1GczPBs8-x7Eido5Ai0tGizWMwuQgA7V3XezfJeEPlR98zNKK5sYGJIrVzA_sH322UO_c3yeYIKGxPIale5K2SVncmWKhzFBJzMSbJh6F6hLzWFx01xq7qN5tudCKt6C3gt6fLYL0WVfTSACtBFM12dxjOSA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">United Nations</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ guided tour was excellent</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczPyYkfgH5zOkVoaRd7WqF1CipgArUizJUWMc82aSH9QMH0wPbc9yFsUQdNeoDazuCMTGM8bPF1WwGga91yZX27Pp4NXLNFUXdiGMKhqtJsA5ySwNKsd2YaO1CJPJxUp9ohaHCHg1aEZu02JGS5Lbs8OBQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the knotted pistol"><img src="https://lh3.googleusercontent.com/pw/AP1GczPyYkfgH5zOkVoaRd7WqF1CipgArUizJUWMc82aSH9QMH0wPbc9yFsUQdNeoDazuCMTGM8bPF1WwGga91yZX27Pp4NXLNFUXdiGMKhqtJsA5ySwNKsd2YaO1CJPJxUp9ohaHCHg1aEZu02JGS5Lbs8OBQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNgGsh4XWijg9eeY-dXvq3UscBpjWXWthR1pj_Sm5AYOHsixJOryRWVa69bIdaAGWoNEu0RiUtay9P3WX9czV5p9_cGV4AW5OKhok_caRCB38rY1IJBj9jl9bHWYZO2PAR3wzal5fFZT4DYdRx_RbBVHQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="inside assembly general"><img src="https://lh3.googleusercontent.com/pw/AP1GczNgGsh4XWijg9eeY-dXvq3UscBpjWXWthR1pj_Sm5AYOHsixJOryRWVa69bIdaAGWoNEu0RiUtay9P3WX9czV5p9_cGV4AW5OKhok_caRCB38rY1IJBj9jl9bHWYZO2PAR3wzal5fFZT4DYdRx_RbBVHQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczM2H5VtfRWTo8KkmhM93AG21Tag3lyx2yBSvbWRKu3y6oVuk9bzjbm7BW9EZNpg2gG-pksM68x1Lqr3yxL9HVOkXkspbhxiFRsVaYhM8Im8JGFl6PnIlnt37g8ym7yYQvvF8EBwPpulJf2r9Ahg3-G5QA=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="iconic building"><img src="https://lh3.googleusercontent.com/pw/AP1GczM2H5VtfRWTo8KkmhM93AG21Tag3lyx2yBSvbWRKu3y6oVuk9bzjbm7BW9EZNpg2gG-pksM68x1Lqr3yxL9HVOkXkspbhxiFRsVaYhM8Im8JGFl6PnIlnt37g8ym7yYQvvF8EBwPpulJf2r9Ahg3-G5QA=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-09">
+        <div class="jd-header">
+          <span class="jd-num">Day 9</span>
+          <span class="jd-date">Jun 09, 2026</span>
+          <span class="jd-loc">New York</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Central Park</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ boys and prajakta experience the Central Park</div>
+          <div class="je-notes">they do this only once !!</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczNFK7FXs-WXs38gpNkmNwinsrkARv1FdMkPuemSz4Osy15clelqvzVKa2sM1hjlrd-VRU70t5kz55q8pd0C9y-RkAattTt4MB_Kqdss9JaxriyiLflbd9G3QX-xbXAUW8Jpi1OY7fToImWjF2aAcZmEIQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="geese and turtles"><img src="https://lh3.googleusercontent.com/pw/AP1GczNFK7FXs-WXs38gpNkmNwinsrkARv1FdMkPuemSz4Osy15clelqvzVKa2sM1hjlrd-VRU70t5kz55q8pd0C9y-RkAattTt4MB_Kqdss9JaxriyiLflbd9G3QX-xbXAUW8Jpi1OY7fToImWjF2aAcZmEIQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPCNBtyv81QND5hwlAm_Rr2U3OwL4BsK10h4-78khpSoirXvmLTjhSXSKS0ms4m6GMW-fxGvWhC9dbN-G7HjphCWLWm99cn-INP2QQ-vv7728loLQYd89jvMqTNYqhLqAoukdveCtBmsyvTEanTD5miDw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="close up of a flower"><img src="https://lh3.googleusercontent.com/pw/AP1GczPCNBtyv81QND5hwlAm_Rr2U3OwL4BsK10h4-78khpSoirXvmLTjhSXSKS0ms4m6GMW-fxGvWhC9dbN-G7HjphCWLWm99cn-INP2QQ-vv7728loLQYd89jvMqTNYqhLqAoukdveCtBmsyvTEanTD5miDw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOnxkdotbRqpNjwJ9RBfIv_e-EBro0xoNT3uZX4Q4LFp9Zoo7M4DyfpjGDii1x2iG-dfNkjMzSbsy1kC2txZGPAEpMKFFmTzW0jXlsuEle4DWeauQTCTJnB7SZSaI893oBMd5aVgELMTFeY9JtZNYGMFg=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="orchestra place inside park"><img src="https://lh3.googleusercontent.com/pw/AP1GczOnxkdotbRqpNjwJ9RBfIv_e-EBro0xoNT3uZX4Q4LFp9Zoo7M4DyfpjGDii1x2iG-dfNkjMzSbsy1kC2txZGPAEpMKFFmTzW0jXlsuEle4DWeauQTCTJnB7SZSaI893oBMd5aVgELMTFeY9JtZNYGMFg=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Rockefeller Center</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ fair walk from Central park to Rockefeller</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczO-4Xbg9HWA2RdyAGO5cbmq-UJss04eImaZiGM7uj56sTKMXvU2eskIdcuSSrLu8JuRV-jf_HfmHpe8mO1MEkGklhPmfMfXCIXHG947Vo5YTXWkEncRjjnkSRYfVUFHE7hTS1HvnYbi4hzsIwLLQ2pdvA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="iconic statue"><img src="https://lh3.googleusercontent.com/pw/AP1GczO-4Xbg9HWA2RdyAGO5cbmq-UJss04eImaZiGM7uj56sTKMXvU2eskIdcuSSrLu8JuRV-jf_HfmHpe8mO1MEkGklhPmfMfXCIXHG947Vo5YTXWkEncRjjnkSRYfVUFHE7hTS1HvnYbi4hzsIwLLQ2pdvA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNLW1qBDCbJYHMFQbwxVjB7aMFSgmzWAXt_RwViG3iuaQVa8NcacNUjb7ZuFLhWK_LKEd2awi77FGVW_OOOOnbefunkYfxc1-ehUQ5pEtQsz2SkF9JA4RO4hvX5jV8AsvSxOIa637KpyhXdHvgq2gzdCA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="entrance"><img src="https://lh3.googleusercontent.com/pw/AP1GczNLW1qBDCbJYHMFQbwxVjB7aMFSgmzWAXt_RwViG3iuaQVa8NcacNUjb7ZuFLhWK_LKEd2awi77FGVW_OOOOnbefunkYfxc1-ehUQ5pEtQsz2SkF9JA4RO4hvX5jV8AsvSxOIa637KpyhXdHvgq2gzdCA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPQNw3TwsYFfoJMRKl5Ykw2c5GdtZLxcYEHMUCwfN0-7Lz5Yb2YArlSjXXMK83nqgbYOvph51qhvV0vvFabE6vAxOd2zQtt6ATyynZFSZIcSykRWYIvoEUAbWYmZkIM7V7ZcCpIvvQih1Zcnb6GZ8voEg=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="another view of Rockefeller Plaza"><img src="https://lh3.googleusercontent.com/pw/AP1GczPQNw3TwsYFfoJMRKl5Ykw2c5GdtZLxcYEHMUCwfN0-7Lz5Yb2YArlSjXXMK83nqgbYOvph51qhvV0vvFabE6vAxOd2zQtt6ATyynZFSZIcSykRWYIvoEUAbWYmZkIM7V7ZcCpIvvQih1Zcnb6GZ8voEg=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Empire State quest</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ half-hearted walk and upsets</div>
+          <div class="je-notes">family was done at rockefeller center, but my exploration quest dragged all to find where is Empire State, which turned to be a long walk; after reaching their we just ubered back to times square</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczPasxokglLjg-NXGk7BgHKMpNzmjOFA3i9CPgjWVM3LZOfIYhSRyVuwN33uLihOjRQIaE6iFMShh_GT-p1gQhTtZ1sZNEXKbS_0NGbaCpSEKFObrDrtnuj-ZyRaapi6sLReRYFmEWUyodiuOtczihCZzQ=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="side entrance at night"><img src="https://lh3.googleusercontent.com/pw/AP1GczPasxokglLjg-NXGk7BgHKMpNzmjOFA3i9CPgjWVM3LZOfIYhSRyVuwN33uLihOjRQIaE6iFMShh_GT-p1gQhTtZ1sZNEXKbS_0NGbaCpSEKFObrDrtnuj-ZyRaapi6sLReRYFmEWUyodiuOtczihCZzQ=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMR-iHPdCivTeuyld6o5Q3c5P8STWqRed8lTCNx501JQ-gd99FBNX0zkE-kZy5iK0_O7QUM0416uy4STjHvQWOv6I20QPMtynImHCxtMGvgR1V3daOMFJpnemO-J2Sdw9wbk0zE4eTniG_wtEal7_RqEA=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="near exit from the building"><img src="https://lh3.googleusercontent.com/pw/AP1GczMR-iHPdCivTeuyld6o5Q3c5P8STWqRed8lTCNx501JQ-gd99FBNX0zkE-kZy5iK0_O7QUM0416uy4STjHvQWOv6I20QPMtynImHCxtMGvgR1V3daOMFJpnemO-J2Sdw9wbk0zE4eTniG_wtEal7_RqEA=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczM4PFM0QgtbmEYNJdRc2l-1EDQvGsswrtdeouRG0Mevle6IxVVlLbo1y73564zIl3JMKcfr88IOJjjVyx0DjMs_KqObJft8i1pjD-wRisrKtCN_4qmLb9qjsb4gosJNuEMDLdM5IwQE2SucaE66-bNgtA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="road sign near Empire State"><img src="https://lh3.googleusercontent.com/pw/AP1GczM4PFM0QgtbmEYNJdRc2l-1EDQvGsswrtdeouRG0Mevle6IxVVlLbo1y73564zIl3JMKcfr88IOJjjVyx0DjMs_KqObJft8i1pjD-wRisrKtCN_4qmLb9qjsb4gosJNuEMDLdM5IwQE2SucaE66-bNgtA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-10">
+        <div class="jd-header">
+          <span class="jd-num">Day 10</span>
+          <span class="jd-date">Jun 10, 2026</span>
+          <span class="jd-loc">New York</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Brooklyn Bridge</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ bright morning adventure</div>
+          <div class="je-notes">this was a refreshing walk for boys and prajakta</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczNQb-QET8uDI2WZ7xQdGk1vMZnGQ7_u6_TA3MWgAXYKqOUlOyr8tX5-aK9_lqjGK7p_DBxWTCPpGxz88NARCbVzfR96L5EOvPbVsidb3HhYbt_JobdQZUI9xcSmbnMhG3XuzOX664szMyYOUlxdsZb3jQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="about cable bridges"><img src="https://lh3.googleusercontent.com/pw/AP1GczNQb-QET8uDI2WZ7xQdGk1vMZnGQ7_u6_TA3MWgAXYKqOUlOyr8tX5-aK9_lqjGK7p_DBxWTCPpGxz88NARCbVzfR96L5EOvPbVsidb3HhYbt_JobdQZUI9xcSmbnMhG3XuzOX664szMyYOUlxdsZb3jQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczONxq9kQkg7GDBwwkV1t5mTlNHfRzDmQQwPCF3FTYWD1UHzsvMbVicsUS0uDimzel1vUwS76hSucn-AzWyzDh0HE1M6QcQuLUXY1N-biVfjz3NXOxYflUSKW7kXh5p6bMDz8sGuYJ3JRyVCW98yBraZVQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="dhanesh on the bridge"><img src="https://lh3.googleusercontent.com/pw/AP1GczONxq9kQkg7GDBwwkV1t5mTlNHfRzDmQQwPCF3FTYWD1UHzsvMbVicsUS0uDimzel1vUwS76hSucn-AzWyzDh0HE1M6QcQuLUXY1N-biVfjz3NXOxYflUSKW7kXh5p6bMDz8sGuYJ3JRyVCW98yBraZVQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczN6SSk1sD6I1UsQKC1Y96qLZXYFk0EsTOs59z6xGppYUqzI7aqnwFQf39AQ5dyPM6WwvpqIyhPsmTfuNPjGr-IhOP-L-PSMjp9cpZn328PP7ye2mBPePWvACHbQTyqBEq83Q5W4fw8-ye3_cVkn6u0V9Q=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="manhattan from brooklyn bridge"><img src="https://lh3.googleusercontent.com/pw/AP1GczN6SSk1sD6I1UsQKC1Y96qLZXYFk0EsTOs59z6xGppYUqzI7aqnwFQf39AQ5dyPM6WwvpqIyhPsmTfuNPjGr-IhOP-L-PSMjp9cpZn328PP7ye2mBPePWvACHbQTyqBEq83Q5W4fw8-ye3_cVkn6u0V9Q=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Washington Square</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ looking for dosa guy</div>
+          <div class="je-notes">dosa guy hunting, experiencing subway trains, trio got to washington square and explored that area, had food there</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczPVcfeVxFQSoJoA8cLTecoSvQFI7SblFq0yCmGpurUGCfqFfXcmp1Z1KsguvyUD1xHtyX-lfZmTtP5D2R_pgHjeeP7kaphrFfrhABEo2xDDZr4MSs2zp3YZ-pJub0rJ84r7gTr6NDkz9KN9J_ic6gbK0A=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="subway train"><img src="https://lh3.googleusercontent.com/pw/AP1GczPVcfeVxFQSoJoA8cLTecoSvQFI7SblFq0yCmGpurUGCfqFfXcmp1Z1KsguvyUD1xHtyX-lfZmTtP5D2R_pgHjeeP7kaphrFfrhABEo2xDDZr4MSs2zp3YZ-pJub0rJ84r7gTr6NDkz9KN9J_ic6gbK0A=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOWOIn7F582HQVaozE7slm4-Y4Mc4JgzmcwITA-bDxlkYtdvA5xTafSjXLzGlu8KTpYBkJV7LRw7q0PDyDobyc-c6WNoiwRrCVjGAQFMRsTeW7MCz7D7pg1ooZlJvNRx48ktw-lkjm5lZQ15neikHc3vQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="another train station"><img src="https://lh3.googleusercontent.com/pw/AP1GczOWOIn7F582HQVaozE7slm4-Y4Mc4JgzmcwITA-bDxlkYtdvA5xTafSjXLzGlu8KTpYBkJV7LRw7q0PDyDobyc-c6WNoiwRrCVjGAQFMRsTeW7MCz7D7pg1ooZlJvNRx48ktw-lkjm5lZQ15neikHc3vQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPO3Bj-0V3uX7Xwe9TCjyWLtzIDG9wVnRC8tPCLwR1FDuepKUNH3q8e0qRzvL2PwpqTkWmEDcG3aw9I6GUntW2kcss2rVLaJBu7H8gqgkb8SxG390MT7LXo37joJ6230Kd6E9HYJJGJ5sOawe_EFXAWlQ=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="downtown building"><img src="https://lh3.googleusercontent.com/pw/AP1GczPO3Bj-0V3uX7Xwe9TCjyWLtzIDG9wVnRC8tPCLwR1FDuepKUNH3q8e0qRzvL2PwpqTkWmEDcG3aw9I6GUntW2kcss2rVLaJBu7H8gqgkb8SxG390MT7LXo37joJ6230Kd6E9HYJJGJ5sOawe_EFXAWlQ=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">One World Mall</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ explore this area</div>
+          <div class="je-notes">after lunch this place was explored; in meantime, i was doing my meetings from hotel room</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczM8d0l-jZWsSPZlFoV5pskY69w3cyuuzcL-OWp5kY0VBMmHhuSdNmICGUEuuycK3L17TzCtwREbmkVo7fGQJP1NNnlGkwmyZx6CAA4VJ_a6fFvEBn2FAlV42_NhPsab_5mbAJCRK5wviSMZxHlSN2AlWQ=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="one world bulding behind the tick-like structure"><img src="https://lh3.googleusercontent.com/pw/AP1GczM8d0l-jZWsSPZlFoV5pskY69w3cyuuzcL-OWp5kY0VBMmHhuSdNmICGUEuuycK3L17TzCtwREbmkVo7fGQJP1NNnlGkwmyZx6CAA4VJ_a6fFvEBn2FAlV42_NhPsab_5mbAJCRK5wviSMZxHlSN2AlWQ=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczM5E4bAE94OF3yOHNTid8oTzgLydmHJzINHlMKuNcGehHXDXIdczg4e8Gyax5DU9KhbzczvCLfEkJpHJBkrZI5Ajk2Ycl0GlKxy0f70CjHcnmqLn-5vxvijjfbB-r0qux3g3xAF9qTllpy9iG9UXo1YtQ=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="art work"><img src="https://lh3.googleusercontent.com/pw/AP1GczM5E4bAE94OF3yOHNTid8oTzgLydmHJzINHlMKuNcGehHXDXIdczg4e8Gyax5DU9KhbzczvCLfEkJpHJBkrZI5Ajk2Ycl0GlKxy0f70CjHcnmqLn-5vxvijjfbB-r0qux3g3xAF9qTllpy9iG9UXo1YtQ=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOuQhlIgLQrfleQKRMHJS4mNXk_-zN8Nhq0Ky0hzAdDJJ5otzdX39EGGyQGYZYZbBrVFIntwjCS_uCL2RUU596RPdD_rPY9yS8wvIvat5unTAAGYee6gItB3zaNP0zE7D0sbDPTgUmpm24nD5H_aqIinQ=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="checkmark structure from other angle"><img src="https://lh3.googleusercontent.com/pw/AP1GczOuQhlIgLQrfleQKRMHJS4mNXk_-zN8Nhq0Ky0hzAdDJJ5otzdX39EGGyQGYZYZbBrVFIntwjCS_uCL2RUU596RPdD_rPY9yS8wvIvat5unTAAGYee6gItB3zaNP0zE7D0sbDPTgUmpm24nD5H_aqIinQ=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">World Trade Center Memorial</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ video conf for prajakta and me, boys spend long time in this memorial</div>
+          <div class="je-notes">after my last call, i ubered to WTC memorial to join family</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczPTT5eN1tuZBVxx0YspR6p_XkXlgVu4CYVOlS0gDr1J4VmqZ4k3FwjGJRn3-I2uyiOWuioIDbftX5aORP4YFW5D5xfgJ98_jIFaoRQ2ZhtF8rDtbIspS_bLmvleHoWhV2DwiL_5iRjeQ8EeRUB9emuhqA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="lest we forget"><img src="https://lh3.googleusercontent.com/pw/AP1GczPTT5eN1tuZBVxx0YspR6p_XkXlgVu4CYVOlS0gDr1J4VmqZ4k3FwjGJRn3-I2uyiOWuioIDbftX5aORP4YFW5D5xfgJ98_jIFaoRQ2ZhtF8rDtbIspS_bLmvleHoWhV2DwiL_5iRjeQ8EeRUB9emuhqA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczN7ZIEKoClrUJ0Gw2Ey5F_eFupEyxmTxlVHZSYUP37J0_KI9t3HJvPFcqy0LKnM_Ep2GtSoruUPdTiBNWeiqUaoYEA6s3f9g3Cso3vSVMk2MFqA-tyXA0VETFF8ODEf0SLm4QVCf1B_Jx796VVS-m40_Q=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="fire truck ladder 3"><img src="https://lh3.googleusercontent.com/pw/AP1GczN7ZIEKoClrUJ0Gw2Ey5F_eFupEyxmTxlVHZSYUP37J0_KI9t3HJvPFcqy0LKnM_Ep2GtSoruUPdTiBNWeiqUaoYEA6s3f9g3Cso3vSVMk2MFqA-tyXA0VETFF8ODEf0SLm4QVCf1B_Jx796VVS-m40_Q=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNrINP3WcvIbjbxX514bshF4CjlMvhUahyuHlgjEc0lgPBRKavIVl94FBak17L_Czn-2qcTaJSseiAWuidjf5LnI2iU8DHDIEUc9ZEXtYYucvvHSe89gW5cnTuBHr1yAfI7_zo9kVaSqAuPFbZr9VW7Ww=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="last column"><img src="https://lh3.googleusercontent.com/pw/AP1GczNrINP3WcvIbjbxX514bshF4CjlMvhUahyuHlgjEc0lgPBRKavIVl94FBak17L_Czn-2qcTaJSseiAWuidjf5LnI2iU8DHDIEUc9ZEXtYYucvvHSe89gW5cnTuBHr1yAfI7_zo9kVaSqAuPFbZr9VW7Ww=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPLENcFAKQvU0Cbyc5TKrS-nrCqOMDaFJS6TCmh8nqXwYozWUA1TUW8A3xhEOf0JBid2iOUws0tDSkz5WtbPwK4vNGs2_kXXLeBAPM5Sjbvfx-3MUDYX3VXhVllVg07d5mI7LIKuSqq7fAKurkX7Nd-ZQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the memorial"><img src="https://lh3.googleusercontent.com/pw/AP1GczPLENcFAKQvU0Cbyc5TKrS-nrCqOMDaFJS6TCmh8nqXwYozWUA1TUW8A3xhEOf0JBid2iOUws0tDSkz5WtbPwK4vNGs2_kXXLeBAPM5Sjbvfx-3MUDYX3VXhVllVg07d5mI7LIKuSqq7fAKurkX7Nd-ZQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-11">
+        <div class="jd-header">
+          <span class="jd-num">Day 11</span>
+          <span class="jd-date">Jun 11, 2026</span>
+          <span class="jd-loc">New York</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">late checkout</span>
+            <span class="pill-loc">New York</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ wait for noon</div>
+          <div class="je-notes">i tried to finish 3 calls from room before i left the wifi</div>
+          <div class="thumbs"></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Car rental at Newark Airport</span>
+            <span class="pill-loc">Newark</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ uber to EWR, for nissan altima</div>
+          <div class="je-notes">my next calls were on cell phone; i opted to drive the car out of big city</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczPSOEhinur8-3TtygnHbxm4FrX813Q_tprRdvB3Q50Q3AZ8mQhuy95B4EQNUd6jAozy_ah-UUNSWMAUA2888Ic4RnP1YaB4c6RZ7FdfdcWBw_dQqf7UX87gzxcQc4__wJ9K_rTRVbKVA2w3sIyuPCsqaQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the bird on tile"><img src="https://lh3.googleusercontent.com/pw/AP1GczPSOEhinur8-3TtygnHbxm4FrX813Q_tprRdvB3Q50Q3AZ8mQhuy95B4EQNUd6jAozy_ah-UUNSWMAUA2888Ic4RnP1YaB4c6RZ7FdfdcWBw_dQqf7UX87gzxcQc4__wJ9K_rTRVbKVA2w3sIyuPCsqaQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczN-lSd9q0II2UtUiIHQNeg0t-5KgtFzKBSr7FBcbOs3G6ipkIAQ5BDl8tAqc2kGeT0BZ_eGKdu-tP4XfyTOKny0FhGO0TWAbJtmRpH09yuoaztYJbe1NArl41uWfBzFOdGJgXVC-hmJKI7LGhbKHcrx-A=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="just the airport"><img src="https://lh3.googleusercontent.com/pw/AP1GczN-lSd9q0II2UtUiIHQNeg0t-5KgtFzKBSr7FBcbOs3G6ipkIAQ5BDl8tAqc2kGeT0BZ_eGKdu-tP4XfyTOKny0FhGO0TWAbJtmRpH09yuoaztYJbe1NArl41uWfBzFOdGJgXVC-hmJKI7LGhbKHcrx-A=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">drive across Albany</span>
+            <span class="pill-loc">Albany</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ interstate 87 was good to head out of big city NY; teh road was clear after teh suburbs</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczNp2NJa47gXE_0tvnq27WGKz3p0ypDekUc39K9UODqjanXDeLvat7ckMdzY0ayqNHHcPCDhBxzmIrGFGnZhIBlgRBoomdAorz8tE2NI2NgIjEmN8bJPgX_AvGxLBexoBVkbvRXkmL-w7fQwSA5YM6ep2g=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="near Albany downtown"><img src="https://lh3.googleusercontent.com/pw/AP1GczNp2NJa47gXE_0tvnq27WGKz3p0ypDekUc39K9UODqjanXDeLvat7ckMdzY0ayqNHHcPCDhBxzmIrGFGnZhIBlgRBoomdAorz8tE2NI2NgIjEmN8bJPgX_AvGxLBexoBVkbvRXkmL-w7fQwSA5YM6ep2g=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOwNrIIoJOr5ayCZT_bj2tR_EZ9vEjlZnpgIfzVoVXu10X5MabvIFVzs3MPR_oK3sSX6ZE3P9eD_ciFmwf3_SdFKXaNj3ompNvjq-byPx7J6AlFHv38UQxSzpPyyYauAfqckDU2xWM7lF3oiBwkXn2YDA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="a walking bridge"><img src="https://lh3.googleusercontent.com/pw/AP1GczOwNrIIoJOr5ayCZT_bj2tR_EZ9vEjlZnpgIfzVoVXu10X5MabvIFVzs3MPR_oK3sSX6ZE3P9eD_ciFmwf3_SdFKXaNj3ompNvjq-byPx7J6AlFHv38UQxSzpPyyYauAfqckDU2xWM7lF3oiBwkXn2YDA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">searching Clifton Park</span>
+            <span class="pill-loc">US-9, NY</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ trying to hunt for old time place was a tough one; the landscape had surely changed since last 26 years</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczPqMRLMjbIyqE7uxNKxUk_LkQhwvZGxQ6g5k-AXc2X9HqcFmbE3qAEparVtJ-RJ0yNN4SO3q1zuu6IANwqQF0rvjoildvThbPE1Wqq2kWrypx8EAq05paR9lls9Mel13VbTCdwYjL0h5-2oVGllN9AiCA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="shopping halt at Latham"><img src="https://lh3.googleusercontent.com/pw/AP1GczPqMRLMjbIyqE7uxNKxUk_LkQhwvZGxQ6g5k-AXc2X9HqcFmbE3qAEparVtJ-RJ0yNN4SO3q1zuu6IANwqQF0rvjoildvThbPE1Wqq2kWrypx8EAq05paR9lls9Mel13VbTCdwYjL0h5-2oVGllN9AiCA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMC2eGqtRsRUnszruJBQT76xlYw5_LoTlo0S_3R_eca5ERVIb2O_ct4A3awJk0gZfbch-0nNB8V-YMSX1KXSUgiKnF1ibIQAdaupszrBuw1wHrQKRSfCij3iAUIutAEGQhFBPlsLUdF2_ICNki2U-GwDg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="i87, US9, US7"><img src="https://lh3.googleusercontent.com/pw/AP1GczMC2eGqtRsRUnszruJBQT76xlYw5_LoTlo0S_3R_eca5ERVIb2O_ct4A3awJk0gZfbch-0nNB8V-YMSX1KXSUgiKnF1ibIQAdaupszrBuw1wHrQKRSfCij3iAUIutAEGQhFBPlsLUdF2_ICNki2U-GwDg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOoFnpy43bUNy2jFPNqqc4AbYC8_HK83rZVp02Pg7FBBoo1inHVlkF2_JOemmptLySLzqc9_MuPf7i8x_MVjPjzHqMW7ZmaJI-2z8gX8cTm9Wigow2wZJcd1Xvk6ovlSo0E9vy4_p2lpzhlpl28ZBuWAQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="along the road"><img src="https://lh3.googleusercontent.com/pw/AP1GczOoFnpy43bUNy2jFPNqqc4AbYC8_HK83rZVp02Pg7FBBoo1inHVlkF2_JOemmptLySLzqc9_MuPf7i8x_MVjPjzHqMW7ZmaJI-2z8gX8cTm9Wigow2wZJcd1Xvk6ovlSo0E9vy4_p2lpzhlpl28ZBuWAQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNvHg2DpJcZdk05nDwniRDNZhN8Htdb6Amr99RtQDNjEAaWEuTJC7CY3PFNMCKrX5cSBBDSGGmbZM_pbtDhjgpnOwFH5hhBmEjVhcvIaniOxKFVGk_TGNj2tIpPuIupAKJmKav7OahgolUN4s_8vDVNgQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="road signs to 3 towns"><img src="https://lh3.googleusercontent.com/pw/AP1GczNvHg2DpJcZdk05nDwniRDNZhN8Htdb6Amr99RtQDNjEAaWEuTJC7CY3PFNMCKrX5cSBBDSGGmbZM_pbtDhjgpnOwFH5hhBmEjVhcvIaniOxKFVGk_TGNj2tIpPuIupAKJmKav7OahgolUN4s_8vDVNgQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOXuqJ8RFspA7JEQky3HQF_mlioCESjg9LEhxrgSLbi37FbYcfyIvU_ma3A7jqMS9BiM8ISXAXHezj1Hi09GrxsoxQhyXb-WifJKKCRg7jEDsAjdTqL9wI6MjlrbC8U5Hsuj_BXX3OqDoNGAbDBJEkLRw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="town sign board is all i got"><img src="https://lh3.googleusercontent.com/pw/AP1GczOXuqJ8RFspA7JEQky3HQF_mlioCESjg9LEhxrgSLbi37FbYcfyIvU_ma3A7jqMS9BiM8ISXAXHezj1Hi09GrxsoxQhyXb-WifJKKCRg7jEDsAjdTqL9wI6MjlrbC8U5Hsuj_BXX3OqDoNGAbDBJEkLRw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOYrvO1gq6U-27NdoWN7XFtbxtbgOoyzsQsgwiM7kMac_jmLOS7iaB9QDoPDryFscvORR2BhLs5oTCSH_5xNV0JK3gzapvwAa4xBXDhqoM6fNAUEjITtbnD8apRUrPPtL3dUuRoXu9iE13I-8Jt7rE_GA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="key bank on the corner was still there"><img src="https://lh3.googleusercontent.com/pw/AP1GczOYrvO1gq6U-27NdoWN7XFtbxtbgOoyzsQsgwiM7kMac_jmLOS7iaB9QDoPDryFscvORR2BhLs5oTCSH_5xNV0JK3gzapvwAa4xBXDhqoM6fNAUEjITtbnD8apRUrPPtL3dUuRoXu9iE13I-8Jt7rE_GA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Malta lake</span>
+            <span class="pill-loc">US-9, NY</span>
+            <span class="pill-wx">☀ clear</span>
+          </div>
+          <div class="je-hi">✨ this was the only lookout i could take the car aside for some photos before sunset</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczPQc6evLBsnZLwheCJB-00wbdbYNlWhEiB7l4egvFU_knq3Bu2v59eSKGqp6CWMe-UaVsJVdOpKOXyPAO0yzD_orHmceXanOUbrQxqddYCbABoGiLJzSbMDFOgCEGRHA-6oR2ZADsbOL0qRjIjh3Da-Qg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="round lake boat launch site"><img src="https://lh3.googleusercontent.com/pw/AP1GczPQc6evLBsnZLwheCJB-00wbdbYNlWhEiB7l4egvFU_knq3Bu2v59eSKGqp6CWMe-UaVsJVdOpKOXyPAO0yzD_orHmceXanOUbrQxqddYCbABoGiLJzSbMDFOgCEGRHA-6oR2ZADsbOL0qRjIjh3Da-Qg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOBqtfp73JgX6I6V6tx_sHcyFyIEWjWea3wJ-mxAYK7f9hEBs0Th2gtBGn_HYFJjX2tBiU7Cjnv6TOrujsH_7CV2BrovhXBF35Z6ExYNHa-xnAMzIQMtMyeoinjWkqJuOzx6VLsh_YGEStCDGbVKA6p1g=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="lake view (round lake again)"><img src="https://lh3.googleusercontent.com/pw/AP1GczOBqtfp73JgX6I6V6tx_sHcyFyIEWjWea3wJ-mxAYK7f9hEBs0Th2gtBGn_HYFJjX2tBiU7Cjnv6TOrujsH_7CV2BrovhXBF35Z6ExYNHa-xnAMzIQMtMyeoinjWkqJuOzx6VLsh_YGEStCDGbVKA6p1g=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">reach Saratoga Springs</span>
+            <span class="pill-loc">Saratoga</span>
+            <span class="pill-wx">☀ clear</span>
+          </div>
+          <div class="je-hi">✨ reached around 8:15pm as the sun was setting</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczNRAJM9-sd_oxdl3HUJSxajEj1JK-PVJo1OxW83GRk6rNYmyBeqEwJV-kPsKPE2hQUf_J3pC445ZoeRo2sfS6bFl0-LFVoTuRxgSP5NBRZvLz5inRkmXPBlslse2C03hmNVBx4XnjCkO-AjJCfXsHf1uA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="dunkins donuts besides the hotel"><img src="https://lh3.googleusercontent.com/pw/AP1GczNRAJM9-sd_oxdl3HUJSxajEj1JK-PVJo1OxW83GRk6rNYmyBeqEwJV-kPsKPE2hQUf_J3pC445ZoeRo2sfS6bFl0-LFVoTuRxgSP5NBRZvLz5inRkmXPBlslse2C03hmNVBx4XnjCkO-AjJCfXsHf1uA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPr2ntqLOq8ViHQe3mTqDxpuGHBF0zoD3KC1qsT8IyAUllRJ0QvUR8vOKvPq6IKglFgDN04OvF8pZG0Dyjvt9FGH6b-oJd5jKa_PKxyrMKlvKZXDQ-U67UsK8JBnYDFhMNCKjs_pa2M2qKo-SrAmkVBdQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="at hotel parking log, right besides i-87"><img src="https://lh3.googleusercontent.com/pw/AP1GczPr2ntqLOq8ViHQe3mTqDxpuGHBF0zoD3KC1qsT8IyAUllRJ0QvUR8vOKvPq6IKglFgDN04OvF8pZG0Dyjvt9FGH6b-oJd5jKa_PKxyrMKlvKZXDQ-U67UsK8JBnYDFhMNCKjs_pa2M2qKo-SrAmkVBdQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMq9nWLV5w4qlmZP5p31WMr-cMN9U1rIYy4z-UHkym84GIe7lHx6MjES7kOitqhxUxVdN_1u4qnhtIKkcYjoaLclujpDTAqGmrMRVz8wA_LOVwv1lil1htoRqVCd01YNJcEVHvgeXKAJuug1fXbnGZvnQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="next day morning view along Malta"><img src="https://lh3.googleusercontent.com/pw/AP1GczMq9nWLV5w4qlmZP5p31WMr-cMN9U1rIYy4z-UHkym84GIe7lHx6MjES7kOitqhxUxVdN_1u4qnhtIKkcYjoaLclujpDTAqGmrMRVz8wA_LOVwv1lil1htoRqVCd01YNJcEVHvgeXKAJuug1fXbnGZvnQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-12">
+        <div class="jd-header">
+          <span class="jd-num">Day 12</span>
+          <span class="jd-date">Jun 12, 2026</span>
+          <span class="jd-loc">Saratoga</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Saratoga Spa State Park</span>
+            <span class="pill-loc">Saratoga</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ this cold water geyser was worth seeing; the state park itself was beautiful</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczOUoLqia1wd11FFM4h4rDOATJygi2oelp6oUOivyIzpjDzQaFEZ2AeNMak1yLc1u59WmJLVBQ08XEC6tluUGqStmJidCuZn0tJzHbsYyQzoJ_vvG_uOP9I4WHUst22Q5grE-2S7H-cdeR3bIL7myr936w=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="welcome sign to the park"><img src="https://lh3.googleusercontent.com/pw/AP1GczOUoLqia1wd11FFM4h4rDOATJygi2oelp6oUOivyIzpjDzQaFEZ2AeNMak1yLc1u59WmJLVBQ08XEC6tluUGqStmJidCuZn0tJzHbsYyQzoJ_vvG_uOP9I4WHUst22Q5grE-2S7H-cdeR3bIL7myr936w=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPdTlrBNnT5jkls1ZetKQgbkKa8A3m7F5fi6GqzFM1pjXd-Jc7HVLpkHudtxDrLWYqZ5g7TTHMCH2UoOclCXNQp47FsgEC1E32z5Z5k8PKE_SC6fJmc3lgwlGTEKng45JhFjbzMAQVDtOq1UZO02CEIjQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the stream"><img src="https://lh3.googleusercontent.com/pw/AP1GczPdTlrBNnT5jkls1ZetKQgbkKa8A3m7F5fi6GqzFM1pjXd-Jc7HVLpkHudtxDrLWYqZ5g7TTHMCH2UoOclCXNQp47FsgEC1E32z5Z5k8PKE_SC6fJmc3lgwlGTEKng45JhFjbzMAQVDtOq1UZO02CEIjQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNrRuNAfFw7_9GeRtwDuaOYyjzfIAo0B5tzzVnQhtkouOmXTXVfZ0zA4ZBmO_KxC5qpBfIPSlByVGCYftJu8qbJ4hrmyDZpYv4gyIR1HyAFtGh8uuPHVUk3WL3npxtw_x8lWo6MC1xbWwSRAF9Vu55WKA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="trout statue"><img src="https://lh3.googleusercontent.com/pw/AP1GczNrRuNAfFw7_9GeRtwDuaOYyjzfIAo0B5tzzVnQhtkouOmXTXVfZ0zA4ZBmO_KxC5qpBfIPSlByVGCYftJu8qbJ4hrmyDZpYv4gyIR1HyAFtGh8uuPHVUk3WL3npxtw_x8lWo6MC1xbWwSRAF9Vu55WKA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczP-snG-ot_D37uc2HrhD8RybTjtNgWlFnBD25_9oRxcSM6w0jTegWk8X_EEuiXVAcKDDYYChNK28vGp2zPKji-iS8TpMHUrQ5qsLbiwJ8Jx4QKDqTNN1P3Id7_8OH558xrjvr-ti16OZy_nPv2yCe-hwQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="cold water geyser"><img src="https://lh3.googleusercontent.com/pw/AP1GczP-snG-ot_D37uc2HrhD8RybTjtNgWlFnBD25_9oRxcSM6w0jTegWk8X_EEuiXVAcKDDYYChNK28vGp2zPKji-iS8TpMHUrQ5qsLbiwJ8Jx4QKDqTNN1P3Id7_8OH558xrjvr-ti16OZy_nPv2yCe-hwQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Mercedes Automobile Museum</span>
+            <span class="pill-loc">Saratoga</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ running on the clock, we quickly made way to this auto museum, it was small but well kept by volunteers</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczM_M7OFABiTGPZHx73KctZ-GZ3nuM4PbMzAhs6DxxSzOoyvJxyQru3tyQ7y-F2VkEbnRfae4ynNeCe_9yL9fvPME1LnXWGz6iOfHMSA727S28DxjulRJS6GpzgOhNl5-plJUnOKeUt0GrLvHGiQ3kJ5TA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="1961 300SL Roadster"><img src="https://lh3.googleusercontent.com/pw/AP1GczM_M7OFABiTGPZHx73KctZ-GZ3nuM4PbMzAhs6DxxSzOoyvJxyQru3tyQ7y-F2VkEbnRfae4ynNeCe_9yL9fvPME1LnXWGz6iOfHMSA727S28DxjulRJS6GpzgOhNl5-plJUnOKeUt0GrLvHGiQ3kJ5TA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNRlSj-bNekQist5qCnXX7_p8a195WMavb8x7ua9xG6qeNWphz_dHnwH_Ikujyo96fLgRdhRvPrrOS_rC4SgcxpUDHECgbRHfn3ACUljkDU-xxBratl58J2NhEvsh4eP239I65RtSiQe8BgiHTiXjdgbw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="old time black mercedez"><img src="https://lh3.googleusercontent.com/pw/AP1GczNRlSj-bNekQist5qCnXX7_p8a195WMavb8x7ua9xG6qeNWphz_dHnwH_Ikujyo96fLgRdhRvPrrOS_rC4SgcxpUDHECgbRHfn3ACUljkDU-xxBratl58J2NhEvsh4eP239I65RtSiQe8BgiHTiXjdgbw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMYUiZDZ92qLGGk2nthEGEDYmQGqV6iLN8e_WAH_KCvX6Gd2tIdEjI9Vp_TBJFS2z99Lq_olm63ZiD__u2oUma7k-8KffuCuKjz76F5AYHxcbB35AENjZzoCdQ0xVtRhqPOaW2lZb2-0nNSE4ICAUAPyg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="220A Cabriolet hand painted"><img src="https://lh3.googleusercontent.com/pw/AP1GczMYUiZDZ92qLGGk2nthEGEDYmQGqV6iLN8e_WAH_KCvX6Gd2tIdEjI9Vp_TBJFS2z99Lq_olm63ZiD__u2oUma7k-8KffuCuKjz76F5AYHxcbB35AENjZzoCdQ0xVtRhqPOaW2lZb2-0nNSE4ICAUAPyg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Saratoga Park Spa</span>
+            <span class="pill-loc">Saratoga</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ the spa area was created during roosevelts time and it was still marvelous</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczP1DqqcVepYDfR4DotSM3mBJAMXi3z9bItkKPEkov314gXbLoLX2SPccE7saZhsLQ9mLsNA69W8qDeDYW4k66YRhBcvDh_Zi_A9OMcIdCrsTzQ-OBB0OhOFoh75zaN_fvVk9Pq23gSf2gJGS00EvxxqJA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="walking near the spa area"><img src="https://lh3.googleusercontent.com/pw/AP1GczP1DqqcVepYDfR4DotSM3mBJAMXi3z9bItkKPEkov314gXbLoLX2SPccE7saZhsLQ9mLsNA69W8qDeDYW4k66YRhBcvDh_Zi_A9OMcIdCrsTzQ-OBB0OhOFoh75zaN_fvVk9Pq23gSf2gJGS00EvxxqJA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNfqD1WSzCppD17YLixSozbWLKI3JMIBGfj3vkjUIRS8coya9IETBz8593H5PR9FKLkGqaAdtJMhz6WN_YWRMyRoxa7goFiWqaNXc0J0TZOCu-lM82FY_RxVHgjBQqrdhIcggOfXCQ6HuOCPbSOO029MA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="spa area"><img src="https://lh3.googleusercontent.com/pw/AP1GczNfqD1WSzCppD17YLixSozbWLKI3JMIBGfj3vkjUIRS8coya9IETBz8593H5PR9FKLkGqaAdtJMhz6WN_YWRMyRoxa7goFiWqaNXc0J0TZOCu-lM82FY_RxVHgjBQqrdhIcggOfXCQ6HuOCPbSOO029MA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOtmJDx3ycI0TgSCLEwEqVzB6wmdLWC_ta-jbrmP2Nj3SeCpIfeMvgQ01vtyuNunddp_pao4yS7FpR0WPkMc463M1Rd6e_EiG67xhuffZVadNk_s9Mq8OHNQdukZcTTC3SJvkh59_04YgpZRdqpeReJeA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="big lawn"><img src="https://lh3.googleusercontent.com/pw/AP1GczOtmJDx3ycI0TgSCLEwEqVzB6wmdLWC_ta-jbrmP2Nj3SeCpIfeMvgQ01vtyuNunddp_pao4yS7FpR0WPkMc463M1Rd6e_EiG67xhuffZVadNk_s9Mq8OHNQdukZcTTC3SJvkh59_04YgpZRdqpeReJeA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Saratoga Lake</span>
+            <span class="pill-loc">Saratoga</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ reviving old memories</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczO45WAOgfQDgYLcRdaK87x2PhPvhvF92pjtmS6Jbeqq10ajmZYiP8JK-27hvI8Ofb6Nf4-l3beprOuzbaCIONIcy0ZMmLVmEDerT7f8g6A6bO7Ii_saS5oxUwc_zuOoH2uFkFWEaU5JbFxmu5NH3XvkTw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="overlook into the lake"><img src="https://lh3.googleusercontent.com/pw/AP1GczO45WAOgfQDgYLcRdaK87x2PhPvhvF92pjtmS6Jbeqq10ajmZYiP8JK-27hvI8Ofb6Nf4-l3beprOuzbaCIONIcy0ZMmLVmEDerT7f8g6A6bO7Ii_saS5oxUwc_zuOoH2uFkFWEaU5JbFxmu5NH3XvkTw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNijICaPBgWj1qiIyluvCtmvQ6fpt8vAryiGx3Rc_GriclwLspjokQH9ByrKpX1sEDf8CImUmW06AmC9scKssLrpbBFA-HCr6nuapJnZDoOgjF-nNarcTt7eaLQz1iVoNq70SCyVZsDdloLF2yMucf2jA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="coming down the steps towards the lake"><img src="https://lh3.googleusercontent.com/pw/AP1GczNijICaPBgWj1qiIyluvCtmvQ6fpt8vAryiGx3Rc_GriclwLspjokQH9ByrKpX1sEDf8CImUmW06AmC9scKssLrpbBFA-HCr6nuapJnZDoOgjF-nNarcTt7eaLQz1iVoNq70SCyVZsDdloLF2yMucf2jA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOJtph5bk_NTIavLDEOsMwcrt0XU5EbYlN2p3CIkn3LzujxHvOH3nt5Yqt2tYbBa1yinzzHORCFp6u2Je0sYjpwzp4cGRNUYsIHfUAXLme86h_-5zTcihEf_gRhCu4JHpb_cJ8yZzcOF8hCPN0_84gJiw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="at the lake; yuvan collected water sample and bottled it"><img src="https://lh3.googleusercontent.com/pw/AP1GczOJtph5bk_NTIavLDEOsMwcrt0XU5EbYlN2p3CIkn3LzujxHvOH3nt5Yqt2tYbBa1yinzzHORCFp6u2Je0sYjpwzp4cGRNUYsIHfUAXLme86h_-5zTcihEf_gRhCu4JHpb_cJ8yZzcOF8hCPN0_84gJiw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNNXSQ3W5zwGNn0fCCKfoSE2QtJmwcZKodJOXncz2D43bTQk1Z9QMNcPWN-VgPPQf9kWhIx7djlI0lOgjHQqx835KbtmJ1Ebsk9TE08n7MIuPZBZErG4TAoYhypuW6BQS_klyyQie3UzYsMXA8jHQchvw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the steps that got us to the lake from overlook point"><img src="https://lh3.googleusercontent.com/pw/AP1GczNNXSQ3W5zwGNn0fCCKfoSE2QtJmwcZKodJOXncz2D43bTQk1Z9QMNcPWN-VgPPQf9kWhIx7djlI0lOgjHQqx835KbtmJ1Ebsk9TE08n7MIuPZBZErG4TAoYhypuW6BQS_klyyQie3UzYsMXA8jHQchvw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Mohawk River Welcome Center</span>
+            <span class="pill-loc">i-90 NY</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ canal dam was an attraction</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczM63UkD5gxaf8OoqSu6vyj6D_jIwLgUtEmwH0aLpGHtvHQ7eB4AoQDs8R07VYJ7_5kMHU60KJ8-aZ6PN4LdKtREdbew8aB03kkvL-61sanFGWo1JTqbmwJuCmPa-qOawC10sjV-HMbEjwfKBn5s_1Pv-g=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="welcome center, rest area"><img src="https://lh3.googleusercontent.com/pw/AP1GczM63UkD5gxaf8OoqSu6vyj6D_jIwLgUtEmwH0aLpGHtvHQ7eB4AoQDs8R07VYJ7_5kMHU60KJ8-aZ6PN4LdKtREdbew8aB03kkvL-61sanFGWo1JTqbmwJuCmPa-qOawC10sjV-HMbEjwfKBn5s_1Pv-g=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOTbW66mPSo6t0ZhWcMngW75RRFtJMo7r2hjqZHsduvWsdoq-8dX9uWo2ipgc9pFD588i9HPAgAfy2ghdJfGmDwpG0tHKE69n9PB2Xo22h4COi9YPHcZPijBjfyVgFwBVThS2nm5DIEGlXtMjdX9hb1rw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the dam on the eire canal"><img src="https://lh3.googleusercontent.com/pw/AP1GczOTbW66mPSo6t0ZhWcMngW75RRFtJMo7r2hjqZHsduvWsdoq-8dX9uWo2ipgc9pFD588i9HPAgAfy2ghdJfGmDwpG0tHKE69n9PB2Xo22h4COi9YPHcZPijBjfyVgFwBVThS2nm5DIEGlXtMjdX9hb1rw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczM0DrDtVwqxttur7docDdFcGfr6BM8bcact9pey7Q91XLWPei9k6qAW9U3VjV58hi3kimUCbaXEb9AP_SlXLvTrdHYhOASh2-XaiLV0LCP0_BVZ98vDGjrJgcjYV30ZdpuDEI2TRTydlg2si5ApsYBjkg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="upstream side of the canal"><img src="https://lh3.googleusercontent.com/pw/AP1GczM0DrDtVwqxttur7docDdFcGfr6BM8bcact9pey7Q91XLWPei9k6qAW9U3VjV58hi3kimUCbaXEb9AP_SlXLvTrdHYhOASh2-XaiLV0LCP0_BVZ98vDGjrJgcjYV30ZdpuDEI2TRTydlg2si5ApsYBjkg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Batavia</span>
+            <span class="pill-loc">Batavia</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ Walmart, Marshals</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczNzYHnqah5fSazeQ1gR6VflnfIpMLRfDueNtu72TRTuf1qhKoKM72CoYKovKT7X0qyzEwV6LxIu97_ORvvIs9GTlB_1AFlPEsYA7Tn_bnPu1Y6fSp1qk3LAKaOgQBRSRg7GEPKz4yZoRpc8uFpxkSPPVA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="apple green was typical at the interstate rest areas"><img src="https://lh3.googleusercontent.com/pw/AP1GczNzYHnqah5fSazeQ1gR6VflnfIpMLRfDueNtu72TRTuf1qhKoKM72CoYKovKT7X0qyzEwV6LxIu97_ORvvIs9GTlB_1AFlPEsYA7Tn_bnPu1Y6fSp1qk3LAKaOgQBRSRg7GEPKz4yZoRpc8uFpxkSPPVA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMB6zl-b91ph037nK91CBZK-BAwEussy6luvYoJPY8rQcPmvJVJJ2WCsz4iqtHKLW5mC7f38i6njeN7F0wNHMKkutz6E0lv9LMFD5UZ_HGZbTiFackL2uueMPkufS6AArwvR_d0_Q5NTDKW12e0mBgeIw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="along the i-90 highway, this was a hilly and rocky area"><img src="https://lh3.googleusercontent.com/pw/AP1GczMB6zl-b91ph037nK91CBZK-BAwEussy6luvYoJPY8rQcPmvJVJJ2WCsz4iqtHKLW5mC7f38i6njeN7F0wNHMKkutz6E0lv9LMFD5UZ_HGZbTiFackL2uueMPkufS6AArwvR_d0_Q5NTDKW12e0mBgeIw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNwtrG7PX5UUkeQkx5sWoqSPHuxj-YDGKTDFsuLy63HCS2ShyOHaBBPMppOzPlN8FXm3s01lbrabuPuPwjY0RNC3PeZw8xrswmkZqffbfTdRvzY6mTdY5RXT894rdK0Hlr933e0GKd8dZne6gnsMZp4ew=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="hills from car window"><img src="https://lh3.googleusercontent.com/pw/AP1GczNwtrG7PX5UUkeQkx5sWoqSPHuxj-YDGKTDFsuLy63HCS2ShyOHaBBPMppOzPlN8FXm3s01lbrabuPuPwjY0RNC3PeZw8xrswmkZqffbfTdRvzY6mTdY5RXT894rdK0Hlr933e0GKd8dZne6gnsMZp4ew=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-13">
+        <div class="jd-header">
+          <span class="jd-num">Day 13</span>
+          <span class="jd-date">Jun 13, 2026</span>
+          <span class="jd-loc">Niagara Falls</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Niagara Falls</span>
+            <span class="pill-loc">Niagara Falls</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ walk around, touristy pictures</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMChau7CDEFsrZsFatTv4_KzpobSLB0b6pUcSBY9GGWCIiy3-5_2dF0WN-ZvGLpijIrYF62-JjWaoyamCt9a1RG_VLnSlAPP47n8x1yrwSe4GLyqF0XVEarlEpiG0LukFGJ5s4x9ZOt6vTaTBzxoJTjtA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="map of the area"><img src="https://lh3.googleusercontent.com/pw/AP1GczMChau7CDEFsrZsFatTv4_KzpobSLB0b6pUcSBY9GGWCIiy3-5_2dF0WN-ZvGLpijIrYF62-JjWaoyamCt9a1RG_VLnSlAPP47n8x1yrwSe4GLyqF0XVEarlEpiG0LukFGJ5s4x9ZOt6vTaTBzxoJTjtA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPANjTpbZJruylkMu7bSMAzsVIhY8aokeItwNHRPZqa3f6Ng-N0_FErn-ng25omdufrui-KE1H5gbW7F_wfFNOevZbNgs6OsgWiJDcNEmYxSr67DKf3MaYeQ6OL1jx8Fqlq9hTvfr-df0f-WTQ3PxnC_g=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="flowers arrangement and falls in the distance"><img src="https://lh3.googleusercontent.com/pw/AP1GczPANjTpbZJruylkMu7bSMAzsVIhY8aokeItwNHRPZqa3f6Ng-N0_FErn-ng25omdufrui-KE1H5gbW7F_wfFNOevZbNgs6OsgWiJDcNEmYxSr67DKf3MaYeQ6OL1jx8Fqlq9hTvfr-df0f-WTQ3PxnC_g=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOxnpNv61vnkFRuWpORMp98Vfeb1r_Vn1OdjQggQRLfuhMBvlJj1qdUfCyjT-gIsbHPY1yL7J-XoS-JYcYI6l4cf-iHC566EwvhK8PpCJn8qAvzPLrzYGZIHcJMDn_6BEGy_16M_wUgUJ0qEwaxDzOy-Q=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="rainbow bridge from top, while waiting for maid of the mist"><img src="https://lh3.googleusercontent.com/pw/AP1GczOxnpNv61vnkFRuWpORMp98Vfeb1r_Vn1OdjQggQRLfuhMBvlJj1qdUfCyjT-gIsbHPY1yL7J-XoS-JYcYI6l4cf-iHC566EwvhK8PpCJn8qAvzPLrzYGZIHcJMDn_6BEGy_16M_wUgUJ0qEwaxDzOy-Q=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Maid of the Mist</span>
+            <span class="pill-loc">Niagara Falls</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ breath taking views of falls</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMTyTulh2986-vtTMgJk_A8yT6f61fVj0rY99VoEjVl1hverfOuckMdlLipbXkHV-1Uh7ycHKMFomtdXyd3CiZS26FEZUhwn_tSTJ6MGDrBNcHpd-_0_c2sfTNTDChEaU3_FgkY7DY9FKnJNHedmpLMrQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the american falls from maid of the mist"><img src="https://lh3.googleusercontent.com/pw/AP1GczMTyTulh2986-vtTMgJk_A8yT6f61fVj0rY99VoEjVl1hverfOuckMdlLipbXkHV-1Uh7ycHKMFomtdXyd3CiZS26FEZUhwn_tSTJ6MGDrBNcHpd-_0_c2sfTNTDChEaU3_FgkY7DY9FKnJNHedmpLMrQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNoeDWWnpOGo1cscsGilQ-yhD_KMb_ezVLoyste6S3BE3_6-qVvl3s8mmO-pBBMThgeqxwYDJmfPH1_iiPUw06EgCBVfI-GMLdJTj7Mo5XOyFWdamfia_TFEVQK1OSBL78cC8TaEjd6f7OgvLwsMw2awQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="falls and bird"><img src="https://lh3.googleusercontent.com/pw/AP1GczNoeDWWnpOGo1cscsGilQ-yhD_KMb_ezVLoyste6S3BE3_6-qVvl3s8mmO-pBBMThgeqxwYDJmfPH1_iiPUw06EgCBVfI-GMLdJTj7Mo5XOyFWdamfia_TFEVQK1OSBL78cC8TaEjd6f7OgvLwsMw2awQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczO2C_rmq2U1djgAuazKqhSGjtn2SwAG7ynBoxCZPMY7hFFiB_aLTAP72Kl2vjfgL7isIfWl-3yYzS0ICSerXKSIPx7KfmIAPrlJWwTeOiDK7PTqtwe7q3hFWaOqbXm_As4c3IsqqL90KW0buS7egZmq1Q=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="falls from the ferry"><img src="https://lh3.googleusercontent.com/pw/AP1GczO2C_rmq2U1djgAuazKqhSGjtn2SwAG7ynBoxCZPMY7hFFiB_aLTAP72Kl2vjfgL7isIfWl-3yYzS0ICSerXKSIPx7KfmIAPrlJWwTeOiDK7PTqtwe7q3hFWaOqbXm_As4c3IsqqL90KW0buS7egZmq1Q=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNa48PZsjb1CZSACJvg-yEZgpea-QgijGtqQ6hd4gGy3K4L4UHg2quNZ1aVUe1mPEy68-5JaBd766_t5CybUZruFnOw5zkBuyG3Q8TAT2BRKJfQ3A0Ejv64MZVTR4huDn0IBF21FuOG2Fyb3cuBsuz-rQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="horse shoe falls from maid of the mist"><img src="https://lh3.googleusercontent.com/pw/AP1GczNa48PZsjb1CZSACJvg-yEZgpea-QgijGtqQ6hd4gGy3K4L4UHg2quNZ1aVUe1mPEy68-5JaBd766_t5CybUZruFnOw5zkBuyG3Q8TAT2BRKJfQ3A0Ejv64MZVTR4huDn0IBF21FuOG2Fyb3cuBsuz-rQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Goat Island</span>
+            <span class="pill-loc">Niagara Falls</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ this was an easy and long winding walk; goat island is a must do at Niagara</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczN4VRDTfgUadpJhAFp1aaSBZ84sQ41A54aVZz2G3RpJXXxRLUmcYZwG_VtUnpVYRS_YIq1EH0-Sd4Xkx-hO6LWRPxc0tK15u2zrdk_6e1QQ19pC_rKQypRSPLTrABMJVYJq6oQRZ6iZ1QApShAKBi8VUg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="going towards goat island"><img src="https://lh3.googleusercontent.com/pw/AP1GczN4VRDTfgUadpJhAFp1aaSBZ84sQ41A54aVZz2G3RpJXXxRLUmcYZwG_VtUnpVYRS_YIq1EH0-Sd4Xkx-hO6LWRPxc0tK15u2zrdk_6e1QQ19pC_rKQypRSPLTrABMJVYJq6oQRZ6iZ1QApShAKBi8VUg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPXwNA97zM6uXHRGlav7tltRQc0vlSwnARRrv0dJuXMpU_0H0p-fB8Y1CmZqXxEyy9sPwJkctN-nhQn-eYedKa1y0UyF2sBL6-dDkt8ZgfDor9H44REZvIducrGHGQDS-khqQoKN2Ktb2Tre-Ec3DBfKw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="american falls from goat island"><img src="https://lh3.googleusercontent.com/pw/AP1GczPXwNA97zM6uXHRGlav7tltRQc0vlSwnARRrv0dJuXMpU_0H0p-fB8Y1CmZqXxEyy9sPwJkctN-nhQn-eYedKa1y0UyF2sBL6-dDkt8ZgfDor9H44REZvIducrGHGQDS-khqQoKN2Ktb2Tre-Ec3DBfKw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOtnMUB-B7UR-cDopyajHLbIlLgxmvLW3KnaW0FJTcXOo5Kx-2LIFAOBp6loQSo87t9zkoUqrkT1LyIreOR7im2_OnunFPl5zyc4JyFGZX-l3xN4mmelJs0wQnsGya5TlCQcEKXJCZm3cptDeyN46rWrQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="horseshow falls from goat island"><img src="https://lh3.googleusercontent.com/pw/AP1GczOtnMUB-B7UR-cDopyajHLbIlLgxmvLW3KnaW0FJTcXOo5Kx-2LIFAOBp6loQSo87t9zkoUqrkT1LyIreOR7im2_OnunFPl5zyc4JyFGZX-l3xN4mmelJs0wQnsGya5TlCQcEKXJCZm3cptDeyN46rWrQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">ice cream and rainbow beach</span>
+            <span class="pill-loc">Niagara Falls</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ after the long windy walk mama, mami had to walk their way back to Canada; on teh way we stopped at an ice cream stall near the rainbow bridge</div>
+          
+          <div class="thumbs"></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">leisure around american falls</span>
+            <span class="pill-loc">Niagara Falls</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ after seeing off mama mami, we entered the park again; this time we literally relaxed at a place; we first intended to walk under rainbow bridge but pessimistic ideas prevailed; we then went to dosa place at Niagara for dinner</div>
+          
+          <div class="thumbs"></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">fireworks at falls</span>
+            <span class="pill-loc">Niagara Falls</span>
+            <span class="pill-wx">☀ clear</span>
+          </div>
+          <div class="je-hi">✨ after dosa we were so full that we sat on bench besides american falls; we did not even go to the goat island</div>
+          
+          <div class="thumbs"></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-14">
+        <div class="jd-header">
+          <span class="jd-num">Day 14</span>
+          <span class="jd-date">Jun 14, 2026</span>
+          <span class="jd-loc">Niagara Falls</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">family lunch at Olive Garden</span>
+            <span class="pill-loc">Niagara Falls</span>
+            <span class="pill-wx">☀ drizzling</span>
+          </div>
+          <div class="je-hi">✨ family time at Olive Garden</div>
+          
+          <div class="thumbs"></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Mall time, Walmart, Marshalls,</span>
+            <span class="pill-loc">Niagara Falls</span>
+            <span class="pill-wx">☀ raining</span>
+          </div>
+          <div class="je-hi">✨ searching for 6dollar shoes, we bought sundries, filled gas, dropped mama mami again and came back to pick dhanesh and prajakta</div>
+          
+          <div class="thumbs"></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">stop at Canadian burger place</span>
+            <span class="pill-loc">Piffard</span>
+            <span class="pill-wx">☀ raining</span>
+          </div>
+          <div class="je-hi">✨ Tim Horton/ burger King?</div>
+          <div class="je-notes">we had coffee and donuts here</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczOMiIoFKgmhrEnlffWoKleEhxWizO4fp5qd8a4VxY4rseI5dkUiHoGi4bTxtsrwnR9lw3v7WgJbfJAJA33q9jqKeBbhOEsx3n2rwHwHgyNMIizfu9F5trXRxOpGnSN-dALXfZKWu8EhKYzL-1GKs6WjmA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="near Tim Horton stop"><img src="https://lh3.googleusercontent.com/pw/AP1GczOMiIoFKgmhrEnlffWoKleEhxWizO4fp5qd8a4VxY4rseI5dkUiHoGi4bTxtsrwnR9lw3v7WgJbfJAJA33q9jqKeBbhOEsx3n2rwHwHgyNMIizfu9F5trXRxOpGnSN-dALXfZKWu8EhKYzL-1GKs6WjmA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">road to Hershey</span>
+            <span class="pill-loc">Hershey</span>
+            <span class="pill-wx">☀ clear</span>
+          </div>
+          <div class="je-hi">✨ the drive</div>
+          
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMHjfSSUO9y3kLenbIxXlb7U9BMo1zMp1Dwv2b9b5PIuDQCBXlpCs-mY56SEhpBOQvAtk5lzYncX5dAUH282hObnHU81eTP2YdZv94jV5DlCTAUtuUEMT7nWUTi_D5WOMchueCcjGDZqcJk93H556bMzQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="near south Williamsport"><img src="https://lh3.googleusercontent.com/pw/AP1GczMHjfSSUO9y3kLenbIxXlb7U9BMo1zMp1Dwv2b9b5PIuDQCBXlpCs-mY56SEhpBOQvAtk5lzYncX5dAUH282hObnHU81eTP2YdZv94jV5DlCTAUtuUEMT7nWUTi_D5WOMchueCcjGDZqcJk93H556bMzQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPjL1hHHHvGL91BfvHAt0HQ5wcMWSrWhapXFoTFzYElY4-CCyHkWm9RahVDL2xR_pesTC_QF9tq710NF0g4m3HTEbS5eVGmX-MjIR2HF25jVWj7-nohZU6CjYKDkfcpi-U29pUZP9xFtQVkTkOdv54Fdg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="Allenwood post office along the way"><img src="https://lh3.googleusercontent.com/pw/AP1GczPjL1hHHHvGL91BfvHAt0HQ5wcMWSrWhapXFoTFzYElY4-CCyHkWm9RahVDL2xR_pesTC_QF9tq710NF0g4m3HTEbS5eVGmX-MjIR2HF25jVWj7-nohZU6CjYKDkfcpi-U29pUZP9xFtQVkTkOdv54Fdg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-15">
+        <div class="jd-header">
+          <span class="jd-num">Day 15</span>
+          <span class="jd-date">Jun 15, 2026</span>
+          <span class="jd-loc">Hershey</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Hershey Chocolate Factory</span>
+            <span class="pill-loc">Hershey</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ a much awaited chocolate factory tour</div>
+          <div class="je-notes">this is surely a worth watch; history of chocolate making is presented so well here; the large than like shop with exclusive varieties makes it unbeatable for chocolate lovers</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczOYjRc4se6bmslEwgdFxsklZarsU_Nv18t0nHJDvF311pNVqekgFsCyTvcfMLCD0Efozuruq1vdrzr4AxbKjUjTqBXruQ4Oo4MNnv5BZieWROYMF0HTIt4sLX9x-Jo1HeLC3_gOzx8I9EqCX2yip4jYNg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="Welcome attractions"><img src="https://lh3.googleusercontent.com/pw/AP1GczOYjRc4se6bmslEwgdFxsklZarsU_Nv18t0nHJDvF311pNVqekgFsCyTvcfMLCD0Efozuruq1vdrzr4AxbKjUjTqBXruQ4Oo4MNnv5BZieWROYMF0HTIt4sLX9x-Jo1HeLC3_gOzx8I9EqCX2yip4jYNg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPJzThqWyCyoOPnRL4UkR18umRbkmfI8vLs-MeAuSvyu0SSyckPAEHo6AgsTrQ6LweJ9zpZFvAix-dI_LoiDZNTITxYlGPLsmwp25VMpWBeICFVKOzH9H9hBdIC4QCWKxgj43ruxUaypNbaBCtpVkjXrg=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="phil bell in chocolate"><img src="https://lh3.googleusercontent.com/pw/AP1GczPJzThqWyCyoOPnRL4UkR18umRbkmfI8vLs-MeAuSvyu0SSyckPAEHo6AgsTrQ6LweJ9zpZFvAix-dI_LoiDZNTITxYlGPLsmwp25VMpWBeICFVKOzH9H9hBdIC4QCWKxgj43ruxUaypNbaBCtpVkjXrg=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNlNyQqoBBfOGkUQCiYqNpAJT47cGVjcZP7XBeVZlxQIcx58S9pNer_Qg-JDhEa2xCXZobsNRfUidrlIqwoTbm-5G76YvfeAyuw6eu_Qa1WenySa05WebXLsJTXIl_XLhlS2CkI3tUZFn6VIZEOFchPKw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="have a sweeet day"><img src="https://lh3.googleusercontent.com/pw/AP1GczNlNyQqoBBfOGkUQCiYqNpAJT47cGVjcZP7XBeVZlxQIcx58S9pNer_Qg-JDhEa2xCXZobsNRfUidrlIqwoTbm-5G76YvfeAyuw6eu_Qa1WenySa05WebXLsJTXIl_XLhlS2CkI3tUZFn6VIZEOFchPKw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPw71HTvL5SZsi1ck4EwfYpqIySOiD_6uDehETtlbAsIpMKqEJz00NYn-nUVGu99I7ISrhrr-WT7AsGZTQT3LSCq9pWplYSckT53dphorW8zExJKUIBkn4MHDnUQs20DhZBn5iQbwGXPPaHdg8xGM4ovw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="create your own chocolate"><img src="https://lh3.googleusercontent.com/pw/AP1GczPw71HTvL5SZsi1ck4EwfYpqIySOiD_6uDehETtlbAsIpMKqEJz00NYn-nUVGu99I7ISrhrr-WT7AsGZTQT3LSCq9pWplYSckT53dphorW8zExJKUIBkn4MHDnUQs20DhZBn5iQbwGXPPaHdg8xGM4ovw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMI4mvzxBI-q-8v70toSqtAaX4LWQ5y8CrVthpWr-Lnc0B41ryAgZK8kdqgM8LykvJZRCHAHWLPY8z0zwTrfXc4JTSsi-gYhv8hivUwndRnIZx2gT7szjiihHNqh3QhzICr_Cx40XI7TFvh-h_8UuQJzg=w1706-h960-s-no?authuser=0" target="_blank" class="thumb" title="during the tour"><img src="https://lh3.googleusercontent.com/pw/AP1GczMI4mvzxBI-q-8v70toSqtAaX4LWQ5y8CrVthpWr-Lnc0B41ryAgZK8kdqgM8LykvJZRCHAHWLPY8z0zwTrfXc4JTSsi-gYhv8hivUwndRnIZx2gT7szjiihHNqh3QhzICr_Cx40XI7TFvh-h_8UuQJzg=w1706-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNMXLBOrw6XsOLTlsj1qrOFj3vD7y0SBKDKNARNurLDHkZyrWzTpMJ6SdAyOc3hefVfM9rk5Ezp_HBCsvk0vo8-iaWLy_uJKfSaheWwXyiL77Z5m3jxVzCSioTlrPUturCXuNoH0GHLKWIz17SPrzU4CQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="yuvan with his memories"><img src="https://lh3.googleusercontent.com/pw/AP1GczNMXLBOrw6XsOLTlsj1qrOFj3vD7y0SBKDKNARNurLDHkZyrWzTpMJ6SdAyOc3hefVfM9rk5Ezp_HBCsvk0vo8-iaWLy_uJKfSaheWwXyiL77Z5m3jxVzCSioTlrPUturCXuNoH0GHLKWIz17SPrzU4CQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Civic History Museum</span>
+            <span class="pill-loc">Hershey</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ impromptu attraction</div>
+          <div class="je-notes">this museum was unique; as per family this one was well balanced and un-biased on history; the location kept the museum on a highest altitude in the city</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczOxE1v5ZbweaiplOE4VXs25D6AabERwuiSOs4elRjHaBaVpXJAsq-VbKRPg3llEB05sDEMDPYvheeuqAZOyTklCwA39Yv4gX3HXmHoW-Xt59VVtAWs0CtRpYV8esHw2B4U406gy_MSnN8_ntOeGsUHW4Q=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="entrance sign"><img src="https://lh3.googleusercontent.com/pw/AP1GczOxE1v5ZbweaiplOE4VXs25D6AabERwuiSOs4elRjHaBaVpXJAsq-VbKRPg3llEB05sDEMDPYvheeuqAZOyTklCwA39Yv4gX3HXmHoW-Xt59VVtAWs0CtRpYV8esHw2B4U406gy_MSnN8_ntOeGsUHW4Q=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczObMNnNuh1Ue15iM6LEknjPZY02jWWfiu2_wcOt7gvE0D8IfSV73T2iPZyvFVU-YBtTX-LiEEFt38kg86ZU60q2CuMjIbko0-cySYZscQbTS1YXOHE3cMLUUnoPYUS4WzZLoeBcO7_6zF5OybD9Kisd8Q=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the museum building"><img src="https://lh3.googleusercontent.com/pw/AP1GczObMNnNuh1Ue15iM6LEknjPZY02jWWfiu2_wcOt7gvE0D8IfSV73T2iPZyvFVU-YBtTX-LiEEFt38kg86ZU60q2CuMjIbko0-cySYZscQbTS1YXOHE3cMLUUnoPYUS4WzZLoeBcO7_6zF5OybD9Kisd8Q=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNNM65abpbMwAm2fEMYW7tq3crQJB1UXzTLZQWvuEUSTGt5KrHTCrw3tWpZKIyQRjoC-5_B6Z6sIIoNcDun7g0ZyBLKKTrpuD7s7I19cVy7jWA4sMuhXoUd8FkNJ1KK_E84qgpENC3eo133hyeRo3elrQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="when sitting outside the museum"><img src="https://lh3.googleusercontent.com/pw/AP1GczNNM65abpbMwAm2fEMYW7tq3crQJB1UXzTLZQWvuEUSTGt5KrHTCrw3tWpZKIyQRjoC-5_B6Z6sIIoNcDun7g0ZyBLKKTrpuD7s7I19cVy7jWA4sMuhXoUd8FkNJ1KK_E84qgpENC3eo133hyeRo3elrQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Harrisburg downtown</span>
+            <span class="pill-loc">Hershey</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ before heading out, we toured around downtown to get glimpse of capitol buildings</div>
+          
+          <div class="thumbs"></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">road to Rocky Mount</span>
+            <span class="pill-loc">Raleigh</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ the drive</div>
+          <div class="je-notes">hilly terrain, it was mountaneous, one was flowing along at most stretch, james river?</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMl3jXMdspbYlNq1n4l-X5kjwrAMlFIytLoP8UAdjMyK4bvHt33GH4cFI7j31g9d40u9hlZIdZMl1qwpAqFmK5AK2wk6VWSun1T5n256G5aDLdypXy9xP8CVcA4qh65tG7KHf-YeL8mjXARoP0dT-VEeA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="harrisburg downtown"><img src="https://lh3.googleusercontent.com/pw/AP1GczMl3jXMdspbYlNq1n4l-X5kjwrAMlFIytLoP8UAdjMyK4bvHt33GH4cFI7j31g9d40u9hlZIdZMl1qwpAqFmK5AK2wk6VWSun1T5n256G5aDLdypXy9xP8CVcA4qh65tG7KHf-YeL8mjXARoP0dT-VEeA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNfVvSF3nOQ0zbktpLIY-t6uY5ryn0_0nd5KOAjjCGbPvEcc3QaKDTT-CgN-VCrVTXpb54Vq8ytmr1b9VdLlGxVR0QLnVqs30vpx8MTeY91bK5vaSDO0kV_N-dy_Enoip6lM3CceQaLB2hnedZGvr_IvQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="grain collection facilities"><img src="https://lh3.googleusercontent.com/pw/AP1GczNfVvSF3nOQ0zbktpLIY-t6uY5ryn0_0nd5KOAjjCGbPvEcc3QaKDTT-CgN-VCrVTXpb54Vq8ytmr1b9VdLlGxVR0QLnVqs30vpx8MTeY91bK5vaSDO0kV_N-dy_Enoip6lM3CceQaLB2hnedZGvr_IvQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczP-K29GV3Kw61gU6M7Vei7FwyRxXxV8PgsO4D8AbYYDQT9d2Pi4__aSy7IJ6XW9do0wdeXuRRuH--BviBzAfJsbFhkJtaXSyODaDyDNJA42csjBrlkBGTVhJsmabI-D5zfr-9zZP_gckoBV6_xgLplByw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="fields, barn"><img src="https://lh3.googleusercontent.com/pw/AP1GczP-K29GV3Kw61gU6M7Vei7FwyRxXxV8PgsO4D8AbYYDQT9d2Pi4__aSy7IJ6XW9do0wdeXuRRuH--BviBzAfJsbFhkJtaXSyODaDyDNJA42csjBrlkBGTVhJsmabI-D5zfr-9zZP_gckoBV6_xgLplByw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPjpQ5Ihk4v7_5ZSi7nzTqCFskANpw0D1mN9B46eah3bKHxsLn-x5fUiJ7JlMNUuyklo-mOVP0qey9ofQmjXxK-fVnwS0hta6x1uzisROp0EGGZNNDkrwEnbv_q57DsDnjs23Lem5nI8W501y-2252GCw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="in the hotel"><img src="https://lh3.googleusercontent.com/pw/AP1GczPjpQ5Ihk4v7_5ZSi7nzTqCFskANpw0D1mN9B46eah3bKHxsLn-x5fUiJ7JlMNUuyklo-mOVP0qey9ofQmjXxK-fVnwS0hta6x1uzisROp0EGGZNNDkrwEnbv_q57DsDnjs23Lem5nI8W501y-2252GCw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-16">
+        <div class="jd-header">
+          <span class="jd-num">Day 16</span>
+          <span class="jd-date">Jun 16, 2026</span>
+          <span class="jd-loc">Raleigh</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Raleigh downtown</span>
+            <span class="pill-loc">Raleigh</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ we stayed in outskirts and came in downtown in the morning</div>
+          <div class="je-notes">downtown buildings were attractive but smaller like Talahassee</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczN5P38_0YlKOjA86MXeYoWogLfr4d12XrxGZts7ecS3QBh6OXepQMFf3YXlKFe-n1Y8lTSXjYiAOI8BrooECgdtccOH_rSA-VOwNoZqjcaszbBrbIGuMDLPbsYomzd1c9DBS4gx-6Z7bfLatRgdQVGBYQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="state buildings in downtown"><img src="https://lh3.googleusercontent.com/pw/AP1GczN5P38_0YlKOjA86MXeYoWogLfr4d12XrxGZts7ecS3QBh6OXepQMFf3YXlKFe-n1Y8lTSXjYiAOI8BrooECgdtccOH_rSA-VOwNoZqjcaszbBrbIGuMDLPbsYomzd1c9DBS4gx-6Z7bfLatRgdQVGBYQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOsl442dDXcZh0VmPmU63pKkA823BYetwB8c2wJnCq1iJMsTQn2SQnwq7gCcLZ8aflE0hNr6ncD8FjylRIxUzt_BcNdJ_hhyfCGQyXhPmmA69QUZpBkhVZ1Rw0MpC-gbg9ML4E3X-bqJ0yEB6dpFmpN3g=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="parking lot"><img src="https://lh3.googleusercontent.com/pw/AP1GczOsl442dDXcZh0VmPmU63pKkA823BYetwB8c2wJnCq1iJMsTQn2SQnwq7gCcLZ8aflE0hNr6ncD8FjylRIxUzt_BcNdJ_hhyfCGQyXhPmmA69QUZpBkhVZ1Rw0MpC-gbg9ML4E3X-bqJ0yEB6dpFmpN3g=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Natural Science Museum</span>
+            <span class="pill-loc">Raleigh</span>
+            <span class="pill-wx">☀ clear, sunny</span>
+          </div>
+          <div class="je-hi">✨ Museum was really good</div>
+          <div class="je-notes">this museum was not as huge as Houston museum, but still we were able to spend a full day till the museum closed</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMFxz0PdjMz5rgbPT3ZsrVtG-RKIRKf0NkzOV3pli1r0hwtV61Sf3Z1YszOFsB2JmYuKx13z39XMgorZPyI15Tz37D2H6Q4Rc66bBMUZQKJH4mUUtmn7jcE4dcxwvk3xfdJFbvMIB3BEORTVEpFy81pkA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the globe in front of museum"><img src="https://lh3.googleusercontent.com/pw/AP1GczMFxz0PdjMz5rgbPT3ZsrVtG-RKIRKf0NkzOV3pli1r0hwtV61Sf3Z1YszOFsB2JmYuKx13z39XMgorZPyI15Tz37D2H6Q4Rc66bBMUZQKJH4mUUtmn7jcE4dcxwvk3xfdJFbvMIB3BEORTVEpFy81pkA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNMZC3MaSiJddZ4LFbTdjyxdN6IdXFyV4XeTPhG4itOHhufc8w_x7XK8VtnikMwGSv7WHGmNPD4HA64g98maXNICZKN8Uk1BXCfSThVblLPBuqfmGszEKb5x-Ylyiwbs3C9mQacMM30vscbZgJHmTDezw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="museum entrance"><img src="https://lh3.googleusercontent.com/pw/AP1GczNMZC3MaSiJddZ4LFbTdjyxdN6IdXFyV4XeTPhG4itOHhufc8w_x7XK8VtnikMwGSv7WHGmNPD4HA64g98maXNICZKN8Uk1BXCfSThVblLPBuqfmGszEKb5x-Ylyiwbs3C9mQacMM30vscbZgJHmTDezw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczOkAIUle0JZknKB_g1PgRENY5g8zZse_iWY3WFTAOx1LzTKsKq95MYJi6h2EE91SEuejWTygc0TaZjRnMtvt14U9BZFefVpLk-Ip7V-gut8utpsXaqSuQ4IJoD1we-mGJckC6CNLs8wLxORwrahzx3ZEQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="from exhibits"><img src="https://lh3.googleusercontent.com/pw/AP1GczOkAIUle0JZknKB_g1PgRENY5g8zZse_iWY3WFTAOx1LzTKsKq95MYJi6h2EE91SEuejWTygc0TaZjRnMtvt14U9BZFefVpLk-Ip7V-gut8utpsXaqSuQ4IJoD1we-mGJckC6CNLs8wLxORwrahzx3ZEQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPfrh3JcTZWytrCDn9UADH1lmepcXH7MSCJXJzDRzDH700r_Tucuqp4oGfCv1oXKTzJU9yktZBWKMr7VrQs5JxZupZfqRYQgpIfyHSpO93R1o6RGexJeutajffxpC9OT1UnM5rfyMcr8-x6zwYbguvTVA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="small fish"><img src="https://lh3.googleusercontent.com/pw/AP1GczPfrh3JcTZWytrCDn9UADH1lmepcXH7MSCJXJzDRzDH700r_Tucuqp4oGfCv1oXKTzJU9yktZBWKMr7VrQs5JxZupZfqRYQgpIfyHSpO93R1o6RGexJeutajffxpC9OT1UnM5rfyMcr8-x6zwYbguvTVA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczN3-NAbTAomUxi0saVBFKb28c_A_RE1ObTlKkx2bvrOcU91UgbFehtitgjDbQJVKFbRiO9AUF5OvPjkWUKLwo_Vv96uGk3lCPqZxPKYZ3E9AOnc46tTBJfnAK5D3OhqlKjfCAs27mbNREuEeEtfd4VI_A=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="more fish"><img src="https://lh3.googleusercontent.com/pw/AP1GczN3-NAbTAomUxi0saVBFKb28c_A_RE1ObTlKkx2bvrOcU91UgbFehtitgjDbQJVKFbRiO9AUF5OvPjkWUKLwo_Vv96uGk3lCPqZxPKYZ3E9AOnc46tTBJfnAK5D3OhqlKjfCAs27mbNREuEeEtfd4VI_A=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMog3TOPX57K1_tV_k4Y56XM1bmEL8vCuk-jCGmOn_vahT54Hh4zxP9K-27bzQqGDAVaaK2VAfa2WIZi_7-f1MrGLZGlTJ5GUyJ3hXdNsT8CONVEpbyb47AxS3QEylWREyr4gsJV74nXA8T7-o1HauxAw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="become a citizens scientist"><img src="https://lh3.googleusercontent.com/pw/AP1GczMog3TOPX57K1_tV_k4Y56XM1bmEL8vCuk-jCGmOn_vahT54Hh4zxP9K-27bzQqGDAVaaK2VAfa2WIZi_7-f1MrGLZGlTJ5GUyJ3hXdNsT8CONVEpbyb47AxS3QEylWREyr4gsJV74nXA8T7-o1HauxAw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">road to Savannah</span>
+            <span class="pill-loc">Savannah</span>
+            <span class="pill-wx">☀ mostly sunny</span>
+          </div>
+          <div class="je-hi">✨ the drive</div>
+          <div class="je-notes">the scenery along the road, road signs, vehicles, road side attractions all make it memorable</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMNRfyyBUGLocnXIVEc8WlnGs38lfaTxojzf3ucM0Uf9LPuegGpFxglu4dLZXpe5uhkGHfdxzgl9D8Lg093ioTKZQ5_CzCruVmmxW84QE_ACD-lo6i4SmKkFHjnyW-rYkuHmzV-sEITSEhDOp4wXzcg0w=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="something we looked for when on the road"><img src="https://lh3.googleusercontent.com/pw/AP1GczMNRfyyBUGLocnXIVEc8WlnGs38lfaTxojzf3ucM0Uf9LPuegGpFxglu4dLZXpe5uhkGHfdxzgl9D8Lg093ioTKZQ5_CzCruVmmxW84QE_ACD-lo6i4SmKkFHjnyW-rYkuHmzV-sEITSEhDOp4wXzcg0w=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczO3w2UOHoUo0ZYbpk-nTHrfiUBQsNm7ZyUKCY5_ZU5yBR8mSI_6jiTGnerjAxKbjt6e1sLzQ1dDqcviKj3r8wJQmOfVDmxsx8AuxS2w62BkX0yUQauamINSjhRsboE9cQ3TKep2J6YmY4uTUMU5KHbnVQ=w720-h960-s-no?authuser=0" target="_blank" class="thumb" title="food stop"><img src="https://lh3.googleusercontent.com/pw/AP1GczO3w2UOHoUo0ZYbpk-nTHrfiUBQsNm7ZyUKCY5_ZU5yBR8mSI_6jiTGnerjAxKbjt6e1sLzQ1dDqcviKj3r8wJQmOfVDmxsx8AuxS2w62BkX0yUQauamINSjhRsboE9cQ3TKep2J6YmY4uTUMU5KHbnVQ=w720-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNe2jF0ojrn4SYxv9dp4ZEE0c0hEAfxCmCH2J4fT3AMZ7PUzN52ODfaR7acpZjCpZq18oPEB1u9_k2LzV5PLlHinnHh9aZzMO5tJXcKF225g7_pRt2ugymf5AmX6VyCyzZYR020-QD8BMeuQQbNWlJ3fw=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="late evening drive after dinner"><img src="https://lh3.googleusercontent.com/pw/AP1GczNe2jF0ojrn4SYxv9dp4ZEE0c0hEAfxCmCH2J4fT3AMZ7PUzN52ODfaR7acpZjCpZq18oPEB1u9_k2LzV5PLlHinnHh9aZzMO5tJXcKF225g7_pRt2ugymf5AmX6VyCyzZYR020-QD8BMeuQQbNWlJ3fw=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPD4A861D7IbCf0Zyn7oU-GmphieZgMOcRRUeBJ7vT9XDE773ZSpSvQ7-YLmvMOfUWTkn6qShdWfkMhIcH9G01a3feVRvt6jV2OPdPMmtrT1f7qjLvKqxiSDb4m53Ug5zyL5lhSaEu-kAk9mTRDwi1sCg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="sunset views from the road"><img src="https://lh3.googleusercontent.com/pw/AP1GczPD4A861D7IbCf0Zyn7oU-GmphieZgMOcRRUeBJ7vT9XDE773ZSpSvQ7-YLmvMOfUWTkn6qShdWfkMhIcH9G01a3feVRvt6jV2OPdPMmtrT1f7qjLvKqxiSDb4m53Ug5zyL5lhSaEu-kAk9mTRDwi1sCg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczNilSzp_g-vLYjHwfcCWQu3b0HZAEA9wUH4O4jOpNQhe7oeWPxapbsYlme9J_Ux69MWHKtL8ncXo8-BbAaRy5UndM_QUS7qrru2pTDJvQ4v9geVxfnFXI3fvTd473CM8PgRHrew6ARn24gYkFLmKf75kg=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="more sunset views"><img src="https://lh3.googleusercontent.com/pw/AP1GczNilSzp_g-vLYjHwfcCWQu3b0HZAEA9wUH4O4jOpNQhe7oeWPxapbsYlme9J_Ux69MWHKtL8ncXo8-BbAaRy5UndM_QUS7qrru2pTDJvQ4v9geVxfnFXI3fvTd473CM8PgRHrew6ARn24gYkFLmKf75kg=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+      </div>
+
+      <div class="jd" id="day-2026-06-17">
+        <div class="jd-header">
+          <span class="jd-num">Day 17</span>
+          <span class="jd-date">Jun 17, 2026</span>
+          <span class="jd-loc">Savannah</span>
+        </div>
+        
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">NOAA center</span>
+            <span class="pill-loc">Savannah</span>
+            <span class="pill-wx">☀ partially cloudy</span>
+          </div>
+          <div class="je-hi">✨ Yuvans choice</div>
+          <div class="je-notes">Yuvan wanted to explore what was in this office; i was one one call here</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczNHxB7JNG3R4SKaRfiIP_pFX9HHmi5WGgW8DtJOTTHECl7vu6FxHsN_H6lihYR4MVcSsCb2eOgoj0Rp7C9Iw4sCxYpyfHD8wnoAVFglyfGrJsbTJyvcrNsaE7dqI_BCDMnOjm36l5tQzuHiGyOKgLsiOQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="visitor center, this is besides the railroad museum"><img src="https://lh3.googleusercontent.com/pw/AP1GczNHxB7JNG3R4SKaRfiIP_pFX9HHmi5WGgW8DtJOTTHECl7vu6FxHsN_H6lihYR4MVcSsCb2eOgoj0Rp7C9Iw4sCxYpyfHD8wnoAVFglyfGrJsbTJyvcrNsaE7dqI_BCDMnOjm36l5tQzuHiGyOKgLsiOQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczM0csywthpOEr7kAg55S_RPNEEOJaXLfR9SbSGG84g6BXY2cGjfR_vm2mxHFqN2u4YQJOmYNpqKD7myh6doTsryZZDuGcMsA9IGTCC-qH76iHeBkSGr24zu15hpQ1wFOt65fcNlz-8phX8oud_XzFzOMA=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="NOAA greys reef center"><img src="https://lh3.googleusercontent.com/pw/AP1GczM0csywthpOEr7kAg55S_RPNEEOJaXLfR9SbSGG84g6BXY2cGjfR_vm2mxHFqN2u4YQJOmYNpqKD7myh6doTsryZZDuGcMsA9IGTCC-qH76iHeBkSGr24zu15hpQ1wFOt65fcNlz-8phX8oud_XzFzOMA=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">River walk, sweet shop</span>
+            <span class="pill-loc">Savannah</span>
+            <span class="pill-wx">☀ partially cloudy</span>
+          </div>
+          <div class="je-hi">✨ visitor center, then river walk</div>
+          <div class="je-notes">NOAA office was right near to Railway museum we usually do in Savannah; we spent time in visitor center; themn waited for free trolley; gave up and caught uber again to river walk</div>
+          <div class="thumbs"></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">River ferry</span>
+            <span class="pill-loc">Savannah</span>
+            <span class="pill-wx">☀ partially cloudy</span>
+          </div>
+          <div class="je-hi">✨ free ferry</div>
+          <div class="je-notes">we just did round trip ; no getting down; this ferry has total 3 stops in a loop</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczNlqcNT1RDlHuzFHWghmxOLfYrsL7WdIkveao_OUzLeq4e7Q21ItyKaoBfsSvC7wUj5hXsiCtVmh-ShKTyoW8VUP3cmZsquigwzG6uF_7hiOpwF9mRjFMAJpmUh9cRXULXRn3t4Z-x1lqGNZffgutFUog=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="ferry on the river side"><img src="https://lh3.googleusercontent.com/pw/AP1GczNlqcNT1RDlHuzFHWghmxOLfYrsL7WdIkveao_OUzLeq4e7Q21ItyKaoBfsSvC7wUj5hXsiCtVmh-ShKTyoW8VUP3cmZsquigwzG6uF_7hiOpwF9mRjFMAJpmUh9cRXULXRn3t4Z-x1lqGNZffgutFUog=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczMeT2ZK4-ZoJlbtSrXvJw7KBvBmB46Int6QsF_jHlvx09fhKZdZexV-fgafuAgGmG3foXvkbkeYB2gDoV54vv_A3o7iiXzNr_VtVKLW3y-J8n3LHuV6-ErRH6kWBDEpMdehs1ptQRx_KJn-uUo9-ttvww=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="the convention center from ferry"><img src="https://lh3.googleusercontent.com/pw/AP1GczMeT2ZK4-ZoJlbtSrXvJw7KBvBmB46Int6QsF_jHlvx09fhKZdZexV-fgafuAgGmG3foXvkbkeYB2gDoV54vv_A3o7iiXzNr_VtVKLW3y-J8n3LHuV6-ErRH6kWBDEpMdehs1ptQRx_KJn-uUo9-ttvww=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">car-park, gas-station</span>
+            <span class="pill-loc">Savannah</span>
+            <span class="pill-wx">☀ drizzling</span>
+          </div>
+          <div class="je-hi">✨ walk to parking lot</div>
+          <div class="je-notes">by this time we could feel that we were stretching on the long trip !! we all were looking forward to Jax by now</div>
+          <div class="thumbs"><a href="https://lh3.googleusercontent.com/pw/AP1GczMk_FM7-Iv3tNzl2tZYBCzrHautyQMmzHewW_EhdqibWVlp_fmoWXbgNTGhG6_KRGX4Ey-lwPtVu43GmEZ8PlR989ZcsU-Y0LFKOmaeYGD83Ieb86toEasuwkOcmeHcsGrYOyb8-ygqpGEa7SqXToxszQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="bus station"><img src="https://lh3.googleusercontent.com/pw/AP1GczMk_FM7-Iv3tNzl2tZYBCzrHautyQMmzHewW_EhdqibWVlp_fmoWXbgNTGhG6_KRGX4Ey-lwPtVu43GmEZ8PlR989ZcsU-Y0LFKOmaeYGD83Ieb86toEasuwkOcmeHcsGrYOyb8-ygqpGEa7SqXToxszQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a><a href="https://lh3.googleusercontent.com/pw/AP1GczPR1Zs-Bmh_Wflj2n3_ukZ4SsMLQ_9m-xiuG5g4O-UTiuEORTWlDCl23_cDEfqvFe0sJZ_QNkbJFAmgA9rgpKBWKoxzJJ8EAQKQe7r5b29BkbR_EVsYkzf_jZEkMUu5iD6aLXpMZ0-YtkEnPiYOVvewGQ=w1280-h960-s-no?authuser=0" target="_blank" class="thumb" title="CAT sign besides the bus station"><img src="https://lh3.googleusercontent.com/pw/AP1GczPR1Zs-Bmh_Wflj2n3_ukZ4SsMLQ_9m-xiuG5g4O-UTiuEORTWlDCl23_cDEfqvFe0sJZ_QNkbJFAmgA9rgpKBWKoxzJJ8EAQKQe7r5b29BkbR_EVsYkzf_jZEkMUu5iD6aLXpMZ0-YtkEnPiYOVvewGQ=w1280-h960-s-no?authuser=0" loading="lazy" onerror="this.parentElement.classList.add('thumb-empty');this.style.display='none'"/></a></div>
+        </div>
+        <div class="je">
+          <div class="je-head">
+            <span class="je-attr">Back to Jax</span>
+            <span class="pill-loc">Jacksonville</span>
+            <span class="pill-wx">☀ drizzling</span>
+          </div>
+          <div class="je-hi">✨ got back home</div>
+          <div class="je-notes">drove to Jacksonville with no rush ; reached home around 4:30 itself; headed straight for early dinner</div>
+          <div class="thumbs"></div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<footer>Road Trip 2026 · Rajpurkar Family Travel Log · Generated June 2026</footer>
+
+<!-- hover image preview overlay -->
+<div id="img-preview"><img src="" alt="photo preview"/></div>
+
+<script>
+const PASTELS = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff", "#d4baff", "#ffbaf5", "#c9ffba", "#ffd9ba", "#baffe8", "#e8baff", "#baedff"];
+const chartDefaults = {
+  type: 'doughnut',
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '48%',
+    plugins: {
+      legend: {
+        position: 'right',
+        labels: { font: { size: 10, family: 'Inter' }, padding: 7, boxWidth: 11, usePointStyle: true }
+      },
+      tooltip: { callbacks: { label: c => ` ${c.label}: $${c.parsed.toFixed(0)}` } }
+    }
+  }
+};
+
+new Chart(document.getElementById('catChart'), {
+  ...chartDefaults,
+  data: {
+    labels: ["food", "accomodation", "activity", "rentacar", "travel", "sovenier", "shopping", "gifts", "data"],
+    datasets: [{ data: [2306.49, 1829.54, 1767.46, 1333.45, 779.34, 678.3, 471.34, 121.13, 63.0], backgroundColor: PASTELS.slice(0,9), borderWidth:1, borderColor:'#fff' }]
+  }
+});
+
+new Chart(document.getElementById('locChart'), {
+  ...chartDefaults,
+  data: {
+    labels: ["New York", "Newark", "Orlando", "Niagara", "Savannah", "Batavia", "Saratoga", "Jacksonville", "UCF", "Hershey", "Other"],
+    datasets: [{ data: [2833.09, 2652.87, 959.54, 704.87, 299.92, 291.0, 230.88, 185.25, 159.67, 158.8, 874.16], backgroundColor: PASTELS.slice(0,11), borderWidth:1, borderColor:'#fff' }]
+  }
+});
+</script>
+
+<script>
+// ── Nature sidebar scroll transitions ───────────────────────────────────
+(function() {
+  const forest = [document.getElementById('sb-forest-l'), document.getElementById('sb-forest-r')];
+  const mtn    = [document.getElementById('sb-mtn-l'),    document.getElementById('sb-mtn-r')];
+  const coast  = [document.getElementById('sb-coast-l'),  document.getElementById('sb-coast-r')];
+
+  function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+  function fade(v, start, end) { return clamp((v - start) / (end - start), 0, 1); }
+
+  function update() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (max <= 0) return;
+    const p = window.scrollY / max;
+
+    // Forest: full 0→28%, fade out 28→42%
+    const fo = p < 0.28 ? 1 : p < 0.42 ? 1 - fade(p, 0.28, 0.42) : 0;
+    // Mountain: fade in 28→42%, full 42→62%, fade out 62→76%
+    const mo = p < 0.28 ? 0 : p < 0.42 ? fade(p, 0.28, 0.42)
+                             : p < 0.62 ? 1
+                             : p < 0.76 ? 1 - fade(p, 0.62, 0.76) : 0;
+    // Coastal: fade in 62→76%, full 76→100%
+    const co = p < 0.62 ? 0 : p < 0.76 ? fade(p, 0.62, 0.76) : 1;
+
+    forest.forEach(el => { if (el) el.style.opacity = fo; });
+    mtn.forEach(el    => { if (el) el.style.opacity = mo; });
+    coast.forEach(el  => { if (el) el.style.opacity = co; });
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; }
+  }, {passive: true});
+  update();
+})();
+
+// ── Hover image preview ──────────────────────────────────────────────────
+(function() {
+  const preview = document.getElementById('img-preview');
+  const previewImg = preview.querySelector('img');
+  let ticking = false;
+
+  function position(x, y) {
+    const pw = preview.offsetWidth  || 0;
+    const ph = preview.offsetHeight || 0;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const margin = 18;
+    let left = x + margin;
+    let top  = y + margin;
+    if (left + pw > vw) left = x - pw - margin;
+    if (top  + ph > vh) top  = y - ph - margin;
+    preview.style.left = Math.max(0, left) + 'px';
+    preview.style.top  = Math.max(0, top)  + 'px';
+  }
+
+  document.querySelectorAll('.thumb img').forEach(img => {
+    img.addEventListener('mouseenter', function(e) {
+      previewImg.src = this.src;
+      preview.style.display = 'block';
+      position(e.clientX, e.clientY);
+    });
+    img.addEventListener('mousemove', function(e) {
+      if (!ticking) {
+        requestAnimationFrame(() => { position(e.clientX, e.clientY); ticking = false; });
+        ticking = true;
+      }
+    });
+    img.addEventListener('mouseleave', function() {
+      preview.style.display = 'none';
+      previewImg.src = '';
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -223,6 +223,9 @@ nav:
     - experiment 07: 07geoemerge/architecture.md
     - experiment 08: 08rdessert/architecture.md
     - car dashboard: static/car-dashboard.html
+    - google drive: static/drive-explorer.html
+    - running dashboard: static/nike-dashboard.html
+    - NY roadtrip: static/2026-ny-roadtrip.html
     
 
   
